@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{% block title %}Arrack{% endblock %}</h1>
+            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% for post in posts %}
+          <div class="post-preview">
+            <a href="post.html">
+              <h2 class="post-title">{{ post['title'] }}</h2>
+              <h3 class="post-subtitle">{{ post['subtitle'] }}</h3>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#">{{ post['author'] }}</a>
+              on {{ post['timestamp'] }}</p>
+          </div>
+          <hr>
+        {% endfor %}
+
+        
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Science has not yet mastered prophecy
+            </h2>
+            <h3 class="post-subtitle">
+              We predict too much for the next year and yet far too little for the next ten.
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on August 24, 2019</p>
+        </div>
+        <hr>
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Science has not yet mastered prophecy
+            </h2>
+            <h3 class="post-subtitle">
+              We predict too much for the next year and yet far too little for the next ten.
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on August 24, 2019</p>
+        </div>
+        <hr>
+        <div class="post-preview">
+          <a href="post.html">
+            <h2 class="post-title">
+              Science has not yet mastered prophecy
+            </h2>
+            <h3 class="post-subtitle">
+              We predict too much for the next year and yet far too little for the next ten.
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on August 24, 2019</p>
+        </div>
+        <hr>
+        <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
