@@ -2,7 +2,7 @@ from datetime import datetime
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from .extensions import db
+from blog.extensions import db
 
 
 class Admin(db.Model):
@@ -11,6 +11,10 @@ class Admin(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     username = db.Column(db.String(32))
     password_hash = db.Column(db.String(128))
+    blog_title = db.Column(db.String(64))
+    blog_sub_title = db.Column(db.String(128))
+    about = db.Column(db.Text)
+    name = db.Column(db.String(32))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -24,18 +28,19 @@ class Category(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(32), unique=True)
-    posts = db.relationship('Post', backref='category')
+    articles = db.relationship('Article', backref='category')
 
 
-class Post(db.Model):
-    __tablename__ = 'post'
+class Article(db.Model):
+    __tablename__ = 'article'
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String(64))
+    title = db.Column(db.String(128))
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    can_comment = db.Column(db.Boolean, default=True)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    comments = db.relationship('Comment', backref='post', cascade='all')
+    comments = db.relationship('Comment', backref='article', cascade='all, delete-orphan')
 
 
 class Comment(db.Model):
@@ -46,9 +51,16 @@ class Comment(db.Model):
     body = db.Column(db.Text)
     reviewed = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+
+    article_id = db.Column(db.Integer, db.ForeignKey('article.id'))
     replied_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
-    replied = db.relationship(          # 被评论的评论
-        'Comment', back_populates='replies', remote_side=[id])
-    replies = db.relationship(          # 评论的评论
-        'Comment', back_populates='replied', cascade='all')
+
+    # replied = db.relationship(          # 被评论的评论
+    #     'Comment', back_populates='replies', remote_side=[id])
+    # replies = db.relationship(          # 评论的评论
+    #     'Comment', back_populates='replied', cascade='all')
+
+    replies = db.relationship(
+        'Comment',
+        backref=db.backref('replied', remote_side=[id]),
+        cascade='all, delete-orphan')

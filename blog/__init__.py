@@ -1,10 +1,11 @@
 import os
 import click
 
-from flask import Flask
+from flask import Flask, render_template
 
-from .extensions import db
-from .settings import config
+from blog.extensions import db
+from blog.settings import config
+from blog.models import Admin, Category, Comment, Article
 
 
 def create_app(config_name=None):
@@ -17,8 +18,27 @@ def create_app(config_name=None):
     register_extensions(app)
     register_blueprint(app)
     register_commands(app)
+    register_errors(app)
+    register_shell_context(app)
+    register_template_context(app)
 
     return app
+
+
+def register_shell_context(app):
+    @app.shell_context_processor
+    def make_shell_context():
+        return dict(
+            db=db, Admin=Admin, Article=Article, Category=Category, Comment=Comment
+        )
+
+
+def register_template_context(app):
+    @app.context_processor
+    def make_template_context():
+        admin = Admin.query.first()
+        categories = Category.query.order_by(Category.name).all()
+        return dict(admin=admin, categories=categories)
 
 
 def register_extensions(app):
@@ -35,7 +55,6 @@ def register_commands(app):
     @app.cli.command()
     @click.option('--drop', is_flag=True, help='Create after drop.')
     def initdb(drop):
-        import blog.models
         if drop:
             click.confirm('This operation will delete the database, do you want to continue?', abort=True)
             db.drop_all()
@@ -48,12 +67,12 @@ def register_commands(app):
     @click.option(
         '--category', default=5, help='Quantity of categories, default is 5')
     @click.option(
-        '--post', default=20, help='Quantity of posts, default is 20')
+        '--article', default=20, help='Quantity of articles, default is 20')
     @click.option(
         '--comment', default=100, help='Quantity of comments, default is 100')
-    def forge(category, post, comment):
+    def forge(category, article, comment):
         from blog.fakes import (
-            fake_admin, fake_categories, fake_posts, fake_comments
+            fake_admin, fake_categories, fake_articles, fake_comments
         )
         db.drop_all()
         db.create_all()
@@ -64,10 +83,24 @@ def register_commands(app):
         click.echo('Generating %d categories...' % category)
         fake_categories(category)
 
-        click.echo('Generating %d posts...' % post)
-        fake_posts(post)
+        click.echo('Generating %d articles...' % article)
+        fake_articles(article)
 
         click.echo('Generating %d comments...' % comment)
         fake_comments(comment)
 
         click.echo('Done.')
+
+
+def register_errors(app):
+    # @app.errorhandler(400)
+    # def bad_request(e):
+    #     return render_template('errors/400.html')
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('errors/404.html')
+
+    @app.errorhandler(500)
+    def internal_server_error(e):
+        return render_template('errors/500.html')

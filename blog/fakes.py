@@ -4,7 +4,7 @@ from faker import Faker
 from sqlalchemy.exc import IntegrityError
 
 from blog.extensions import db
-from blog.models import Admin, Category, Post, Comment
+from blog.models import Admin, Category, Article, Comment
 
 
 fake = Faker()
@@ -13,8 +13,13 @@ fake = Faker()
 def fake_admin():
     admin = Admin(
         username='Administrator',
+        blog_title='Arrackisarookie',
+        name='Arrackisarookie',
+        blog_sub_title="Everything is not too late.",
+        about=''
     )
     admin.set_password('123')
+
     db.session.add(admin)
     db.session.commit()
 
@@ -32,15 +37,15 @@ def fake_categories(count=5):
             db.session.rollback()
 
 
-def fake_posts(count=20):
+def fake_articles(count=20):
     for i in range(count):
-        post = Post(
-            title=fake.sentence(),
+        article = Article(
+            title=fake.sentence(nb_words=10),
             body=fake.text(2000),
             category=Category.query.get(randint(1, Category.query.count())),
             timestamp=fake.date_time_this_year()
         )
-        db.session.add(post)
+        db.session.add(article)
     db.session.commit()
 
 
@@ -51,7 +56,7 @@ def fake_comments(count=100):
             body=fake.sentence(),
             timestamp=fake.date_time_this_year(),
             reviewed=True,
-            post=Post.query.get(randint(1, Post.query.count()))
+            article=Article.query.get(randint(1, Article.query.count()))
         )
         db.session.add(comment)
 
@@ -63,7 +68,7 @@ def fake_comments(count=100):
             body=fake.sentence(),
             timestamp=fake.date_time_this_year(),
             reviewed=False,
-            post=Post.query.get(randint(1, Post.query.count()))
+            article=Article.query.get(randint(1, Article.query.count()))
         )
         db.session.add(comment)
 
@@ -74,7 +79,7 @@ def fake_comments(count=100):
             timestamp=fake.date_time_this_year(),
             reviewed=True,
             replied=Comment.query.get(randint(1, Comment.query.count())),
-            post=Post.query.get(randint(1, Post.query.count()))
+            article=Article.query.get(randint(1, Article.query.count()))
         )
         db.session.add(comment)
 
