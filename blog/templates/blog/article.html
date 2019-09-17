@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block pageTitle %}
+  {{ article.title|default('Blog Title') }}
+{% endblock %}
+
+{% block pageSubTitle %}
+  {{ admin.blog_sub_title|default('Blog Subtitle') }}
+{% endblock %}
+
+
+{% block content %}
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          {{ article.body }}
+        </div>
+      </div>
+    </div>
+  </article>
+{% endblock %}

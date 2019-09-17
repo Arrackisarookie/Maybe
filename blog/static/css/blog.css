@@ -283,15 +283,14 @@ header.masthead .post-heading .meta a {
   margin-bottom: 10px;
 }
 
-.post-preview > a > .post-subtitle {
-  font-weight: 300;
-  margin: 0 0 10px;
+.post-preview > p {
+  margin-bottom: 0;
 }
 
 .post-preview > .post-meta {
   font-size: 18px;
   font-style: italic;
-  margin-top: 0;
+  margin-top: 10px;
   color: #868e96;
 }
 
@@ -300,9 +299,18 @@ header.masthead .post-heading .meta a {
   color: #212529;
 }
 
+
 .post-preview > .post-meta > a:focus, .post-preview > .post-meta > a:hover {
   text-decoration: underline;
   color: #0085A1;
+}
+
+.post-preview > .post-meta > div {
+  display: inline-block;
+}
+
+.post-preview > .post-meta > .post-time {
+  float: right;
 }
 
 @media only screen and (min-width: 768px) {
