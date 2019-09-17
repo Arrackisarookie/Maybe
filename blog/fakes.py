@@ -13,7 +13,7 @@ fake = Faker()
 def fake_admin():
     admin = Admin(
         username='Administrator',
-        blog_title='Arrackisarookie',
+        blog_title='Be Yourself',
         name='Arrackisarookie',
         blog_sub_title="Everything is not too late.",
         about=''

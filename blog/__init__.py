@@ -3,7 +3,7 @@ import click
 
 from flask import Flask, render_template
 
-from blog.extensions import db
+from blog.extensions import bootstrap, db
 from blog.settings import config
 from blog.models import Admin, Category, Comment, Article
 
@@ -42,6 +42,7 @@ def register_template_context(app):
 
 
 def register_extensions(app):
+    bootstrap.init_app(app)
     db.init_app(app)
 
 

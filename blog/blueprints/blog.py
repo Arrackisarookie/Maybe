@@ -7,7 +7,6 @@ bp = Blueprint('blog', __name__)
 
 
 @bp.route('/')
-@bp.route('/index')
 def index():
     page_num = request.args.get('page', 1, type=int)
     per_page = current_app.config['BLOG_ARTICLE_PER_PAGE']
@@ -23,7 +22,7 @@ def about():
 
 
 @bp.route('/category/<int:category_id>')
-def show_category(category_id):
+def category(category_id):
     return render_template('blog/category.html', category_id=category_id)
 
 

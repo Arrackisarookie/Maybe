@@ -216,11 +216,11 @@ header.masthead .site-heading h1 {
 
 header.masthead .page-heading .subheading,
 header.masthead .site-heading .subheading {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 300;
   line-height: 1.1;
   display: block;
-  margin: 10px 0 0;
+  margin: 25px 0 0;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -311,6 +311,28 @@ header.masthead .post-heading .meta a {
 
 .post-preview > .post-meta > .post-time {
   float: right;
+}
+
+.page-footer {
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 25px;
+  margin-top: 40px;
+}
+
+.page-footer .active {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.page-footer li {
+  padding: 0 10px;
+}
+
+.page-footer .disabled {
+  pointer-events: none;
+  visibility: hidden;
 }
 
 @media only screen and (min-width: 768px) {
