@@ -15,17 +15,17 @@
       <div class="col-lg-8 col-md-10 mx-auto">
 
         {% for article in articles %}
-          <div class="article-preview">
+          <div class="post-preview">
             <a href="{{ url_for('blog.article', article_id=article.id) }}">
-              <h2 class="article-title">{{ article.title }}</h2>
+              <h2 class="post-title">{{ article.title }}</h2>
             </a>
             <p>{{ article.body|striptags|truncate }}</p>
-            <div class="article-meta">
+            <div class="post-meta">
               <div>
                 <small>Comments: {{ article.comments|length }}</small>
                 <small>Category: {{ article.category.name }}</small>
               </div>
-              <div class="article-time">
+              <div class="post-time">
                 <small>Posted on {{ article.timestamp }}</small>
               </div>
             </div>

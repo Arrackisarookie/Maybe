@@ -1,14 +1,13 @@
 import os
 
 
-MYSQL_USERNAEM = 'root'
-MYSQL_PASSWORD = ''
-MYSQL_HOST = '127.0.0.1'
-MYSQL_PORT = '3306'
-MYSQL_DATABASE = 'Blog'
-MYSQL_DEV_DATABASE = 'Blog-dev'
+ENGINE = 'mysql'
+DRIVER = 'pymysql'
 
-prefix = 'mysql+pymysql://'
+MYSQL_USERNAME = 'Arrack'
+MYSQL_PASSWORD = 'whosyourdaddy'
+MYSQL_HOST = 'Arrack.mysql.pythonanywhere-services.com'
+MYSQL_DATABASE = 'Arrack$blog'
 
 
 class BaseConfig(object):
@@ -23,17 +22,19 @@ class BaseConfig(object):
 
 class DevelopmentConfig(BaseConfig):
     # 'mysql+pymysql://username:password@localhost/db_name'
-    SQLALCHEMY_DATABASE_URI = prefix + '%s:%s@%s:%s/%s' % (MYSQL_USERNAEM, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, MYSQL_DEV_DATABASE)
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost/blog-dev'
 
 
 class TestingConfig(BaseConfig):
     TESTING = True
     WTF_CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost/memory'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost/blog-test'
 
 
 class ProductionConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = prefix + '%s:%s@%s/%s' % (MYSQL_USERNAEM, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_DATABASE)
+    SQLALCHEMY_DATABASE_URI = '{}+{}://{}:{}@{}/{}?charset=utf8'.format(
+        ENGINE, DRIVER,
+        MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_DATABASE)
 
 
 config = {

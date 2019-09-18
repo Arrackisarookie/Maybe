@@ -13,6 +13,7 @@ def create_app(config_name=None):
         config_name = os.getenv('FLASK_CONFIG', 'development')
 
     app = Flask('blog')
+    print(config_name.capitalize(), 'mode.')
     app.config.from_object(config[config_name])
 
     register_extensions(app)
