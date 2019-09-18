@@ -9,4 +9,5 @@ if os.path.exists(dotenv_path):
 
 
 from blog import create_app
+print('do wsgi.py')
 app = create_app('production')
