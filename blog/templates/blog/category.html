@@ -1,25 +1,22 @@
 {% extends "base.html" %}
+{% from "bootstrap/pagination.html" import render_pagination %}
 
-{% block title %} - Article{% endblock %}
+{% block title %} - Category{% endblock %}
 
 {% block header %}
   <style type="text/css">
-    header.masthead .site-heading {
-      padding: 120px 0 80px;
-    }
-
     header.masthead {
       background-image: url('{{ url_for('static', filename='images/home-bg.jpg') }}')
     }
   </style>
-  
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+
+  <header class="masthead">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading" style="padding: 120px 0 80px;">
-            <h1 style="font-size: 50px">{{ article.title }}</h1>
+          <div class="site-heading">
+            <h1>{{ category.name }}</h1>
             <span class="subheading">
               {{ admin.blog_sub_title }}
             </span>
@@ -31,13 +28,5 @@
 {% endblock %}
 
 {% block content %}
-  <article>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          {{ article.body|safe }}
-        </div>
-      </div>
-    </div>
-  </article>
+  {% include 'blog/_articles.html' %}
 {% endblock %}

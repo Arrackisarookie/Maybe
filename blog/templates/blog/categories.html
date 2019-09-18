@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-
-{% block title %} - Article{% endblock %}
+{% from "bootstrap/pagination.html" import render_pagination %}
 
 {% block header %}
   <style type="text/css">
@@ -12,14 +11,13 @@
       background-image: url('{{ url_for('static', filename='images/home-bg.jpg') }}')
     }
   </style>
-  
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <header class="masthead">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading" style="padding: 120px 0 80px;">
-            <h1 style="font-size: 50px">{{ article.title }}</h1>
+          <div class="site-heading">
+            <h1>{{ admin.blog_title }}</h1>
             <span class="subheading">
               {{ admin.blog_sub_title }}
             </span>
@@ -31,13 +29,18 @@
 {% endblock %}
 
 {% block content %}
-  <article>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          {{ article.body|safe }}
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% for cat in cats %}
+          <div class="post-preview">
+            <a href="{{ url_for('blog.category', cat=cat.name) }}">
+              <h2 class="post-title">{{ cat.name }}</h2>
+            </a>
+          </div>
+          <hr>
+        {% endfor %}
       </div>
     </div>
-  </article>
+  </div>
 {% endblock %}

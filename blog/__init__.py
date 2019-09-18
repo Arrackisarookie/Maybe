@@ -9,12 +9,11 @@ from blog.models import Admin, Category, Comment, Article
 
 
 def create_app(config_name=None):
-    # print(config_)
-    # if config_name is None:
-    #     config_name = os.getenv('FLASK_CONFIG', 'development')
+    if config_name is None:
+        config_name = os.getenv('FLASK_CONFIG', 'development')
 
     app = Flask('blog')
-    # print(config_name.capitalize(), 'mode.')
+    print(config_name.capitalize(), 'mode.')
     app.config.from_object(config[config_name])
 
     register_extensions(app)
@@ -49,7 +48,7 @@ def register_extensions(app):
 
 
 def register_blueprint(app):
-    from .blueprints import blog
+    from blog.views import blog
     app.register_blueprint(blog.bp)
 
 

@@ -3,11 +3,17 @@
 
 ---
 ### 版本
-#### Version 0.0.1
-
+#### Version 0.0.2
+- 增加分类显示
+- 重构前端页面
+  
+ Version 0.0.1  
+  
 - 纯展示，包括首页和内容页
 - 首页显示文章列表，实现分页
 - 内容页简单陈列
+
+---
 
 ### 踩坑
 - 第一坑、Flask 程序发现机制
@@ -18,11 +24,9 @@
 
     **根据给定的参数，Flask 会寻找一个名为 app 或者 application 的应用实例。 如果找不到会继续寻找任意应用实例。如果找不到任何实例，会接着寻找名为 create_app 或者 make_app 的函数，使用该函数返回的实例。**  
 
-    环境变量设置见[官方文档](https://dormousehole.readthedocs.io/en/latest/cli.html)
+    环境变量设置见[官方文档](https://dormousehole.readthedocs.io/en/latest/cli.html)  
 
-    **！！！ 注意 ！！！**  
     如果后来加上了 app.py 或 wsgi.py 之后，千万要记得将原来设置的 FLASK_APP 环境变量删掉！！不然每次启动可能都不是你想要的那种方式。  
-
   
 - 第二坑、python-dotenv
 
@@ -38,11 +42,24 @@
 - 第三坑、在 pythonanywhere.com 部署
 
     1. 关于数据库  
-    pythonanywhere 中的 MySQL 数据库都是形如 Arrack$blog，  
-    即 用户名$数据库名  
-
-    pythonanywhere 中的 MySQL host 名都形如 Arrack.mysql.pythonanywhere-services.com  
-    即 用户名.mysql.pythonanywhere-services.com
+    pythonanywhere 中的 MySQL 数据库都是形如 ``Arrack$blog``，  
+    即 ``用户名$数据库名``  
+    pythonanywhere 中的 MySQL host 名都形如 ``Arrack.mysql.pythonanywhere-services.com``  
+    即 ``用户名.mysql.pythonanywhere-services.com``
   
     2. 关于 SECRET_KEY  
     production 模式时，SECRET_KEY 尽量设置为随机密码，可由 Python 的 uuid.uuid4().hex 生成，然后以 SECRET_KEY=刚刚生成的密码 的形式放在 .env 中即可
+
+- 第四坑、 pip freeze
+
+    Ubuntu 系列在使用 ``pip freeze`` 命令时，除了显示当前环境已安装的 Python 包，还会多一条多余信息 ``pkg-resources==0.0.0`` 。   
+
+    已被证实这是 Ubuntu 系统的 [bug](https://bugs.launchpad.net/ubuntu/+source/python-pip/+bug/1635463)。  
+  
+    故，Ubuntu 用户若要使用 pip freeze 生成依赖文件，需要将其中的 ``pkg-resources==0.0.0`` 删除，否则该条目将导致 ``pip install -r 依赖文件``无法执行。
+
+---
+
+### Tips
+
+1. Sqlalchemy create 建表时，会将第一个不是外键的 Integer 主键列设置为自增。可以通过设置该列的 ``autoincrement=False`` 关闭这一特性。
