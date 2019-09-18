@@ -21,9 +21,21 @@ def about():
     return render_template('blog/about.html')
 
 
-@bp.route('/category/<int:category_id>')
-def category(category_id):
-    return render_template('blog/category.html', category_id=category_id)
+@bp.route('/category')
+def categories():
+    cats = Category.query.all()
+    # articles = page.items
+    return render_template('blog/categories.html', cats=cats)
+
+
+@bp.route('/category/<cat>')
+def category(cat):
+    category = Category.query.filter_by(name=cat).first()
+    page_num = request.args.get('page', 1, type=int)
+    per_page = current_app.config['BLOG_ARTICLE_PER_PAGE']
+    page = Article.query.with_parent(category).order_by(Article.timestamp.desc()).paginate(page_num, per_page, error_out=False)
+    articles = page.items
+    return render_template('blog/category.html', page=page, articles=articles, category=category)
 
 
 @bp.route('/article/<int:article_id>', methods=['GET', 'POST'])
