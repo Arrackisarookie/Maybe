@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} - Article{% endblock %}
+{% block title %}{% block article_title %}{% endblock %} - {% endblock %}
 
 {% block header %}
   <style type="text/css">
@@ -19,9 +19,19 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading" style="padding: 120px 0 80px;">
-            <h1 style="font-size: 50px">{{ article.title }}</h1>
+            <h1 style="font-size: 50px">
+              {% block article_title %}{% endblock %}</h1>
             <span class="subheading">
-              {{ admin.blog_sub_title }}
+              {% block category %}{% endblock %}
+            </span>
+            <span class="subheading">
+              {% block tag %}{% endblock %}
+            </span>
+            <span class="subheading">
+              {% block summary %}{% endblock %}
+            </span>
+            <span class="subheading">
+              {% block datetime %}{% endblock %}
             </span>
           </div>
         </div>
@@ -35,7 +45,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          {{ article.body|safe }}
+          {% block article %}{% endblock %}
         </div>
       </div>
     </div>
