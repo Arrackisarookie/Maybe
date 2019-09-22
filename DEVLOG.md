@@ -1,4 +1,12 @@
-### 2019.9.21
+### 2019.9.22
+重构了一下 yukun 大佬的 [quiet](https://github.com/blackyukun/quiet)，主要是改了 generate.py 这个文件。  
+##### 目前遇到的问题是: 
+1. 模板的设计有点烦
+2. flask 和 generate 对接有点烦  
+
+搞模板搞得要吐了，我缓缓。。明天见。。
+  
+2019.9.21  
 两天时间，查了很多资料，看了很多别人家的代码，也尝试了很多，最后决定为本博客定义以下标签:  
 个人，静态，markdown，Flask  
 启发于[Blackyukun](https://github.com/blackyukun)
