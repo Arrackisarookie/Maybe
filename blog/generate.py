@@ -4,9 +4,10 @@ import os
 import shelve
 
 from markdown import Markdown
-from jinja2 import Environment, FileSystemLoader
+from flask import render_template
+from jinja2 import Environment, PackageLoader
 
-from config import (
+from blog.config import (
     BLOG_DAT, GENERATED_PATH, PAGE_PATH, ARTICLE_PATH, SITE_TITLE, SITE_SUBTITLE
 )
 
@@ -16,7 +17,7 @@ class Generate(object):
         self._generated_folder = GENERATED_PATH
         self._article_folder = ARTICLE_PATH
         self._page_folder = PAGE_PATH
-        self._env = Environment(loader=FileSystemLoader('./templates'))
+        self._env = Environment(loader=PackageLoader('blog', 'templates'))
 
         self._articles = {}
         self._pages = []
@@ -45,12 +46,13 @@ class Generate(object):
                 html = template.render(
                     articles=cate_articles,
                     category=category,
-                    title='标签: ' + category
+                    title='分类: ' + category
                 )
                 self.save_page(category + '.html', html, 'category')
 
     def render_index(self):
         template = self._env.get_template('blog/index.html')
+        print(self._articles)
         html = template.render(
             articles=self._articles,
             # title='首页',
@@ -61,16 +63,16 @@ class Generate(object):
 
     def render_about(self):
         file = os.path.join(self._page_folder, 'about.md')
-        content = self.markdown_to_html()
+        content = self.markdown_to_html(file)
 
         template = self._env.get_template('blog/about.html')
         html = template.render(
             page=content,
             title='关于'
         )
-        self.save_page('index.html', html)
+        self.save_page('about.html', html)
 
-    def render_tags_html(self):
+    def render_tags(self):
         template = self._env.get_template('blog/tags.html')
         html = template.render(
             tags=self._tags,
@@ -78,10 +80,10 @@ class Generate(object):
         )
         self.save_page('tags.html', html)
 
-    def render_categories_html(self):
+    def render_categories(self):
         template = self._env.get_template('blog/categories.html')
         html = template.render(
-            categories=self._categories,
+            categories=self._categories.keys(),
             title='分类'
         )
         self.save_page('categories.html', html)
@@ -143,18 +145,17 @@ class Generate(object):
             identifier = os.path.splitext(os.path.basename(filename))[0]
 
             self._articles[identifier] = data
-            print(self._articles)
 
             self.update_tags(identifier, data['tag'])
             self.update_categories(identifier, data['category'])
 
-        template = self._env.get_template('blog/article.html')
-        html = template.render(
-            article=article,
-            data=data,
-            title=data['title']
-        )
-        return html
+            template = self._env.get_template('blog/article.html')
+            html = template.render(
+                article=article,
+                data=data,
+            )
+
+            return html
 
     def save_page(self, basename, html, extra_path=None):
 
@@ -200,13 +201,13 @@ class Generate(object):
             self.save_article(os.path.basename(filename), html)
 
     def generate_page(self):
-        self.render_index_html()
-        self.render_tags_html()
-        self.render_categories_html()
-        self.render_tag_articles()
-        self.render_cate_articles()
+        self.render_index()
+        # self.render_tags()
+        self.render_categories()
+        # self.render_tag_articles()
+        # self.render_cate_articles()
 
-
-if __name__ == '__main__':
-    gen = Generate()
-    gen.generate_article()
+    def main(self):
+        self.generate_article()
+        self.generate_page()
+        # self.dump_data()

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{% block article_title %}{% endblock %} - {% endblock %}
+{% block title %}{{ data.title }} - {% endblock %}
 
 {% block header %}
   <style type="text/css">
@@ -9,29 +9,28 @@
     }
 
     header.masthead {
-      background-image: url('{{ url_for('static', filename='images/home-bg.jpg') }}')
+      background-image: url('../../static/images/home-bg.jpg')
     }
   </style>
   
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <header class="masthead">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading" style="padding: 120px 0 80px;">
-            <h1 style="font-size: 50px">
-              {% block article_title %}{% endblock %}</h1>
+            <h1 style="font-size: 50px">{{ data.title }}</h1>
             <span class="subheading">
-              {% block category %}{% endblock %}
+              {{ data.category }}
             </span>
             <span class="subheading">
-              {% block tag %}{% endblock %}
+              {{ data.datetime }}
             </span>
             <span class="subheading">
-              {% block summary %}{% endblock %}
+              {{ data.summary }}
             </span>
             <span class="subheading">
-              {% block datetime %}{% endblock %}
+              {{ data.tag }}
             </span>
           </div>
         </div>
@@ -45,7 +44,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          {% block article %}{% endblock %}
+          {{ article }}
         </div>
       </div>
     </div>
