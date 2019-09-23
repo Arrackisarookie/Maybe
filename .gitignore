@@ -107,3 +107,10 @@ venv.bak/
 *.css
 *.html
 *.md
+
+# fonts
+*.eot
+*.svg
+*.ttf
+*.woff
+*.woff2

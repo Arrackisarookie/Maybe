@@ -24,7 +24,7 @@ class User(UserMixin):
 class ImportData(object):
     _data = {}
     data_path = BLOG_DAT
-    datafile = os.path.join(data_path, 'blog_data')
+    datafile = os.path.join(data_path, 'blog.dat')
 
     @classmethod
     def _load_data(cls):

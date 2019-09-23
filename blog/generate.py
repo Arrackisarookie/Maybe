@@ -27,7 +27,7 @@ class Generate(object):
         data_path = BLOG_DAT
         if not os.path.exists(os.path.dirname(data_path)):
             os.makedirs(data_path)
-        file = os.path.join(data_path, 'blog_data')
+        file = os.path.join(data_path, 'blog.dat')
         dat = shelve.open(file)
         dat['article_data'] = self._articles
         dat['category_data'] = self._categories
