@@ -26,35 +26,32 @@ class Generate(object):
 
     def render_tag_articles(self):
         template = self._env.get_template('blog/tag.html')
-        for tag in self._tags:
+        for tag, articles in self._tags.items():
             tag_articles = []
-            for identifier in tag:
+            for identifier in articles:
                 tag_articles.append(self._articles[identifier])
                 html = template.render(
                     articles=tag_articles,
-                    tag=tag,
-                    title='标签: ' + tag
+                    tag=tag
                 )
                 self.save_page(tag + '.html', html, 'tag')
 
     def render_cate_articles(self):
         template = self._env.get_template('blog/category.html')
-        for category in self._categories:
+        for category, articles in self._categories.items():
             cate_articles = []
-            for identifier in category:
+            for identifier in articles:
                 cate_articles.append(self._articles[identifier])
                 html = template.render(
                     articles=cate_articles,
-                    category=category,
-                    title='分类: ' + category
+                    category=category
                 )
                 self.save_page(category + '.html', html, 'category')
 
     def render_index(self):
         template = self._env.get_template('blog/index.html')
-        print(self._articles)
         html = template.render(
-            articles=self._articles,
+            articles=self._articles.values(),
             # title='首页',
             header_title=SITE_TITLE,
             header_subtitle=SITE_SUBTITLE
@@ -63,11 +60,12 @@ class Generate(object):
 
     def render_about(self):
         file = os.path.join(self._page_folder, 'about.md')
-        content = self.markdown_to_html(file)
+        content, data = self.parse_markdown(file)
 
         template = self._env.get_template('blog/about.html')
         html = template.render(
-            page=content,
+            content=content,
+            data=data,
             title='关于'
         )
         self.save_page('about.html', html)
@@ -122,7 +120,7 @@ class Generate(object):
         }
         return data
 
-    def markdown_to_html(self, filename):
+    def parse_markdown(self, filename):
         with codecs.open(filename, 'r', 'utf-8', 'ignore') as f:
             body = f.read()
 
@@ -139,23 +137,27 @@ class Generate(object):
             #      value 为 ':' 后的值，类型 list
             meta = md.Meta if hasattr(md, 'Meta') else {}
             data = self.parse_meta(meta)
+            return article, data
 
-        # todo: 加判断
-            # md 文件名为上传时间，可作为识别码 如，190922112323.md
-            identifier = os.path.splitext(os.path.basename(filename))[0]
+    def markdown_to_html(self, filename):
+        article, data = self.parse_markdown(filename)
 
-            self._articles[identifier] = data
+    # todo: 加判断
+        # md 文件名为上传时间，可作为识别码 如，190922112323.md
+        identifier = os.path.splitext(os.path.basename(filename))[0]
 
-            self.update_tags(identifier, data['tag'])
-            self.update_categories(identifier, data['category'])
+        self._articles[identifier] = data
 
-            template = self._env.get_template('blog/article.html')
-            html = template.render(
-                article=article,
-                data=data,
-            )
+        self.update_tags(identifier, data['tag'])
+        self.update_categories(identifier, data['category'])
 
-            return html
+        template = self._env.get_template('blog/article.html')
+        html = template.render(
+            article=article,
+            data=data,
+        )
+
+        return html
 
     def save_page(self, basename, html, extra_path=None):
 
@@ -202,10 +204,11 @@ class Generate(object):
 
     def generate_page(self):
         self.render_index()
-        # self.render_tags()
+        self.render_about()
+        self.render_tags()
         self.render_categories()
-        # self.render_tag_articles()
-        # self.render_cate_articles()
+        self.render_tag_articles()
+        self.render_cate_articles()
 
     def main(self):
         self.generate_article()

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
       {% if articles %}
-        {% for id, article in articles.items() %}
+        {% for article in articles %}
           <div class="post-preview">
             <a href="/article/{{ article.url_prefix }}/{{ article.url }}">
               <h2 class="post-title">{{ article.title }}</h2>

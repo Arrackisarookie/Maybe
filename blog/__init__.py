@@ -1,7 +1,7 @@
 import os
 import sys
 
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template
 
 from blog.generate import Generate
 
@@ -11,26 +11,8 @@ def create_app():
     app = Flask(__name__)
     # app.config.from_object('config')
 
-    @app.route('/')
-    @app.route('/index')
-    def index():
+    register_blueprint(app)
 
-        return send_from_directory(
-            'static', 'generated/page/index.html')
-
-    @app.route('/category')
-    def categories():
-
-        return send_from_directory(
-            'static', 'generated/page/categories.html')
-
-    @app.route('/article/<year>/<month>/<article>')
-    def article(year, month, article):
-
-        return send_from_directory(
-            'static',
-            'generated/article/{}/{}/{}.html'.format(
-                year, month, article))
     return app
 
 
@@ -39,7 +21,7 @@ gen.main()
 
 
 def register_blueprint(app):
-    from blog.views import blog
+    from .views import blog
     app.register_blueprint(blog.bp)
 
 

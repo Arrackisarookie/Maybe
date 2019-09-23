@@ -1,12 +1,11 @@
 {% extends "base.html" %}
-{% from "bootstrap/pagination.html" import render_pagination %}
 
-{% block title %} - Category{% endblock %}
+{% block title %}{{ category }}{% endblock %}
 
 {% block header %}
   <style type="text/css">
     header.masthead {
-      background-image: url('{{ url_for('static', filename='images/home-bg.jpg') }}')
+      background-image: url('/static/images/home-bg.jpg')
     }
   </style>
 
@@ -16,9 +15,8 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>{{ category.name }}</h1>
+            <h1>{{ category }}</h1>
             <span class="subheading">
-              {{ admin.blog_sub_title }}
             </span>
           </div>
         </div>
