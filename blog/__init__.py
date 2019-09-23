@@ -2,19 +2,25 @@ import os
 import sys
 
 from flask import Flask, render_template
-
+from flask_login import LoginManager
 from blog.generate import Generate
 
 
 def create_app():
 
     app = Flask(__name__)
-    # app.config.from_object('config')
+    app.config.from_pyfile('config.py')
 
     register_blueprint(app)
 
+    lm.init_app(app)
+
     return app
 
+
+lm = LoginManager()
+lm.login_view = 'admin.login'
+lm.login_message = '你特娘的请登录啊，管理员'
 
 gen = Generate()
 gen.main()
@@ -23,6 +29,8 @@ gen.main()
 def register_blueprint(app):
     from .views import blog
     app.register_blueprint(blog.bp)
+    from .views import admin
+    app.register_blueprint(admin.bp)
 
 
 def register_errors(app):

@@ -1,5 +1,4 @@
-import os
-
+SECRET_KEY = 'dev'
 
 SITE_TITLE = '也许'
 SITE_SUBTITLE = 'Everything is not too late.'
@@ -11,8 +10,8 @@ GENERATED_PATH = './blog/static/generated/'
 DEFAULT_CATEGORY = '未分类'
 DEFAULT_TAG = ['其他']
 
-BLOG_DAT = './blog/static/generated/data.dat'
+BLOG_DAT = './blog/static/generated/data/'
 
 
-ADMIN_USERNAME = os.getenv('ADMIN_USERNAME') or 'Maybe'
-ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD') or 'whosyourdaddy'
+ADMIN_USERNAME = 'Maybe'
+ADMIN_PASSWORD = 'whosyourdaddy'

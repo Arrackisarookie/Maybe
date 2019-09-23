@@ -4,7 +4,6 @@ import os
 import shelve
 
 from markdown import Markdown
-from flask import render_template
 from jinja2 import Environment, PackageLoader
 
 from blog.config import (
@@ -20,9 +19,21 @@ class Generate(object):
         self._env = Environment(loader=PackageLoader('blog', 'templates'))
 
         self._articles = {}
-        self._pages = []
+        # self._pages = []
         self._tags = {}
         self._categories = {}
+
+    def dump_data(self):
+        data_path = BLOG_DAT
+        if not os.path.exists(os.path.dirname(data_path)):
+            os.makedirs(data_path)
+        file = os.path.join(data_path, 'blog_data')
+        dat = shelve.open(file)
+        dat['article_data'] = self._articles
+        dat['category_data'] = self._categories
+        dat['tag_data'] = self._tags
+        # dat['page_data'] = self._pages
+        dat.close()
 
     def render_tag_articles(self):
         template = self._env.get_template('blog/tag.html')
@@ -52,7 +63,6 @@ class Generate(object):
         template = self._env.get_template('blog/index.html')
         html = template.render(
             articles=self._articles.values(),
-            # title='首页',
             header_title=SITE_TITLE,
             header_subtitle=SITE_SUBTITLE
         )
@@ -213,4 +223,7 @@ class Generate(object):
     def main(self):
         self.generate_article()
         self.generate_page()
-        # self.dump_data()
+        self.dump_data()
+
+    def __call__(self):
+        self.main()
