@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - {% endblock %}
+
+{% block header %}
+  <style type="text/css">
+    header.masthead .site-heading {
+      padding: 120px 0 80px;
+    }
+
+    header.masthead {
+      background-image: url('/static/images/home-bg.jpg')
+    }
+  </style>
+  
+  <header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading" style="padding: 120px 0 80px;">
+            <h1 style="font-size: 50px">{{ data.title }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+  </article>
+{% endblock %}

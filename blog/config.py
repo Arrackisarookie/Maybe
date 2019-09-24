@@ -5,6 +5,7 @@ SITE_SUBTITLE = 'Everything is not too late.'
 
 ARTICLE_PATH = './blog/source/_article/'
 PAGE_PATH = './blog/source/_page/'
+FINISHED_PATH = './blog/source/_finished/'
 GENERATED_PATH = './blog/static/generated/'
 
 DEFAULT_CATEGORY = '未分类'

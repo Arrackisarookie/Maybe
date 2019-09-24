@@ -1,14 +1,17 @@
+from datetime import datetime
 import os
-import shelve
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import UserMixin, login_user, login_required, logout_user
 
 from blog.config import ADMIN_USERNAME, ADMIN_PASSWORD
 
-from blog import lm, gen
-from blog.config import ARTICLE_PATH, BLOG_DAT
+from blog import gen
+from blog.config import ARTICLE_PATH
+from blog.utils import ImportData
 
+
+ALLOWED_EXTENSIONS = {'.md'}
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 user = {
@@ -21,46 +24,9 @@ class User(UserMixin):
     pass
 
 
-class ImportData(object):
-    _data = {}
-    data_path = BLOG_DAT
-    datafile = os.path.join(data_path, 'blog.dat')
-
-    @classmethod
-    def _load_data(cls):
-        """载入数据"""
-        data = shelve.open(cls.datafile)
-        for i in data:
-            cls._data[i] = data[i]
-
-        return cls._data
-
-    @classmethod
-    def get_data(cls):
-        """获取数据"""
-        if len(cls._data) == 0:
-            cls._load_data()
-
-        return cls._data
-
-    @classmethod
-    def reload_data(cls):
-        """重新载入数据"""
-        cls._load_data()
-
-
 def query_user(username):
     if user['username'] == username:
         return user
-
-
-@lm.user_loader
-def load_user(username):
-    if query_user(username) is not None:
-        cur_user = User
-        cur_user.id = username
-        return cur_user
-    return None
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -98,14 +64,30 @@ def logout():
 def upload_article():
     source_folder = ARTICLE_PATH
     if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part.')
+            return redirect(request.url)
         file = request.files['file']
-        filename = file.filename
-        path = os.path.join(source_folder, filename)
-        file.save(path)
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file.')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+
+            filename = datetime.now().strftime('%y%m%d%H%M%S' + '.md')
+            path = os.path.join(source_folder, filename)
+            file.save(path)
+        else:
+            flash('Incorrect file type, need .md')
 
         gen()
 
-        ImportData.reload_data()
-
         return redirect(url_for('admin.index'))
     return render_template('admin/upload_article.html', title='upload')
+
+
+def allowed_file(filename):
+
+    return os.path.splitext(filename)[1].lower() in ALLOWED_EXTENSIONS

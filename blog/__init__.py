@@ -1,9 +1,11 @@
-import os
-import sys
-
 from flask import Flask, render_template
 from flask_login import LoginManager
+
 from blog.generate import Generate
+
+
+gen = Generate()
+gen()
 
 
 def create_app():
@@ -12,18 +14,26 @@ def create_app():
     app.config.from_pyfile('config.py')
 
     register_blueprint(app)
-
-    lm.init_app(app)
+    register_login(app)
 
     return app
 
 
-lm = LoginManager()
-lm.login_view = 'admin.login'
-lm.login_message = '你特娘的请登录啊，管理员'
+def register_login(app):
+    lm = LoginManager()
 
-gen = Generate()
-gen.main()
+    @lm.user_loader
+    def load_user(username):
+        from blog.views.admin import query_user, User
+        if query_user(username) is not None:
+            cur_user = User
+            cur_user.id = username
+            return cur_user
+        return None
+
+    lm.login_view = 'admin.login'
+    lm.login_message = '你特娘的请登录啊，管理员'
+    lm.init_app(app)
 
 
 def register_blueprint(app):
@@ -31,6 +41,8 @@ def register_blueprint(app):
     app.register_blueprint(blog.bp)
     from .views import admin
     app.register_blueprint(admin.bp)
+    from .views import api
+    app.register_blueprint(api.bp)
 
 
 def register_errors(app):

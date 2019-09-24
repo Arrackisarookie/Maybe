@@ -2,13 +2,15 @@ from datetime import datetime
 import codecs
 import os
 import shelve
+import shutil
 
 from markdown import Markdown
 from jinja2 import Environment, PackageLoader
 
 from blog.config import (
-    BLOG_DAT, GENERATED_PATH, PAGE_PATH, ARTICLE_PATH, SITE_TITLE, SITE_SUBTITLE
+    BLOG_DAT, GENERATED_PATH, PAGE_PATH, ARTICLE_PATH, SITE_TITLE, SITE_SUBTITLE, FINISHED_PATH
 )
+from blog.utils import ImportData
 
 
 class Generate(object):
@@ -19,7 +21,6 @@ class Generate(object):
         self._env = Environment(loader=PackageLoader('blog', 'templates'))
 
         self._articles = {}
-        # self._pages = []
         self._tags = {}
         self._categories = {}
 
@@ -28,12 +29,24 @@ class Generate(object):
         if not os.path.exists(os.path.dirname(data_path)):
             os.makedirs(data_path)
         file = os.path.join(data_path, 'blog.dat')
-        dat = shelve.open(file)
-        dat['article_data'] = self._articles
-        dat['category_data'] = self._categories
-        dat['tag_data'] = self._tags
-        # dat['page_data'] = self._pages
-        dat.close()
+        with shelve.open(file, writeback=True) as dat:
+
+            self.update_data(dat, 'articles_data', self._articles)
+            self.update_data(dat, 'categories_data', self._categories)
+            self.update_data(dat, 'tags_data', self._tags)
+
+            # for key, value in dat.items():
+            #     for k, v in value.items():
+            #         print(k, v)
+            #         print()
+
+    def update_data(self, dat, key, value):
+        if key in dat:
+            temp = dat[key].copy()
+            temp.update(value)
+            dat[key] = temp
+        else:
+            dat[key] = value
 
     def render_tag_articles(self):
         template = self._env.get_template('blog/tag.html')
@@ -69,9 +82,9 @@ class Generate(object):
         self.save_page('index.html', html)
 
     def render_about(self):
-        file = os.path.join(self._page_folder, 'about.md')
-        content, data = self.parse_markdown(file)
-
+        filename = os.path.join(self._page_folder, 'about.md')
+        content, data = self.parse_markdown(filename)
+        self.move_generated_md(filename)
         template = self._env.get_template('blog/about.html')
         html = template.render(
             content=content,
@@ -112,7 +125,7 @@ class Generate(object):
     def parse_meta(self, meta):
         now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         date = meta.get('datetime')[0] if meta.get('datetime') else now
-        tag = meta.get('tag', '其他')
+        tag = meta.get('tag', ['其他'])
         category = meta.get('category')[0] if meta.get('category') else '无分类'
         title = meta.get('title')[0] if meta.get('title') else now
         summary = meta.get('summary')[0] if meta.get('summary') else '无描述'
@@ -152,7 +165,6 @@ class Generate(object):
     def markdown_to_html(self, filename):
         article, data = self.parse_markdown(filename)
 
-    # todo: 加判断
         # md 文件名为上传时间，可作为识别码 如，190922112323.md
         identifier = os.path.splitext(os.path.basename(filename))[0]
 
@@ -209,21 +221,35 @@ class Generate(object):
         for filename in self.load_folder(self._article_folder):
             html = self.markdown_to_html(filename)
 
+            # 将已转换的 markdown 文件移除资源目录
+            self.move_generated_md(filename)
+
             # md 文件名为上传时间，可作为识别码
             self.save_article(os.path.basename(filename), html)
+        # 如果 PAGE_PATH 有文章
+        if os.listdir(PAGE_PATH):
+            self.render_about()
 
     def generate_page(self):
         self.render_index()
-        self.render_about()
         self.render_tags()
         self.render_categories()
         self.render_tag_articles()
         self.render_cate_articles()
 
+    def move_generated_md(self, filename):
+        shutil.move(filename, FINISHED_PATH)
+
     def main(self):
-        self.generate_article()
+        # 如果 ARTICLE_PATH 有文章
+        if os.listdir(ARTICLE_PATH):
+            self.generate_article()
+            self.dump_data()
+        data = ImportData.get_data()
+        self._articles = data['articles_data']
+        self._categories = data['categories_data']
+        self._tags = data['tags_data']
         self.generate_page()
-        self.dump_data()
 
     def __call__(self):
         self.main()
