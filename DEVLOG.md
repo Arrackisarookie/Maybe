@@ -1,4 +1,15 @@
 ### 2019.9.24
+
+##### 更正
+我发现下面的报错不是因为 flask 多线程导致读写冲突，而是 shelve 打开文件时默认不支持更改数据
+```Python
+    shelve.open(filename, flag='c', protocol=None, writeback=False)
+```
+
+writeback 默认为 False，即不能动态写回数据，更改为 True 上面的 error 就没了。
+
+---
+
 再一次的想砸电脑。。
 突然怀念起数据库的好。。
 由于是静态博客，所以数据是用 shelve 存储的。我刚意识到这样的数据存储和更新是有多愚蠢。。 
@@ -19,13 +30,14 @@
 按理说，用数据库的话，就是个 update 再 select 的事情，用 flask-sqlalchemy 还能保证没冲突。  
 可是 shelve 太简单了。。他同时读写时不是线程安全的。。但 flask 多线程啊。。  
 有读有写。。这不就崩了。。 
+
 ```
     _gdbm.error: [Errno 11] Resource temporarily unavailable  
 ```
 
 这就很难受了。。我在研究一下怎么控制读写保护。。  
 实在不行，就还是每回都重新生成吧。。  
-  
+
 ---
 2019.9.22
 重构了一下 yukun 大佬的 [quiet](https://github.com/blackyukun/quiet)，主要是改了 generate.py 这个文件。  

@@ -8,7 +8,6 @@ from blog.config import ADMIN_USERNAME, ADMIN_PASSWORD
 
 from blog import gen
 from blog.config import ARTICLE_PATH
-from blog.utils import ImportData
 
 
 ALLOWED_EXTENSIONS = {'.md'}

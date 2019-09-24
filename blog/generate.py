@@ -35,11 +35,6 @@ class Generate(object):
             self.update_data(dat, 'categories_data', self._categories)
             self.update_data(dat, 'tags_data', self._tags)
 
-            # for key, value in dat.items():
-            #     for k, v in value.items():
-            #         print(k, v)
-            #         print()
-
     def update_data(self, dat, key, value):
         if key in dat:
             temp = dat[key].copy()
