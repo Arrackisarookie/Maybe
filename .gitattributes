@@ -1,2 +1,2 @@
-blog/static/* linguist-vendored
+blog/static/css linguist-vendored
 blog/templates/* linguist-vendored
