@@ -1,11 +1,14 @@
 ## Maybe
-*Flask 驱动，静态个人博客，支持上传 markdown 文件生成 html*  
+*Flask 驱动个人博客，支持上传 markdown 文件生成 html*  
 
 ---
 ### Developing
+- 启用 MySQL 进行数据管理
 - 优化用户登录
 - 上传表单加入 tag, category
 - 上传文件生成预览
+- 加入 moment
+
 
 ---
 ### Version
@@ -39,6 +42,7 @@ Version 0.0.2
 ---
 ### todo
 
+- 使用 flask_migrate
 - 在线编辑 markdown
 - 优化文件转化过程
 - 优化安全措施

@@ -1,4 +1,4 @@
-from flask import Blueprint, send_from_directory
+from flask import Blueprint, send_from_directory, abort
 
 
 bp = Blueprint('blog', __name__)
@@ -48,3 +48,10 @@ def article(year, month, article):
         'static',
         'generated/article/{}/{}/{}.html'.format(
             year, month, article))
+
+
+@bp.route('/test')
+def test():
+    abort(500)
+    return send_from_directory(
+            'static', 'generated/page/index.html')
