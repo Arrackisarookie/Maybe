@@ -233,6 +233,8 @@ class Generate(object):
         self.render_cate_articles()
 
     def move_generated_md(self, filename):
+        if not os.path.exists(FINISHED_PATH):
+            os.makedirs(FINISHED_PATH)
         shutil.move(filename, FINISHED_PATH)
 
     def main(self):

@@ -1,29 +1,47 @@
+{% extends "base.html" %}
 
+{% block header %}
+  <style type="text/css">
+    header.masthead {
+      background-image: url('/static/images/home-bg.jpg')
+    }
+  </style>
 
-{% block header_title %}
-管理后台
-{% endblock %}
-
-{% block header_subtitle %}
-选择上传类型
+  <header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>后台管理</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 {% endblock %}
 
 {% block content %}
-
-<p>
-    <a href="#">
-        上传页面
-    </a>
-</p>
-<p>
-    <a href="/admin/upload/article">
-        上传文章
-    </a>
-</p>
-<p>
-    <a href="/admin/logout">
-        登出
-    </a>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <p>
+        <a href="#">
+            上传页面
+        </a>
+      </p>
+      <p>
+        <a href="/admin/upload/article">
+            上传文章
+        </a>
+      </p>
+      <p>
+        <a href="/admin/logout">
+            登出
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

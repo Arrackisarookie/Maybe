@@ -16,3 +16,5 @@ BLOG_DAT = './blog/static/generated/data/'
 
 ADMIN_USERNAME = 'Maybe'
 ADMIN_PASSWORD = 'whosyourdaddy'
+
+UPLOADED_MARKDOWN_DEST = ARTICLE_PATH

@@ -1,7 +1,8 @@
+import codecs
 import os
 import shelve
 
-from blog.config import BLOG_DAT
+from blog.config import BLOG_DAT, ARTICLE_PATH
 
 
 class ImportData(object):
@@ -30,3 +31,17 @@ class ImportData(object):
     def reload_data(cls):
         """重新载入数据"""
         cls._load_data()
+
+
+def add_meta(file, data):
+    with codecs.open(file, 'r+', 'utf-8') as f:
+        old = f.read()
+        f.seek(0)
+        for key, value in data.items():
+            if key == 'tag':
+                f.write('{}: {}\n'.format(key, value[0]))
+                for t in value[1:]:
+                    f.write('    {}\n'.format(t))
+            else:
+                f.write('{}: {}\n'.format(key, value))
+        f.write('\n' + old)

@@ -1,16 +1,23 @@
-## blog
+## Maybe
 *Flask 驱动，静态个人博客，支持上传 markdown 文件生成 html*  
 
 ---
-### 版本信息
-#### Version 0.0.4 (Developing)
+### Developing
+- 优化用户登录
+- 上传表单加入 tag, category
+- 上传文件生成预览
 
-- 更改上传后的文件名                     √
-- 上传后只生成新文件                     √
-- 将已生成的 md 移出 source/_article     √
-- 上传后更新 tag，category，index        √
-- 网页显示上传文件内容
-- 为上传文件加入 meta 信息
+---
+### Version
+#### Version 0.0.4
+
+- 更改上传后的文件名
+- 上传后只生成新文件
+- 将已生成的 md 移出 source/_article
+- 上传后更新 tag，category，index
+- 使用 Flask-WTF，Flask-Uploads 重写表单
+- 使用 Flask-Bootstrap 渲染表单
+- 为上传文件加入 meta 信息(no tag, cate)
   
  Version 0.0.3 
   

@@ -3,7 +3,7 @@ from flask import Blueprint, jsonify
 from blog.utils import ImportData
 
 
-bp = Blueprint('api', __name__, url_prefix='/api')
+bp = Blueprint('api', __name__)
 
 
 @bp.route('/posts')
