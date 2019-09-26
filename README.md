@@ -44,7 +44,6 @@ Version 0.0.2
 ---
 ### todo
 
-- 使用 flask_migrate
 - 在线编辑 markdown
 - 优化文件转化过程
 - 优化安全措施

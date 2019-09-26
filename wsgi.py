@@ -3,7 +3,7 @@ import os
 
 from blog import create_app
 from blog.extensions import db
-from blog.models import Article, Category, User
+from blog.models import Article, Category, Permission, Role, User
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
@@ -14,7 +14,12 @@ app = create_app(os.environ.get('FLASK_CONFIG') or 'default')
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, Article=Article, Category=Category, User=User)
+    return dict(db=db, Article=Article, Category=Category, User=User, Role=Role, Permission=Permission)
+
+
+@app.context_processor
+def inject_permission():
+    return dict(Permission=Permission)
 
 
 @app.cli.command()

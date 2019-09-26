@@ -16,6 +16,11 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log in')
 
 
+class ArticleForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired(), Length(1, 60)])
+    submit = SubmitField('Log in')
+
+
 class UpdateForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(1, 60)])
     # category = SelectField('Category', coerce=int, default=1)

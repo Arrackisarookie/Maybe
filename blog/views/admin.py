@@ -6,6 +6,7 @@ from flask_login import login_required
 
 from blog import markdowns
 from blog.forms import UpdateForm
+from blog.decorators import admin_required, permission_required
 # from blog.utils import add_meta
 
 
@@ -14,6 +15,7 @@ bp = Blueprint('admin', __name__)
 
 @bp.route('/')
 @login_required
+@admin_required
 def index():
     return render_template('admin/admin.html', title='admin-management')
 

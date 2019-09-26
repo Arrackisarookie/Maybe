@@ -19,6 +19,8 @@ UPLOADED_MARKDOWN_DEST = ARTICLE_PATH
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev'
 
+    FLASK_ADMIN = os.environ.get('FLASK_ADMIN') or 'Arrack'
+
     SITE_TITLE = '也许'
     SITE_SUBTITLE = 'Everything is not too late.'
 
