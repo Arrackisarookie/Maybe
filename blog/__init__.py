@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_uploads import configure_uploads, patch_request_class
 
-from blog.extensions import bootstrap, db, loginmanager, markdowns
+from blog.extensions import bootstrap, db, loginmanager, markdowns, migrate
 # from blog.generate import Generate
 from config import config
 
@@ -26,6 +26,7 @@ def register_extensions(app):
     bootstrap.init_app(app)
     db.init_app(app)
     # loginmanager.init_app(app)
+    migrate.init_app(app, db)
     configure_uploads(app, markdowns)
     patch_request_class(app)
 

@@ -6,7 +6,7 @@ from blog.extensions import db
 class Article(db.Model):
     __tablename__ = 'articles'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(60))
+    title = db.Column(db.String(64))
     cate_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
     def __repr__(self):
@@ -16,7 +16,7 @@ class Article(db.Model):
 class Category(db.Model):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20))
+    name = db.Column(db.String(32))
     articles = db.relationship('Article', backref='category', lazy='dynamic')
 
     def __repr__(self):
@@ -26,7 +26,7 @@ class Category(db.Model):
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20))
+    username = db.Column(db.String(64), unique=True)
     password_hash = db.Column(db.String(128))
 
     @property
