@@ -1,5 +1,6 @@
-from flask import Blueprint, send_from_directory, abort
+from flask import Blueprint, send_from_directory, render_template
 
+from blog.forms import LeaveMsgForm
 
 bp = Blueprint('blog', __name__)
 
@@ -50,8 +51,7 @@ def article(year, month, article):
             year, month, article))
 
 
-@bp.route('/test')
-def test():
-    abort(500)
-    return send_from_directory(
-            'static', 'generated/page/index.html')
+@bp.route('/whatsonyourmind')
+def leavemsgs():
+    form = LeaveMsgForm()
+    return render_template('blog/leavemsgs.html')

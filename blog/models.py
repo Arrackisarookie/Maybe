@@ -29,12 +29,21 @@ class Category(db.Model):
         return '<Category %r>' % self.name
 
 
+class LeaveMsg(db.Model):
+    __tablename__ = 'leavemsgs'
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.Text())
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow())
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True)
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    leavemsgs = db.relationship('LeaveMsg', backref='author', lazy='dynamic')
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
