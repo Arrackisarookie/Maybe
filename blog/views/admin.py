@@ -4,9 +4,9 @@ import os
 from flask import Blueprint, flash, redirect, render_template, request, url_for, current_app
 from flask_login import UserMixin, login_user, login_required, logout_user
 
-from blog import gen, markdowns
+from blog import markdowns
 from blog.forms import LoginForm, UpdateForm
-from blog.utils import add_meta
+# from blog.utils import add_meta
 
 
 bp = Blueprint('admin', __name__)
@@ -73,7 +73,7 @@ def upload_article():
         file = os.path.join(path, filename)
         markdowns.save(form.markdown.data, name=filename)
 
-        add_meta(file, data)
+        # add_meta(file, data)
         # gen()
 
         return redirect(url_for('admin.index'))
