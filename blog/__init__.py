@@ -25,7 +25,7 @@ def create_app(config_name):
 def register_extensions(app):
     bootstrap.init_app(app)
     db.init_app(app)
-    # loginmanager.init_app(app)
+    loginmanager.init_app(app)
     migrate.init_app(app, db)
     configure_uploads(app, markdowns)
     patch_request_class(app)
@@ -36,6 +36,8 @@ def register_blueprint(app):
     app.register_blueprint(blog.bp)
     from .views import admin
     app.register_blueprint(admin.bp, url_prefix='/admin')
+    from .views import auth
+    app.register_blueprint(auth.bp, url_prefix='/auth')
     # from .views import api
     # app.register_blueprint(api.bp, url_prefix='/api')
 
