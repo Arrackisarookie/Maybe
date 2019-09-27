@@ -10,10 +10,23 @@ from blog.extensions import db, loginmanager
 class Article(db.Model):
     __tablename__ = 'articles'
     id = db.Column(db.Integer, primary_key=True)
+
     title = db.Column(db.String(64))
-    body = db.Column(db.Text())
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow())
+
+    filename = db.Column(db.String(64))
+    html_path = db.Column(db.String(128))
+    markdown_path = db.Column(db.String(128))
+    add_time = db.Column(db.DateTime, index=True, default=datetime.utcnow())
+    url = db.Column(db.String(128))
+
+    verified = db.Column(db.Boolean, default=False)
+    verified_time = db.Column(db.DateTime, index=True)
+
+    posted = db.Column(db.Boolean, default=False)
+    posted_time = db.Column(db.DateTime, index=True)
+
     cate_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+
 
     def __repr__(self):
         return '<Article %r>' % self.title
@@ -32,7 +45,7 @@ class Category(db.Model):
 class LeaveMsg(db.Model):
     __tablename__ = 'leavemsgs'
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.Text())
+    body = db.Column(db.String(512))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
