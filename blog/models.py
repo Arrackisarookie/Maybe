@@ -27,7 +27,6 @@ class Article(db.Model):
 
     cate_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
-
     def __repr__(self):
         return '<Article %r>' % self.title
 

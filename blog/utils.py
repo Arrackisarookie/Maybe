@@ -22,6 +22,8 @@ def markdown_to_html(path, name):
 def save_html(html, path, name, verifying=False):
     if not os.path.exists(path):
         os.makedirs(path)
+    if not name.endswith('.html'):
+        name += '.html'
     file = os.path.join(path, name)
     print(file)
 
