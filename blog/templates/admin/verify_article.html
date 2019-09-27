@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block header %}
+  <style type="text/css">
+    header.masthead .site-heading {
+      padding: 120px 0 80px;
+    }
+
+    header.masthead {
+      background-image: url('/static/images/home-bg.jpg')
+    }
+  </style>
+  
+  <header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading" style="padding: 120px 0 80px;">
+            <h1 style="font-size: 50px">审核文章</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% block article_body %}{% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {{ render_form(form) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

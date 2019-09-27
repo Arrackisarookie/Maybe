@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <style type="text/css">
+    header.masthead {
+      background-image: url('/static/images/home-bg.jpg')
+    }
+  </style>
+
+  <header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>审核</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <ul>Unverified
+        {% for article in unverified %}
+          <li>
+            <p>
+              <span>
+                <a href="verify/article/{{ article.id }}">{{ article.title }}</a>
+              </span>
+              <span>{{ article.add_time }}</span>
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
+      <hr/>
+      <hr/>
+      <ul>Verified
+        {% for article in verified %}
+          <li>
+            <p>
+              <span>{{ article.title }}</span>
+              <span>{{ article.add_time }}</span>
+              <span>{{ article.verified_time }}</span>
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

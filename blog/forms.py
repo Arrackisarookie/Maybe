@@ -36,6 +36,10 @@ class UpdateForm(FlaskForm):
     submit = SubmitField()
 
 
+class VerifyArticleForm(FlaskForm):
+    submit = SubmitField()
+
+
 class LeaveMsgForm(FlaskForm):
     # username = StringField(
     #     label='Username',
