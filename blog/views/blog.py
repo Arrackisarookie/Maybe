@@ -8,8 +8,8 @@ bp = Blueprint('blog', __name__)
 @bp.route('/')
 @bp.route('/index')
 def index():
-    return send_from_directory(
-            'static', 'generated/page/index.html')
+    articles = []
+    return render_template('blog/index.html', articles=articles)
 
 
 @bp.route('/tag')

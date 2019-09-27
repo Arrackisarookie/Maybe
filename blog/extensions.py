@@ -8,5 +8,5 @@ from flask_migrate import Migrate
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 loginmanager = LoginManager()
-markdowns = UploadSet('markdown', ('md'))
+upload_markdowns = UploadSet('markdown', ('md'))
 migrate = Migrate()
