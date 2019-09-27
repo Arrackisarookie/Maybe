@@ -1,47 +1,36 @@
-# import codecs
-# import os
-# import shelve
+import codecs
+import os
 
-# from blog.config import BLOG_DAT, ARTICLE_PATH
-
-
-# class ImportData(object):
-#     _data = {}
-#     data_path = BLOG_DAT
-#     datafile = os.path.join(data_path, 'blog.dat')
-
-#     @classmethod
-#     def _load_data(cls):
-#         """载入数据"""
-#         with shelve.open(cls.datafile) as data:
-#             for key, value in data.items():
-#                 cls._data[key] = value
-
-#             return cls._data
-
-#     @classmethod
-#     def get_data(cls):
-#         """获取数据"""
-#         if len(cls._data) == 0:
-#             cls._load_data()
-
-#         return cls._data
-
-#     @classmethod
-#     def reload_data(cls):
-#         """重新载入数据"""
-#         cls._load_data()
+from markdown import Markdown
 
 
-# def add_meta(file, data):
-#     with codecs.open(file, 'r+', 'utf-8') as f:
-#         old = f.read()
-#         f.seek(0)
-#         for key, value in data.items():
-#             if key == 'tag':
-#                 f.write('{}: {}\n'.format(key, value[0]))
-#                 for t in value[1:]:
-#                     f.write('    {}\n'.format(t))
-#             else:
-#                 f.write('{}: {}\n'.format(key, value))
-#         f.write('\n' + old)
+def markdown_to_html(path, name):
+    file = os.path.join(path, name)
+    with codecs.open(file, 'r', 'utf-8', 'ignore') as f:
+        body = f.read()
+
+        md = Markdown(extensions=[
+            'admonition',       # 警告样式
+            'codehilite',       # 语法高亮
+            'fenced_code',      # 代码不用缩进
+            'tables'])          # 表格
+        content = md.convert(body)
+
+        return content
+
+
+def save_html(html, path, name, verifying=False):
+    if not os.path.exists(path):
+        os.makedirs(path)
+    file = os.path.join(path, name)
+    print(file)
+
+    with codecs.open(file, 'w', 'utf-8') as f:
+        if verifying:
+            f.write('{% extends "admin/verify_article.html" %}\n')
+        else:
+            f.write('{% extends "blog/article.html" %}\n')
+
+        f.write('{% block article_body %}\n')
+        f.write(html + '\n')
+        f.write('{% endblock %}\n')
