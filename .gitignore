@@ -8,5 +8,4 @@ instance/
 .env
 venv/
 
-generated/
 source/
