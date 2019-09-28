@@ -7,6 +7,7 @@
   <meta name="author" content="">
 
   <title>{% block title %}{% endblock %}也许</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/jinx256.png') }}">
 
   <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='css/icon.min.css') }}" rel="stylesheet">
@@ -38,9 +39,19 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('blog.about') }}">About</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://github.com/arrackisarookie">Github</a>
+          {% if current_user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Change Password</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+              </ul>
             </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a>
+            </li>
+          {% endif %}
           </ul>
         </div>
       </div>
@@ -49,6 +60,18 @@
 
   <!-- Page Header -->
   {% block header %}{% endblock %}
+
+  {% block flash %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+  {% endblock %}
 
   <!-- Main Content -->
   {% block content %}{% endblock %}
@@ -84,6 +107,7 @@
     </footer>
   {% endblock %}
   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/blog.js') }}"></script>
 
 </body>

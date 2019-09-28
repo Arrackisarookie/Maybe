@@ -54,4 +54,7 @@ def article(year, month, article):
 @bp.route('/whatsonyourmind')
 def leavemsgs():
     form = LeaveMsgForm()
+
+    if form.validate_on_submit():
+        return
     return render_template('blog/leavemsgs.html')

@@ -15,10 +15,9 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>上传文章</h1>
-            <span class="subheading">
-              上传 markdown 文件
-            </span>
+            
+            <h1>注册</h1>
+
           </div>
         </div>
       </div>
@@ -29,18 +28,10 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
+    <div class="col-lg-4 col-md-6 mx-auto">
+      <h2>Register</h2>
       {{ render_form(form) }}
-
-      <p>上传文件可能需要一些时间，请耐心等待哦。</p>
-      <p>
-        <a href="{{ url_for('auth.logout') }}">
-            登出
-        </a>
-      </p>
-
     </div>
   </div>
 </div>
-
 {% endblock %}
