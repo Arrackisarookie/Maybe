@@ -48,6 +48,9 @@ class LeaveMsg(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+    def __repr__(self):
+        return '<LeaveMsg %r-%r>' % (self.name, self.author)
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'

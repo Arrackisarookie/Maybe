@@ -1,4 +1,5 @@
 from flask import Blueprint, send_from_directory, render_template
+from flask_login import current_user
 
 from blog.forms import LeaveMsgForm
 
@@ -54,7 +55,8 @@ def article(year, month, article):
 @bp.route('/whatsonyourmind')
 def leavemsgs():
     form = LeaveMsgForm()
-
+    if not current_user.is_authenticated:
+        
     if form.validate_on_submit():
         return
     return render_template('blog/leavemsgs.html')
