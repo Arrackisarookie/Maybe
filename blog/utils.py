@@ -5,6 +5,8 @@ from markdown import Markdown
 
 
 def markdown_to_html(path, name):
+    if not name.endswith('.md'):
+        name += '.md'
     file = os.path.join(path, name)
     with codecs.open(file, 'r', 'utf-8', 'ignore') as f:
         body = f.read()

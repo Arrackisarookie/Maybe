@@ -33,16 +33,18 @@ def upload_article():
         subfolder = os.path.join(str(utcnow.year), str(utcnow.month))
         markdown_path = os.path.join(current_app.config['MARKDOWN_PATH'], subfolder)
         html_path = os.path.join(current_app.config['HTML_PATH'], subfolder)
-        filename = utcnow.strftime('%d%H%M%S')
+        filename = title
 
         upload_markdowns.save(form.markdown.data, folder=subfolder, name=filename + '.md')
+        url = os.path.join('article', subfolder, title)
 
         article = Article(
             title=title,
             markdown_path=markdown_path,
             html_path=html_path,
             filename=filename,
-            add_time=utcnow)
+            add_time=utcnow,
+            url=url)
         db.session.add(article)
         db.session.commit()
 

@@ -92,7 +92,7 @@ _以 markdown 格式存储，可在线编辑，也可上传。_
 
 文章审核通过后，会通过程序生成如下的 html
 ```html
-    {% block content %}
+    {% block blockname %}
     ...
     <p>文章内容</p>
     ...

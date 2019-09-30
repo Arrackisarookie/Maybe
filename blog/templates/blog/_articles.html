@@ -4,7 +4,7 @@
       {% if articles %}
         {% for article in articles %}
           <div class="post-preview">
-            <a href="/article/{{ article.url_prefix }}/{{ article.url }}">
+            <a href="{{ article.url }}">
               <h2 class="post-title">{{ article.title }}</h2>
             </a>
             <p>{{ article.summary }}</p>

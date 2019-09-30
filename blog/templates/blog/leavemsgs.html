@@ -11,7 +11,7 @@
   <main class="container">
     <header>
       <h1 class="text-center display-4">
-        <a class="text-success" href="{{ url_for('index') }}"><strong>Say Hello</strong></a>
+        <a class="text-success" href="{{ url_for('blog.index') }}"><strong>Say Hello</strong></a>
         <small class="text-muted" style="font-size: 24px">to the world</small>
       </h1>
     </header>
@@ -27,7 +27,7 @@
 
 {% block content %}
 <div class="hello-form">
-  {{ render_form(form, action=request.full_path) }}
+  {{ render_form(form) }}
 </div>
 <h5>{{ messages|length }} messages
   <small class="float-right">
