@@ -38,18 +38,15 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
 
-class ArticleForm(FlaskForm):
-    title = StringField(
-        label='Title',
-        validators=[DataRequired(), Length(1, 60)])
-    submit = SubmitField('Log in')
-
-
 class UpdateForm(FlaskForm):
     title = StringField(
         label='Title',
         validators=[DataRequired(), Length(1, 60)])
-    # category = SelectField('Category', coerce=int, default=1)
+    category = SelectField(
+        label='Category',
+        choices=[(4, '随笔'), (2, '技术'), (3, '资讯'), (1, '其他')],
+        coerce=int,
+        default=1)
     markdown = FileField(
         label='Markdown-file',
         validators=[FileRequired(), FileAllowed(['md'], 'Only .md')])

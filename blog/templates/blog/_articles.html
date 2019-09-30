@@ -1,38 +1,32 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-      {% if articles %}
-        {% for article in articles %}
-          <div class="post-preview">
-            <a href="{{ article.url }}">
-              <h2 class="post-title">{{ article.title }}</h2>
-            </a>
-            <p>{{ article.summary }}</p>
-            <div class="post-meta">
-              <div>
-                
-                <small>Category: <a href="/category/{{ article.category }}">{{ article.category }}</a></small>
-              </div>
-              <div class="post-time">
-                <small>Posted on {{ article.datetime }}</small>
-              </div>
-            </div>
-          </div>
-          <hr>
-        {% endfor %}
-      {% else %}
-        <div class="tip">
-          <h5>No posts yet.</h5>
+{% if articles %}
+  {% for article in articles %}
+    <div class="post-preview">
+      <a href="{{ article.url }}">
+        <h2 class="post-title">{{ article.title }}</h2>
+      </a>
+      <p>{{ article.summary }}</p>
+      <div class="post-meta">
+        <div>
+          
+          <small>Category: <a href="{{ url_for('blog.category', category=article.category.name)}}">{{ article.category.name }}</a></small>
         </div>
-      {% endif %}
-      <!-- Pager -->
-      <div class="row">
-        <div class="col-lg-11">
-          <div class="page-footer">
-            
-          </div>
+        <div class="post-time">
+          <small>Posted on {{ article.datetime }}</small>
         </div>
       </div>
+    </div>
+    <hr>
+  {% endfor %}
+{% else %}
+  <div class="tip">
+    <h5>No posts yet.</h5>
+  </div>
+{% endif %}
+<!-- Pager -->
+<div class="row">
+  <div class="col-lg-11">
+    <div class="page-footer">
+      
     </div>
   </div>
 </div>
