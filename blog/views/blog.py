@@ -1,9 +1,7 @@
 from flask import Blueprint, send_from_directory, render_template
-from flask_login import current_user
 
 from blog.forms import LeaveMsgForm
-from blog.models import LeaveMsg, Article, Category
-from blog.extensions import db
+from blog.models import LeaveMsg, Article, Category, Tag
 
 bp = Blueprint('blog', __name__)
 
@@ -30,16 +28,11 @@ def category(category):
         'blog/category.html', category=category, articles=articles)
 
 
-@bp.route('/tag')
-def tags():
-    return send_from_directory(
-        'static', 'generated/page/tags.html')
-
-
 @bp.route('/tag/<tag>')
 def tag_articles(tag):
-    return send_from_directory(
-        'static', 'generated/page/tag/{}.html'.format(tag))
+    articles = Tag.query.filter_by(name=tag).first().articles
+    return render_template(
+        'blog/tag.html', tag=tag, articles=articles)
 
 
 @bp.route('/about')

@@ -7,6 +7,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from blog.extensions import db, loginmanager
 
 
+article_tag = db.Table(
+    'article_tag',
+    db.Column('article_id', db.ForeignKey('articles.id')),
+    db.Column('tag_id', db.ForeignKey('tags.id')))
+
+
 class Article(db.Model):
     __tablename__ = 'articles'
     id = db.Column(db.Integer, primary_key=True)
@@ -39,6 +45,18 @@ class Category(db.Model):
 
     def __repr__(self):
         return '<Category %r>' % self.name
+
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(32))
+    articles = db.relationship(
+        'Article', secondary=article_tag,
+        backref=db.backref('tags', lazy='dynamic'))
+
+    def __repr__(self):
+        return '<Tag %r>' % self.name
 
 
 class LeaveMsg(db.Model):

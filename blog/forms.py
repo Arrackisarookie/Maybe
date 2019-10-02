@@ -47,6 +47,9 @@ class UpdateForm(FlaskForm):
         choices=[(4, '随笔'), (2, '技术'), (3, '资讯'), (1, '其他')],
         coerce=int,
         default=1)
+    tag = StringField(
+        label='tag',
+        validators=[DataRequired(), Length(1, 256)])
     markdown = FileField(
         label='Markdown-file',
         validators=[FileRequired(), FileAllowed(['md'], 'Only .md')])

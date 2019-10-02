@@ -7,7 +7,7 @@ from flask_login import login_required
 from blog.extensions import upload_markdowns, db
 from blog.forms import UpdateForm, VerifyArticleForm
 from blog.decorators import admin_required
-from blog.models import Article, Category
+from blog.models import Article, Category, Tag
 from blog.utils import markdown_to_html, save_html
 
 
@@ -29,7 +29,6 @@ def upload_article():
     if form.validate_on_submit():
         utcnow = datetime.utcnow()
         title = form.title.data
-        category_id = form.category.data
         subfolder = os.path.join(str(utcnow.year), str(utcnow.month))
         markdown_path = os.path.join(current_app.config['MARKDOWN_PATH'], subfolder)
         html_path = os.path.join(current_app.config['HTML_PATH'], subfolder)
@@ -40,12 +39,18 @@ def upload_article():
 
         article = Article(
             title=title,
-            category=Category.query.filter_by(id=category_id).first(),
+            category=Category.query.filter_by(id=form.category.data).first(),
             markdown_path=markdown_path,
             html_path=html_path,
             filename=filename,
             add_time=utcnow,
             url=url)
+        for t in form.tag.data.split(','):
+            tag = Tag.query.filter_by(name=t).first()
+            if not tag:
+                tag = new_tag(t)
+            article.tags.append(tag)
+
         db.session.add(article)
         db.session.commit()
 
@@ -53,6 +58,13 @@ def upload_article():
 
         return redirect(url_for('admin.index'))
     return render_template('admin/upload_article.html', form=form)
+
+
+def new_tag(t):
+    tag = Tag(name=t)
+    db.session.add(tag)
+    db.session.commit()
+    return tag
 
 
 @bp.route('/verify')
