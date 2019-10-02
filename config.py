@@ -14,9 +14,6 @@ class Config(object):
 
     UPLOADED_MARKDOWN_DEST = MARKDOWN_PATH
 
-    TEMPORARY_HTML_PATH = './blog/templates/generated/'
-    TEMPORARY_HTML_NAME = 'temporary.html'
-
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod

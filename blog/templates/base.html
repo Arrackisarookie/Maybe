@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('blog.leavemsgs') }}">what's on your mind</a>
+              <a class="nav-link" href="{{ url_for('blog.about') }}">About</a>
             </li>
             <li class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Category</a>
@@ -39,12 +39,6 @@
                 <li><a href="{{ url_for('blog.category', category='其他') }}">其他</a></li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/tag">Tag</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('blog.about') }}">About</a>
-            </li>
           {% if current_user.is_authenticated %}
             <li class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
@@ -52,10 +46,6 @@
                 <li><a href="#">Change Password</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
               </ul>
-            </li>
-          {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a>
             </li>
           {% endif %}
           </ul>

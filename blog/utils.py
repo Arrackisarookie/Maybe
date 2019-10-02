@@ -3,6 +3,9 @@ import os
 
 from markdown import Markdown
 
+from blog.models import Tag
+from blog.extensions import db
+
 
 def markdown_to_html(path, name):
     if not name.endswith('.md'):
@@ -38,3 +41,10 @@ def save_html(html, path, name, verifying=False):
         f.write('{% block article_body %}\n')
         f.write(html + '\n')
         f.write('{% endblock %}\n')
+
+
+def new_tag(t):
+    tag = Tag(name=t)
+    db.session.add(tag)
+    db.session.commit()
+    return tag

@@ -23,6 +23,14 @@
             <span class="subheading">
               {{ article.add_time }}
             </span>
+            <span class="subheading">
+              <a href="{{ url_for('blog.category', category=article.category.name) }}">{{ article.category.name }}</a>
+            </span>
+            <span class="subheading">
+              {% for tag in article.tags %}
+                <a href="{{ url_for('blog.tag', tag=tag.name) }}">{{ tag.name }}</a>
+              {% endfor %}
+            </span>
           </div>
         </div>
       </div>

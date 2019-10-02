@@ -2,12 +2,8 @@ from flask import Flask, render_template
 from flask_uploads import configure_uploads, patch_request_class
 
 from blog.extensions import bootstrap, db, loginmanager, upload_markdowns, migrate
-# from blog.generate import Generate
+
 from config import config
-
-
-# gen = Generate()
-# gen()
 
 
 def create_app(config_name):
@@ -38,8 +34,6 @@ def register_blueprint(app):
     app.register_blueprint(admin.bp, url_prefix='/admin')
     from .views import auth
     app.register_blueprint(auth.bp, url_prefix='/auth')
-    # from .views import api
-    # app.register_blueprint(api.bp, url_prefix='/api')
 
 
 def register_errors(app):

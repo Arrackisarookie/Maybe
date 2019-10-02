@@ -1,10 +1,9 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import (
-    BooleanField, StringField, SubmitField, SelectField, PasswordField,
-    FileField, TextAreaField
+    BooleanField, StringField, SubmitField, SelectField, PasswordField, FileField
 )
-from wtforms.validators import DataRequired, Length, Regexp, EqualTo
+from wtforms.validators import DataRequired, Length
 
 
 class LoginForm(FlaskForm):
@@ -16,26 +15,6 @@ class LoginForm(FlaskForm):
         validators=[DataRequired(), Length(1, 128)])
     remember_me = BooleanField('Remember me.')
     submit = SubmitField('Log in')
-
-
-class RegistrationForm(FlaskForm):
-    username = StringField(
-        label='Username',
-        validators=[
-            DataRequired(), Length(1, 64),
-            Regexp(
-                '^[A-Za-z][A-Za-z0-9_.]*$', 0,
-                'Usernames must have only letters, '
-                'numbers, dots or underscores')])
-    password = PasswordField(
-        label='Password',
-        validators=[
-            DataRequired(),
-            EqualTo('password2', message='Passwords must match.')])
-    password2 = PasswordField(
-        label='Confirm password',
-        validators=[DataRequired()])
-    submit = SubmitField('Register')
 
 
 class UpdateForm(FlaskForm):
@@ -53,21 +32,4 @@ class UpdateForm(FlaskForm):
     markdown = FileField(
         label='Markdown-file',
         validators=[FileRequired(), FileAllowed(['md'], 'Only .md')])
-    submit = SubmitField()
-
-
-class VerifyArticleForm(FlaskForm):
-    submit = SubmitField()
-
-
-class LeaveMsgForm(FlaskForm):
-    # username = StringField(
-    #     label='Username',
-    #     validators=[DataRequired(), Length(1, 64)])
-    # password = PasswordField(
-    #     label='Password',
-    #     validators=[DataRequired(), Length(1, 128)])
-    body = TextAreaField(
-        label="What's on your mind ?",
-        validators=[DataRequired()])
     submit = SubmitField()
