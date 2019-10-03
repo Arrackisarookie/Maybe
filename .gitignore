@@ -9,3 +9,4 @@ instance/
 venv/
 
 source/
+generated/

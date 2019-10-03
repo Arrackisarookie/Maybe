@@ -7,7 +7,7 @@ from flask_login import login_required
 from blog.extensions import upload_markdowns, db
 from blog.forms import UpdateForm
 from blog.models import Article, Category, Tag
-from blog.utils import markdown_to_html, save_html, new_tag
+from blog.utils import new_tag
 
 
 bp = Blueprint('admin', __name__)
@@ -51,8 +51,6 @@ def upload_article():
         db.session.add(article)
         db.session.commit()
 
-        article_body = markdown_to_html(article.markdown_path, article.filename)
-        save_html(article_body, article.html_path, article.filename)
         flash('Article uploaded.', 'success')
 
         return redirect(url_for('admin.index'))
