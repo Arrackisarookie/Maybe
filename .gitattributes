@@ -1,2 +1,3 @@
 blog/static/* linguist-vendored
 migrations/* linguist-vendored
+*.html linguist-language=Python
