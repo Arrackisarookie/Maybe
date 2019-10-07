@@ -41,7 +41,7 @@ def upload_article():
             html_path=html_path,
             filename=filename,
             add_time=utcnow,
-            url=url)
+            url='/' + url)
         for t in form.tag.data.split(','):
             tag = Tag.query.filter_by(name=t).first()
             if not tag:

@@ -1,7 +1,10 @@
 from flask import Flask, render_template
 from flask_uploads import configure_uploads, patch_request_class
 
-from blog.extensions import bootstrap, db, loginmanager, upload_markdowns, migrate
+from blog.admin import admin
+from blog.extensions import (
+    bootstrap, db, loginmanager, upload_markdowns, migrate
+)
 
 from config import config
 
@@ -14,6 +17,8 @@ def create_app(config_name):
     register_blueprint(app)
     register_extensions(app)
     # register_errors(app)
+
+    admin.init_app(app)
 
     return app
 
@@ -30,8 +35,8 @@ def register_extensions(app):
 def register_blueprint(app):
     from .views import blog
     app.register_blueprint(blog.bp)
-    from .views import admin
-    app.register_blueprint(admin.bp, url_prefix='/admin')
+    # from .views import admin
+    # app.register_blueprint(admin.bp, url_prefix='/admin')
     from .views import auth
     app.register_blueprint(auth.bp, url_prefix='/auth')
 

@@ -6,6 +6,8 @@ class Config(object):
 
     FLASK_ADMIN = os.environ.get('FLASK_ADMIN') or 'Arrack'
 
+    FLASK_ADMIN_SWATCH = 'flatly'
+
     SITE_TITLE = '也许'
     SITE_SUBTITLE = 'Everything is not too late.'
 
