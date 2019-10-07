@@ -25,7 +25,10 @@ class Article(db.Model):
     cate_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
     def __repr__(self):
-        return '<Article %r>' % self.title
+        return '<Article %r-%d>' % (self.title, self.id)
+
+    def __str__(self):
+        return '{}'.format(self.title)
 
 
 class Category(db.Model):
@@ -35,7 +38,10 @@ class Category(db.Model):
     articles = db.relationship('Article', backref='category', lazy='dynamic')
 
     def __repr__(self):
-        return '<Category %r>' % self.name
+        return '<Category %r-%d>' % (self.name, self.id)
+
+    def __str__(self):
+        return '{}'.format(self.name)
 
 
 class Tag(db.Model):
@@ -43,11 +49,13 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
     articles = db.relationship(
-        'Article', secondary=article_tag,
-        backref=db.backref('tags', lazy='dynamic'))
+        'Article', secondary=article_tag, backref='tags', lazy='dynamic')
 
     def __repr__(self):
-        return '<Tag %r>' % self.name
+        return '<Tag %r-%d>' % (self.name, self.id)
+
+    def __str__(self):
+        return '{}'.format(self.name)
 
 
 class User(db.Model, UserMixin):
@@ -57,7 +65,10 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r-%d>' % (self.name, self.id)
+
+    def __str__(self):
+        return '{}'.format(self.username)
 
     @property
     def password(self):
