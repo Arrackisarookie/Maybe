@@ -16,13 +16,11 @@ class Article(db.Model):
     __tablename__ = 'articles'
     id = db.Column(db.Integer, primary_key=True)
 
-    title = db.Column(db.String(64))
+    title = db.Column(db.String(64), nullable=False)
+    body = db.Column(db.Text, nullable=False)
 
-    filename = db.Column(db.String(64))
-    html_path = db.Column(db.String(128))
-    markdown_path = db.Column(db.String(128))
     add_time = db.Column(db.DateTime, index=True, default=datetime.utcnow())
-    url = db.Column(db.String(128))
+    url = db.Column(db.String(128), nullable=False, index=True)
 
     cate_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
@@ -33,7 +31,7 @@ class Article(db.Model):
 class Category(db.Model):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32))
+    name = db.Column(db.String(32), nullable=False)
     articles = db.relationship('Article', backref='category', lazy='dynamic')
 
     def __repr__(self):
@@ -43,7 +41,7 @@ class Category(db.Model):
 class Tag(db.Model):
     __tablename__ = 'tags'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32))
+    name = db.Column(db.String(32), nullable=False)
     articles = db.relationship(
         'Article', secondary=article_tag,
         backref=db.backref('tags', lazy='dynamic'))
@@ -55,7 +53,7 @@ class Tag(db.Model):
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True)
+    username = db.Column(db.String(64), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
 
     def __repr__(self):

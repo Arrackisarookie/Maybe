@@ -1,4 +1,4 @@
-from flask import Blueprint, send_from_directory, render_template, current_app
+from flask import Blueprint, send_from_directory, render_template, current_app, request
 
 from blog.models import Article, Category, Tag
 from blog.utils import markdown_to_html
@@ -17,8 +17,8 @@ def index():
 
 @bp.route('/article/<year>/<month>/<title>')
 def article(year, month, title):
-    article = Article.query.filter_by(title=title).first()
-    article_body = markdown_to_html(article.markdown_path, article.filename)
+    article = Article.query.filter_by(url=request.url).first()
+    article_body = markdown_to_html(article.body)
     return render_template(
         'blog/article.html', article=article, article_body=article_body)
 
