@@ -1,10 +1,11 @@
+from datetime import datetime
+
 from flask import redirect, request, url_for
 from flask_admin import AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
+from wtforms import HiddenField, PasswordField, StringField
 from wtforms.validators import DataRequired
-
-from blog.models import Category, Tag
 
 
 class IndexView(AdminIndexView):
@@ -49,16 +50,22 @@ class ArticleView(AuthModelView):
         'add_time',
     ]
     column_default_sort = ('id', True)
-    form_excluded_columns = ['add_time']
+    form_excluded_columns = ['add_time', 'url']
+    form_extra_fields = {
+        # 'tags': StringField('Tags'),
+        # 'add_time': HiddenField(default=datetime.utcnow()),
+    }
     form_args = {
         'body': {
             'validators': [DataRequired()]
-        }
+        },
+
+
     }
     form_widget_args = {
         'body': {
             'rows': 10
-        }
+        },
     }
 
 
@@ -73,3 +80,7 @@ class UserView(AuthModelView):
     create_modal = True
     edit_modal = True
     column_exclude_list = ['password_hash']
+    form_excluded_columns = ['password_hash']
+    form_extra_fields = {
+        'password': PasswordField('Password')
+    }
