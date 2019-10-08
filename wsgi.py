@@ -17,9 +17,18 @@ def make_shell_context():
     return dict(db=db, Article=Article, Category=Category, User=User, Tag=Tag)
 
 
+@app.context_processor
+def inject_models():
+    return dict(Article=Article, Category=Category, User=User, Tag=Tag)
+
+
+@app.context_processor
+def inject_title():
+    return dict(title=app.config['SITE_TITLE'], subtitle=app.config['SITE_SUBTITLE'])
+
+
 @app.cli.command()
 def test():
-    """ Run the unit tests. """
     import unittest
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)

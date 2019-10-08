@@ -1,9 +1,8 @@
 from flask import Flask, render_template
-from flask_uploads import configure_uploads, patch_request_class
 
 from blog.admin import admin
 from blog.extensions import (
-    bootstrap, db, loginmanager, upload_markdowns, migrate
+    bootstrap, db, loginmanager, migrate, moment
 )
 
 from config import config
@@ -28,8 +27,7 @@ def register_extensions(app):
     db.init_app(app)
     loginmanager.init_app(app)
     migrate.init_app(app, db)
-    configure_uploads(app, upload_markdowns)
-    patch_request_class(app)
+    moment.init_app(app)
 
 
 def register_blueprint(app):

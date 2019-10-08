@@ -7,11 +7,19 @@
       <p>{{ article.summary }}</p>
       <div class="post-meta">
         <div>
-          
-          <small>Category: <a href="{{ url_for('blog.category', category=article.category.name)}}">{{ article.category.name }}</a></small>
+          <small>Category: 
+            <a href="{{ url_for('blog.category', category=article.category.name)}}">{{ article.category.name }}</a>
+          </small>
+        </div>
+        <div>
+          <small>tag: 
+            {% for tag in article.tags %}
+              <a href="{{ url_for('blog.tag', tag=tag.name)}}">{{ tag.name }}</a>
+            {% endfor %}
+          </small>
         </div>
         <div class="post-time">
-          <small>Posted on {{ article.add_time }}</small>
+          <small>Posted on {{ moment(article.add_time).format('LL') }}</small>
         </div>
       </div>
     </div>

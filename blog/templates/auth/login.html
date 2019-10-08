@@ -1,38 +1,57 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login V14</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% from 'bootstrap/form.html' import render_form %}
+  <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 
-{% block header %}
-  <style type="text/css">
-    header.masthead {
-      background-image: url('/static/images/home-bg.jpg')
-    }
-  </style>
-
-  <header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            
-            <h1>登录</h1>
-            <!-- <span class="subheading">你好啊，管理员</span> -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/icon.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/login.css') }}" rel='stylesheet'>
+</head>
+<body>
+  
+  <div class="limiter">
+    <div class="container-login">
+      <div class="wrap-login">
+        <form class="login-form validate-form" method="post">
+          <span class="login-form-title">
+            Account Login
+          </span>
+          {{ form.csrf_token }}
+          <span class="txt1">
+            Username
+          </span>
+          <div class="wrap-input validate-input m-b-36" data-validate = "Username is required">
+            {{ form.username(class_="input") }}
+            <span class="focus-input"></span>
           </div>
-        </div>
+          
+          <span class="txt1">
+            Password
+          </span>
+          <div class="wrap-input validate-input m-b-12" data-validate = "Password is required">
+            {{ form.password(class_="input") }}
+            <span class="focus-input"></span>
+          </div>
+          
+          <div class="txt3">
+            <div class="contact-form-checkbox">
+              <input class="input-checkbox" id="ckb1" type="checkbox" name="remember_me">
+              <label class="label-checkbox fa-check" for="ckb1">
+                Remember me
+              </label>
+            </div>
+          </div>
+
+          <div class="container-login-form-btn">
+            {{ form.submit(class_="login-form-btn") }}
+          </div>
+        </form>
       </div>
     </div>
-  </header>
-{% endblock %}
-
-{% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-lg-4 col-md-6 mx-auto">
-      <h2>Login</h2>
-      {{ render_form(form) }}
-    </div>
   </div>
-</div>
-
-{% endblock %}
+</body>
+</html>

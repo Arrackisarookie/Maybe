@@ -1,6 +1,6 @@
 from os.path import join
 
-from flask import Blueprint, send_from_directory, render_template, current_app
+from flask import Blueprint, render_template
 
 from blog.models import Article, Category, Tag
 from blog.utils import markdown_to_html
@@ -9,12 +9,9 @@ bp = Blueprint('blog', __name__)
 
 
 @bp.route('/')
-@bp.route('/index')
 def index():
     articles = Article.query.all()
-    title = current_app.config['SITE_TITLE']
-    subtitle = current_app.config['SITE_SUBTITLE']
-    return render_template('blog/index.html', articles=articles, title=title, subtitle=subtitle)
+    return render_template('blog/index.html', articles=articles)
 
 
 @bp.route('/article/<year>/<month>/<title>')
@@ -42,5 +39,4 @@ def tag(tag):
 
 @bp.route('/about')
 def about():
-    return send_from_directory(
-        'static', 'generated/page/about.html')
+    return render_template('blog/about.html')

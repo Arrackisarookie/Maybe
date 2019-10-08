@@ -8,13 +8,8 @@ class Config(object):
 
     FLASK_ADMIN_SWATCH = 'flatly'
 
-    SITE_TITLE = '也许'
+    SITE_TITLE = 'Maybe'
     SITE_SUBTITLE = 'Everything is not too late.'
-
-    MARKDOWN_PATH = './blog/source/article/'
-    HTML_PATH = './blog/templates/generated/'
-
-    UPLOADED_MARKDOWN_DEST = MARKDOWN_PATH
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
