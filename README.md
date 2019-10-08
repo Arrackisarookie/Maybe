@@ -3,17 +3,33 @@
 
 ---
 
-### Doing
+### Todo
 
-- 时间本地化
-- 优化前台界面
+- [x] 文章显示
+- [x] 分类，标签
+- [x] 后台管理
+- [ ] 优化前台页面
+- [ ] 在线编辑文档
+- [ ] 实时显示文档效果
+- [ ] 说说
+- [ ] 用户
+- [ ] 留言板
+- [ ] 文章点赞
+- [ ] 文章评论
+- [ ] 动态添加标签
 
 ---
+
 ### Version
 #### Version 0.0.6
 
-- 引入 `Flask-Admin` 管理后台
+- 引入 [Flask-Admin](https://github.com/flask-admin/flask-admin) 管理后台，实现在线增删改
+- 引入 [Flask-Moment](https://github.com/miguelgrinberg/Flask-Moment) 实现时间本地化
 - 优化文章，分类，标签，用户管理
+- 更新登录页面样式
+- 移除 [Flask-Uploads](https://github.com/maxcountryman/flask-uploads) 取消上传文件功能
+- 移除 [Bootstrap-Flask](https://github.com/greyli/bootstrap-flask)
+- 移除遗留问题代码
 
 Version 0.0.5  
   
@@ -33,8 +49,8 @@ Version 0.0.4
 - 上传后只生成新文件
 - 将已生成的 md 移出 source/_article
 - 上传后更新 tag，category，index
-- 使用 Flask-WTF，Flask-Uploads 重写表单
-- 使用 Flask-Bootstrap 渲染表单
+- 使用 `Flask-WTF`，`Flask-Uploads` 重写表单
+- 使用 `Flask-Bootstrap` 渲染表单
 - 为上传文件加入 meta 信息(no tag, cate)
   
  Version 0.0.3 
@@ -53,10 +69,3 @@ Version 0.0.2
 - 纯展示，包括首页和内容页
 - 首页显示文章列表，实现分页
 - 内容页简单陈列
-
----
-### todo
-
-- 在线编辑 markdown
-- 优化文件转化过程
-- 优化安全措施

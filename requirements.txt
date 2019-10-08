@@ -1,5 +1,4 @@
 alembic==1.2.1
-Bootstrap-Flask==1.1.0
 Click==7.0
 dominate==2.4.0
 Flask==1.1.1

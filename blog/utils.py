@@ -13,10 +13,3 @@ def markdown_to_html(body):
     content = md.convert(body)
 
     return content
-
-
-def new_tag(t):
-    tag = Tag(name=t)
-    db.session.add(tag)
-    db.session.commit()
-    return tag

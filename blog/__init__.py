@@ -2,7 +2,7 @@ from flask import Flask, render_template
 
 from blog.admin import admin
 from blog.extensions import (
-    bootstrap, db, loginmanager, migrate, moment
+    db, loginmanager, migrate, moment
 )
 
 from config import config
@@ -23,7 +23,6 @@ def create_app(config_name):
 
 
 def register_extensions(app):
-    bootstrap.init_app(app)
     db.init_app(app)
     loginmanager.init_app(app)
     migrate.init_app(app, db)
