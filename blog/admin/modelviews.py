@@ -1,10 +1,8 @@
-from datetime import datetime
-
 from flask import redirect, request, url_for
 from flask_admin import AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
-from wtforms import HiddenField, PasswordField, StringField
+from wtforms import PasswordField
 from wtforms.validators import DataRequired
 
 
@@ -51,10 +49,6 @@ class ArticleView(AuthModelView):
     ]
     column_default_sort = ('id', True)
     form_excluded_columns = ['add_time', 'url']
-    form_extra_fields = {
-        # 'tags': StringField('Tags'),
-        # 'add_time': HiddenField(default=datetime.utcnow()),
-    }
     form_args = {
         'body': {
             'validators': [DataRequired()]

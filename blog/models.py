@@ -34,14 +34,6 @@ class Article(db.Model):
 
     cate_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
-    # @property
-    # def tags(self):
-    #     return self.tags
-
-    # @tags.setter
-    # def tags(self, tags):
-    #     pass
-
     def __repr__(self):
         return '<Article %r-%d>' % (self.title, self.id)
 

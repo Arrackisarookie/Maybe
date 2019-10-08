@@ -35,8 +35,6 @@ def register_extensions(app):
 def register_blueprint(app):
     from .views import blog
     app.register_blueprint(blog.bp)
-    # from .views import admin
-    # app.register_blueprint(admin.bp, url_prefix='/admin')
     from .views import auth
     app.register_blueprint(auth.bp, url_prefix='/auth')
 
