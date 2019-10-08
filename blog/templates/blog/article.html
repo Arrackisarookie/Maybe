@@ -1,8 +1,10 @@
-{% extends "base.html" %}
+{% extends "blog/base.html" %}
 
 {% block title %}{{ article.title }} - {% endblock %}
 
-{% block header %}
+{%- block styles %}
+  {{ super() }}
+  <link href="{{ url_for('static', filename='css/markdown.css') }}" rel='stylesheet'>
   <style type="text/css">
     header.masthead .site-heading {
       padding: 120px 0 80px;
@@ -12,40 +14,26 @@
       background-image: url('/static/images/home-bg.jpg')
     }
   </style>
-  
-  <header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading" style="padding: 120px 0 80px;">
-            <h1 style="font-size: 50px">{{ article.title }}</h1>
-            <span class="subheading">
-              {{ article.add_time }}
-            </span>
-            <span class="subheading">
-              <a href="{{ url_for('blog.category', category=article.category.name) }}">{{ article.category.name }}</a>
-            </span>
-            <span class="subheading">
-              {% for tag in article.tags %}
-                <a href="{{ url_for('blog.tag', tag=tag.name) }}">{{ tag.name }}</a>
-              {% endfor %}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-{% endblock %}
+{%- endblock styles %}
 
-{% block content %}
-  <article>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          {{ article_body | safe }}
-        </div>
-      </div>
-    </div>
-  </article>
-{% endblock %}
+  
+{% block header_content -%}
+  <div class="site-heading">
+    <h1 style="font-size: 50px">{{ article.title }}</h1>
+    <span class="subheading">
+      {{ article.add_time }}
+    </span>
+    <span class="subheading">
+      <a href="{{ url_for('blog.category', category=article.category.name) }}">{{ article.category.name }}</a>
+    </span>
+    <span class="subheading">
+      {% for tag in article.tags %}
+        <a href="{{ url_for('blog.tag', tag=tag.name) }}">{{ tag.name }}</a>
+      {% endfor %}
+    </span>
+  </div>
+{%- endblock %}
+
+{% block main_content -%}
+  <article>{{ article_body | safe }}</article>
+{%- endblock main_content %}

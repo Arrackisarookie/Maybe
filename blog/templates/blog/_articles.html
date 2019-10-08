@@ -7,11 +7,6 @@
       <p>{{ article.summary }}</p>
       <div class="post-meta">
         <div>
-          <small>Category: 
-            <a href="{{ url_for('blog.category', category=article.category.name)}}">{{ article.category.name }}</a>
-          </small>
-        </div>
-        <div>
           <small>tag: 
             {% for tag in article.tags %}
               <a href="{{ url_for('blog.tag', tag=tag.name)}}">{{ tag.name }}</a>
@@ -30,11 +25,3 @@
     <h5>No posts yet.</h5>
   </div>
 {% endif %}
-<!-- Pager -->
-<div class="row">
-  <div class="col-lg-11">
-    <div class="page-footer">
-      
-    </div>
-  </div>
-</div>

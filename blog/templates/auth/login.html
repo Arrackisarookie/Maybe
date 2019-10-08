@@ -1,18 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Login V14</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'base.html' %}
 
-  <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+{%- block metas %}
+  {{ super() }}
+  <meta name="description" content="">
+  <meta name="author" content="">
+{%- endblock metas %}
 
-  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='css/icon.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='css/login.css') }}" rel='stylesheet'>
-</head>
-<body>
-  
+{%- block styles %}
+  {{ super() }}
+  <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
+{%- endblock styles %}
+
+{% block navbar %}
+  <nav class="navbar fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="/">{{ title }}</a>
+    </div>
+  </nav>
+{%- endblock navbar %}
+
+{% block content -%}
   <div class="limiter">
     <div class="container-login">
       <div class="wrap-login">
@@ -53,5 +60,4 @@
       </div>
     </div>
   </div>
-</body>
-</html>
+{%- endblock content %}

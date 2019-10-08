@@ -113,6 +113,25 @@ label {
   padding-bottom: 48px;
 }
 
+#mainNav {
+  position: absolute;
+  border-bottom: 1px solid #e9ecef;
+}
+
+#mainNav .navbar-brand {
+  font-weight: 800;
+  color: #343a40;
+}
+
+@media only screen and (min-width: 992px) {
+  #mainNav {
+    border-bottom: 1px solid transparent;
+    background: transparent;
+  }
+  #mainNav .navbar-brand {
+    padding: 10px 20px;
+  }
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
