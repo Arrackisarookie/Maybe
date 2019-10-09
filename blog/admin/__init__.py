@@ -6,7 +6,10 @@ from blog.admin.modelviews import (
     IndexView, ArticleView, CategoryView, TagView, UserView
 )
 
-admin = Admin(index_view=IndexView(), template_mode='bootstrap3')
+admin = Admin(
+    name='Maybe-Admin',
+    index_view=IndexView(),
+    template_mode='bootstrap3')
 
 
 admin.add_view(ArticleView(Article, db.session))

@@ -26,6 +26,11 @@ class CategoryView(AuthModelView):
     create_modal = True
     edit_modal = True
     form_excluded_columns = ['articles']
+    column_list = [
+        'name',
+        'slogan'
+    ]
+    column_sortable_list = ('id', )
 
 
 class ArticleView(AuthModelView):
@@ -33,10 +38,10 @@ class ArticleView(AuthModelView):
     column_list = [
         'id',
         'title',
-        'add_time',
         'category',
         'tags',
-        'url'
+        'url',
+        'add_time',
     ]
     column_labels = {
         'title': 'Title',
@@ -44,17 +49,14 @@ class ArticleView(AuthModelView):
     }
     column_sortable_list = [
         'id',
-        'title',
         'add_time',
     ]
-    column_default_sort = ('id', True)
+    column_default_sort = 'id'
     form_excluded_columns = ['add_time', 'url']
     form_args = {
         'body': {
             'validators': [DataRequired()]
         },
-
-
     }
     form_widget_args = {
         'body': {
@@ -67,12 +69,18 @@ class TagView(AuthModelView):
     form_excluded_columns = ['articles']
     create_modal = True
     edit_modal = True
+    column_list = [
+        'name',
+        'slogan'
+    ]
+    column_sortable_list = ('id', )
 
 
 class UserView(AuthModelView):
     can_delete = False
     create_modal = True
     edit_modal = True
+    column_sortable_list = ('id', )
     column_exclude_list = ['password_hash']
     form_excluded_columns = ['password_hash']
     form_extra_fields = {
