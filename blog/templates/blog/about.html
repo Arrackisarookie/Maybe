@@ -1,40 +1,27 @@
-{% extends "base.html" %}
+{% extends "blog/base.html" %}
 
-{% block title %}{{ title }} - {% endblock %}
+{% block title %}{{ about.title }} - {% endblock %}
 
-{% block header %}
+{%- block styles %}
+  {{ super() }}
+  <link href="{{ url_for('static', filename='css/markdown.css') }}" rel='stylesheet'>
   <style type="text/css">
-    header.masthead .site-heading {
-      padding: 120px 0 80px;
-    }
-
     header.masthead {
-      background-image: url('/static/images/home-bg.jpg')
+      background-image: url('/static/images/railway1.jpg')
     }
   </style>
-  
-  <header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading" style="padding: 120px 0 80px;">
-            <h1 style="font-size: 50px">{{ data.title }}</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-{% endblock %}
+{%- endblock styles %}
 
-{% block content %}
-  <article>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          {{ content }}
-        </div>
-      </div>
-    </div>
-  </article>
-{% endblock %}
+
+{% block header_content %}
+  <div class="site-heading">
+    <h1>{{ about.title }}</h1>
+    <span class="subheading">
+      {{ about.slogan }}
+    </span>
+  </div>
+{% endblock header_content %}
+
+{% block main_content %}
+  {{ about_body | safe }}
+{% endblock main_content %}

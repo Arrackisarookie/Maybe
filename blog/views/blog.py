@@ -2,7 +2,7 @@ from os.path import join
 
 from flask import Blueprint, render_template
 
-from blog.models import Article, Category, Tag
+from blog.models import About, Article, Category, Tag
 from blog.utils import markdown_to_html
 
 bp = Blueprint('blog', __name__)
@@ -39,4 +39,6 @@ def tag(tag):
 
 @bp.route('/about')
 def about():
-    return render_template('blog/about.html')
+    about = About.query.first()
+    about_body = markdown_to_html(about.body)
+    return render_template('blog/about.html', about=about, about_body=about_body)

@@ -22,6 +22,33 @@ class AuthModelView(ModelView):
         return redirect(url_for('auth.login', next=request.url))
 
 
+class AboutView(AuthModelView):
+    can_view_details = True
+    column_list = [
+        'title',
+        'slogan',
+        'url',
+        'add_time',
+        'update_time',
+    ]
+    column_sortable_list = [
+        'add_time',
+        'update_time',
+    ]
+    column_default_sort = 'id'
+    form_excluded_columns = ['add_time', 'update_time']
+    form_args = {
+        'body': {
+            'validators': [DataRequired()]
+        },
+    }
+    form_widget_args = {
+        'body': {
+            'rows': 10
+        },
+    }
+
+
 class CategoryView(AuthModelView):
     create_modal = True
     edit_modal = True

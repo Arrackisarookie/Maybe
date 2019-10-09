@@ -19,6 +19,24 @@ def default_url(context):
     return os.path.join('/article/', str(today.year), str(today.month), title)
 
 
+class About(db.Model):
+    __tablename__ = 'abouts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(64), nullable=False)
+    slogan = db.Column(db.String(128), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+    add_time = db.Column(db.DateTime, index=True, default=datetime.utcnow())
+    update_time = db.Column(db.TIMESTAMP(True), index=True, nullable=False)
+    url = db.Column(db.String(128))
+
+    def __repr__(self):
+        return '<About %r>' % self.title
+
+    def __str__(self):
+        return '{}'.format(self.title)
+
+
 class Article(db.Model):
     __tablename__ = 'articles'
 
