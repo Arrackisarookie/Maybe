@@ -1,8 +1,5 @@
 from markdown import Markdown
 
-from blog.models import Tag
-from blog.extensions import db
-
 
 def markdown_to_html(body):
     md = Markdown(extensions=[
