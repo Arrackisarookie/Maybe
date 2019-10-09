@@ -50,9 +50,10 @@ class ArticleView(AuthModelView):
     column_sortable_list = [
         'id',
         'add_time',
+        'update_time',
     ]
     column_default_sort = 'id'
-    form_excluded_columns = ['add_time', 'url']
+    form_excluded_columns = ['add_time', 'url', 'update_time']
     form_args = {
         'body': {
             'validators': [DataRequired()]

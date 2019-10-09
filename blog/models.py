@@ -28,6 +28,10 @@ class Article(db.Model):
     body = db.Column(db.Text, nullable=False)
 
     add_time = db.Column(db.DateTime, index=True, default=datetime.utcnow())
+    update_time = db.Column(db.TIMESTAMP(True), index=True, nullable=False)
+
+    isdraft = db.Column(db.Boolean, default=False)
+
     url = db.Column(
         db.String(128), index=True,
         default=default_url, onupdate=default_url)
@@ -45,6 +49,7 @@ class Category(db.Model):
     __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
+    slogan = db.Column(db.String(128), nullable=False)
     articles = db.relationship('Article', backref='category', lazy='dynamic')
 
     def __repr__(self):
@@ -58,6 +63,7 @@ class Tag(db.Model):
     __tablename__ = 'tags'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
+    slogan = db.Column(db.String(128), default='Everything is not too late.')
     articles = db.relationship(
         'Article', secondary=article_tag, backref='tags', lazy='dynamic')
 

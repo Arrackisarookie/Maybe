@@ -6,7 +6,7 @@
   {{ super() }}
   <style type="text/css">
     header.masthead {
-      background-image: url('/static/images/home-bg.jpg')
+      background-image: url('/static/images/city2.jpg')
     }
   </style>
 {%- endblock styles %}
@@ -15,6 +15,7 @@
   <div class="site-heading">
     <h1>{{ category }}</h1>
     <span class="subheading">
+      {{ Category.query.filter_by(name=category).first().slogan }}
     </span>
   </div>
 {% endblock header_content %}
