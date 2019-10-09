@@ -27,7 +27,7 @@ class About(db.Model):
     slogan = db.Column(db.String(128), nullable=False)
     body = db.Column(db.Text, nullable=False)
     add_time = db.Column(db.DateTime, index=True, default=datetime.utcnow())
-    update_time = db.Column(db.TIMESTAMP(True), index=True, nullable=False)
+    update_time = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
     url = db.Column(db.String(128))
 
     def __repr__(self):
@@ -75,7 +75,7 @@ class Article(db.Model):
     body = db.Column(db.Text, nullable=False)
 
     add_time = db.Column(db.DateTime, index=True, default=datetime.utcnow())
-    update_time = db.Column(db.TIMESTAMP(True), index=True, nullable=False)
+    update_time = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
 
     isdraft = db.Column(db.Boolean, default=False)
 
@@ -99,7 +99,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
 
     def __repr__(self):
-        return '<User %r-%d>' % (self.name, self.id)
+        return '<User %r-%d>' % (self.username, self.id)
 
     def __str__(self):
         return '{}'.format(self.username)
