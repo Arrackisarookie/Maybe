@@ -12,6 +12,7 @@ class Config(object):
     SITE_SUBTITLE = 'Everything is not too late.'
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_POOL_RECYCLE = 280
 
     @staticmethod
     def init_app(app):
