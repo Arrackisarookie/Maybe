@@ -13,10 +13,10 @@ article_tag = db.Table(
     db.Column('tag_id', db.ForeignKey('tags.id')))
 
 
-def default_url(context):
-    today = date.today()
-    title = context.get_current_parameters()['title']
-    return os.path.join('/article/', str(today.year), str(today.month), title)
+# def default_url(context):
+#     today = date.today()
+#     title = context.get_current_parameters()['title']
+#     return os.path.join('/article/', str(today.year), str(today.month), title)
 
 
 class About(db.Model):
@@ -79,9 +79,7 @@ class Article(db.Model):
 
     isdraft = db.Column(db.Boolean, default=False)
 
-    url = db.Column(
-        db.String(128), index=True,
-        default=default_url, onupdate=default_url)
+    url = db.Column(db.String(128), index=True, nullable=False)
 
     cate_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
