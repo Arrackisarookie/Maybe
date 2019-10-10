@@ -3,10 +3,8 @@ from markdown import Markdown
 
 def markdown_to_html(body):
     md = Markdown(extensions=[
-        'admonition',       # 警告样式
-        'codehilite',       # 语法高亮
-        'fenced_code',      # 代码不用缩进
-        'tables'])          # 表格
+        'fenced_code',
+        'tables'])
     content = md.convert(body)
 
     return content
