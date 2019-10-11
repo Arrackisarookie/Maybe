@@ -1,6 +1,3 @@
-from datetime import datetime, date
-import os
-
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -13,12 +10,6 @@ article_tag = db.Table(
     db.Column('tag_id', db.ForeignKey('tags.id')))
 
 
-# def default_url(context):
-#     today = date.today()
-#     title = context.get_current_parameters()['title']
-#     return os.path.join('/article/', str(today.year), str(today.month), title)
-
-
 class About(db.Model):
     __tablename__ = 'abouts'
 
@@ -26,7 +17,7 @@ class About(db.Model):
     title = db.Column(db.String(64), nullable=False)
     slogan = db.Column(db.String(128), nullable=False)
     body = db.Column(db.Text, nullable=False)
-    add_time = db.Column(db.DateTime, index=True, default=datetime.utcnow())
+    add_time = db.Column(db.DateTime, index=True, default=db.func.now())
     update_time = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
     url = db.Column(db.String(128))
 
@@ -74,7 +65,7 @@ class Article(db.Model):
     title = db.Column(db.String(64), nullable=False)
     body = db.Column(db.Text, nullable=False)
 
-    add_time = db.Column(db.DateTime, index=True, default=datetime.utcnow())
+    add_time = db.Column(db.DateTime, index=True, default=db.func.now())
     update_time = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
 
     isdraft = db.Column(db.Boolean, default=False)
