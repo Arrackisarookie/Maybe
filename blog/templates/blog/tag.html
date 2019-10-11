@@ -15,6 +15,7 @@
   <div class="site-heading">
     <h1>{{ tag }}</h1>
     <span class="subheading">
+      {{ Tag.query.filter_by(name=tag).first().slogan }}
     </span>
   </div>
 {% endblock header_content %}
