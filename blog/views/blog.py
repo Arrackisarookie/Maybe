@@ -10,7 +10,7 @@ bp = Blueprint('blog', __name__)
 
 @bp.route('/')
 def index():
-    articles = Article.query.all()
+    articles = Article.query.order_by(Article.id.desc()).all()
     return render_template('blog/index.html', articles=articles)
 
 
@@ -25,14 +25,14 @@ def article(year, month, title):
 
 @bp.route('/category/<category>')
 def category(category):
-    articles = Category.query.filter_by(name=category).first().articles
+    articles = Category.query.filter_by(name=category).first().articles.order_by(Article.id.desc())
     return render_template(
         'blog/category.html', category=category, articles=articles)
 
 
 @bp.route('/tag/<tag>')
 def tag(tag):
-    articles = Tag.query.filter_by(name=tag).first().articles
+    articles = Tag.query.filter_by(name=tag).first().articles.order_by(Article.id.desc())
     return render_template(
         'blog/tag.html', tag=tag, articles=articles)
 
