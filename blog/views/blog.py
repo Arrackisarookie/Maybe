@@ -1,9 +1,12 @@
 from os.path import join
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, flash, redirect, url_for
 
-from blog.models import About, Article, Category, Tag
+from blog.models import About, Article, Category, Tag, Talk, Top
 from blog.utils import markdown_to_html
+from blog.forms import TalkForm
+from blog.extensions import db
+
 
 bp = Blueprint('blog', __name__)
 
@@ -42,3 +45,23 @@ def about():
     about = About.query.first()
     about_body = markdown_to_html(about.body)
     return render_template('blog/about.html', about=about, about_body=about_body)
+
+
+@bp.route('/talktalk', methods=['GET', 'POST'])
+def talktalk():
+    form = TalkForm()
+    if form.validate_on_submit():
+        talk = Talk(
+            content=form.content.data,
+            visible=form.visible.data)
+        db.session.add(talk)
+        db.session.commit()
+        flash('Add talk.')
+        return redirect(url_for('blog.talktalk'))
+
+    first_id = Top.query.filter_by(type='talk').first().foreign_id
+    first = Talk.query.filter_by(id=first_id).first()
+
+    # TODO visible, auth, write
+    talks = Talk.query.filter(Talk.id != first_id).order_by(Talk.id.desc()).all()
+    return render_template('blog/talktalk.html', first=first, talks=talks, form=form)

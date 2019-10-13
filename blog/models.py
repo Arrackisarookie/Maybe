@@ -10,6 +10,31 @@ article_tag = db.Table(
     db.Column('tag_id', db.ForeignKey('tags.id')))
 
 
+class Top(db.Model):
+    __tablename__ = 'tops'
+
+    choices = ['article', 'talk', 'leavemsg']
+
+    id = db.Column(db.Integer, primary_key=True)
+    foreign_id = db.Column(db.Integer(), nullable=False)
+    type = db.Column(db.Enum(*choices), nullable=False)
+
+
+class Talk(db.Model):
+    __tablename__ = 'talks'
+
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
+    add_time = db.Column(db.DateTime, index=True, default=db.func.now())
+    visible = db.Column(db.Boolean, default=True)
+
+    def __repr__(self):
+        return '<Talk %d> content: %r' % (self.id, self.content)
+
+    def __str__(self):
+        return '{}'.format(self.content)
+
+
 class About(db.Model):
     __tablename__ = 'abouts'
 

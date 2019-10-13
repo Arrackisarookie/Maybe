@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name='viewport' content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{% block title %}话唠{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/talktalk.css') }}">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1 class="text-center display-4">
+        <a class="text-success" href="{{ url_for('blog.index') }}"><strong>话唠</strong></a>
+      </h1>
+    </header>
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-info">
+        <button class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+      </div>
+    {% endfor %}
+
+
+{% block content %}
+
+{% if current_user.is_authenticated %}
+  <div class="hello-form">
+    <form class="login-form validate-form" method="post">
+      <span class="login-form-title">
+        说点啥
+      </span>
+      {{ form.csrf_token }}
+      {{ form.content(class_="input") }}
+      {{ form.visible(class_="input") }}
+      {{ form.submit(class_="login-form-btn") }}
+    </form>
+  </div>
+{% endif %}
+
+
+<div class="list-group">
+  {% if first %}
+    <a class="list-group-item list-group-item-action flex-column">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1 text-success">
+          <small class="text-muted"> # 置顶</small>
+        </h5>
+      </div>
+      <p class="mb-1">{{ first.content }}</p>
+    </a>
+  {% endif %}
+  {% for talk in talks %}
+    <a class="list-group-item list-group-item-action flex-column">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1 text-success">
+          <small class="text-muted"> #{{ loop.revindex }}</small>
+        </h5>
+      </div>
+      <p class="mb-1">{{ talk.content }}</p>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}
+
+  </main>
+</body>
+</html>
