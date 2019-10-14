@@ -22,7 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('content', sa.Text(), nullable=False),
     sa.Column('add_time', sa.DateTime(), nullable=True),
-    sa.Column('visible', sa.Boolean(), nullable=True),
+    sa.Column('private', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_talks_add_time'), 'talks', ['add_time'], unique=False)

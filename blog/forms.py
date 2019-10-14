@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import (
-    BooleanField, StringField, SubmitField, PasswordField, TextField
+    BooleanField, StringField, SubmitField, PasswordField, TextAreaField
 )
 from wtforms.validators import DataRequired, Length
 
@@ -17,6 +17,6 @@ class LoginForm(FlaskForm):
 
 
 class TalkForm(FlaskForm):
-    content = TextField(label='Content', validators=[DataRequired()])
-    visible = BooleanField('Visible')
-    submit = SubmitField('Go')
+    content = TextAreaField(validators=[DataRequired()])
+    private = BooleanField()
+    submit = SubmitField()

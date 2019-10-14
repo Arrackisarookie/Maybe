@@ -53,15 +53,15 @@ def talktalk():
     if form.validate_on_submit():
         talk = Talk(
             content=form.content.data,
-            visible=form.visible.data)
+            private=form.private.data)
         db.session.add(talk)
         db.session.commit()
-        flash('Add talk.')
+        flash('能比比尽量别动手。')
         return redirect(url_for('blog.talktalk'))
 
     first_id = Top.query.filter_by(type='talk').first().foreign_id
     first = Talk.query.filter_by(id=first_id).first()
 
-    # TODO visible, auth, write
+    # TODO private, auth, flash, style
     talks = Talk.query.filter(Talk.id != first_id).order_by(Talk.id.desc()).all()
     return render_template('blog/talktalk.html', first=first, talks=talks, form=form)

@@ -26,7 +26,7 @@ class Talk(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     add_time = db.Column(db.DateTime, index=True, default=db.func.now())
-    visible = db.Column(db.Boolean, default=True)
+    private = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<Talk %d> content: %r' % (self.id, self.content)
