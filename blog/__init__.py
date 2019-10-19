@@ -34,8 +34,8 @@ def register_blueprint(app):
     app.register_blueprint(blog.bp)
     from .views import auth
     app.register_blueprint(auth.bp, url_prefix='/auth')
-    # from .api import api as api_bp
-    # app.register_blueprint(api_bp, url_prefix='/api')
+    from .api import api as api_bp
+    app.register_blueprint(api_bp, url_prefix='/api')
 
 
 def register_errors(app):
