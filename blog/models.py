@@ -1,3 +1,8 @@
+from itsdangerous import (
+    TimedJSONWebSignatureSerializer as Sericalizer,
+    BadSignature, SignatureExpired
+)
+from flask import current_app
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -105,6 +110,12 @@ class Article(db.Model):
     def __str__(self):
         return '{}'.format(self.title)
 
+    def to_json(self):
+        json_article = {
+            'body': self.body
+        }
+        return json_article
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -116,7 +127,7 @@ class User(db.Model, UserMixin):
         return '<User %r-%d>' % (self.username, self.id)
 
     def __str__(self):
-        return '{}'.format(self.username)
+        return 'User: {}'.format(self.username)
 
     @property
     def password(self):
@@ -128,6 +139,21 @@ class User(db.Model, UserMixin):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def generate_auth_token(self, expiration):
+        s = Sericalizer(current_app.config['SECRET_KEY'], expires_in=expiration)
+        return s.dumps({'id': self.id})
+
+    @staticmethod
+    def verify_auth_token(token):
+        s = Sericalizer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except SignatureExpired:
+            return None  # valid token, but expired
+        except BadSignature:
+            return None  # invalid token
+        return User.query.get(data['id'])
 
 
 loginmanager.login_view = 'auth.login'
