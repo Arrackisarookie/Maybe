@@ -65,9 +65,10 @@ class ArticleView(AuthModelView):
     column_list = [
         'id',
         'title',
+        'name',
+        'url',
         'category',
         'tags',
-        'url',
         'add_time',
         'update_time',
     ]
@@ -80,9 +81,9 @@ class ArticleView(AuthModelView):
         'add_time',
         'update_time',
     ]
-    column_editable_list = ['url', ]
+    # column_editable_list = ['url', ]
     column_default_sort = 'id'
-    form_excluded_columns = ['add_time', 'update_time']
+    form_excluded_columns = ['name', 'url', 'add_time', 'update_time']
     form_args = {
         'body': {
             'validators': [DataRequired()]
@@ -96,9 +97,10 @@ class ArticleView(AuthModelView):
     column_details_list = [
         'id',
         'title',
+        'name',
+        'url',
         'category',
         'tags',
-        'url',
         'add_time',
         'update_time',
     ]
