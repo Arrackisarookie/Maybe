@@ -193,7 +193,7 @@ class Article(db.Model):
             'update_time': self.update_time,
             'isdraft': self.isdraft,
             'url': self.url,
-            'category': Category.query.filter_by(id=self.cate_id).first().name
+            # 'category': Category.query.get(int(self.cate_id)).name
             # 'tag': Tag.query.filter_by()
         }
         return json_article

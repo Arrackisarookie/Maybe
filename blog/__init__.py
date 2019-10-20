@@ -49,7 +49,7 @@ def register_errors(app):
             response = jsonify({'error': 'not found'})
             response.status_code = 404
             return response
-        return render_template('errors/404.html')
+        return render_template('errors/404.html'), 404
 
     @app.errorhandler(500)
     def internal_server_error(e):
@@ -57,4 +57,4 @@ def register_errors(app):
             response = jsonify({'error': 'internal server error'})
             response.status_code = 500
             return response
-        return render_template('errors/500.html')
+        return render_template('errors/500.html'), 500

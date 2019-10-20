@@ -60,7 +60,7 @@ def talktalk():
         return redirect(url_for('blog.talktalk'))
 
     first_id = Top.query.filter_by(type='talk').first().foreign_id
-    first = Talk.query.filter_by(id=first_id).first()
+    first = Talk.query.get(first_id).first()
 
     # TODO private, auth, flash, style
     talks = Talk.query.filter(Talk.id != first_id).order_by(Talk.id.desc()).all()

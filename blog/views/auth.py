@@ -18,7 +18,7 @@ def login():
             login_user(user, form.remember_me.data)
             next = request.args.get('next')
             if next is None or not next.startswith('/'):
-                next = url_for('admin.index')
+                next = url_for('blog.index')
             flash('Welcome, %s!' % user.username)
             return redirect(next)
         flash('Invalid username or password.')
