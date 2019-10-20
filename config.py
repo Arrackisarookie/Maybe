@@ -14,6 +14,8 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_POOL_RECYCLE = 280
 
+    JSON_AS_ASCII = False
+
     @staticmethod
     def init_app(app):
         pass
