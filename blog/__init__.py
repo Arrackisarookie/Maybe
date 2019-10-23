@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, jsonify
+import click
+from flask import Flask, current_app, jsonify, render_template, request
 
 from blog.admin import admin
+from blog.models.user import Role, User
 from blog.extensions import (
-    db, loginmanager, migrate, moment
-)
+    db, loginmanager, migrate, moment)
 
 from config import config
 
@@ -16,6 +17,7 @@ def create_app(config_name):
     register_blueprint(app)
     register_extensions(app)
     register_errors(app)
+    register_command(app)
 
     admin.init_app(app)
 
@@ -58,3 +60,32 @@ def register_errors(app):
             response.status_code = 500
             return response
         return render_template('errors/500.html'), 500
+
+
+def register_command(app):
+    @app.cli.command()
+    @click.option('--drop', is_flag=True, help='Create after drop.')
+    def initdb(drop):
+        if drop:
+            click.confirm(
+                'This operation will delete the database, '
+                'do you want to continue?')
+            db.drop_all()
+            click.echo('All tables have been dropped.')
+        db.create_all()
+        click.echo('Initialized database.')
+        Role.init_roles()
+        click.echo('Initialized Roles.')
+
+    @app.cli.command()
+    @click.argument('username')
+    @click.argument('password')
+    def initadmin(username, password):
+        email = current_app.config['ADMIN_EMAIL']
+        if User.query.first():
+            click.echo('Administrator already exsits.')
+            return None
+        user = User(email=email, username=username, password=password)
+        db.session.add(user)
+        db.session.commit()
+        click.echo('Initialized Administrator %s' % username)

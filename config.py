@@ -4,7 +4,7 @@ import os
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev'
 
-    FLASK_ADMIN = os.environ.get('FLASK_ADMIN') or 'Arrack'
+    ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL') or 'nicearrack@163.com'
 
     FLASK_ADMIN_SWATCH = 'flatly'
 
