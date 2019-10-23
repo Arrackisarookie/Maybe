@@ -8,8 +8,6 @@ instance/
 .env
 venv/
 
-source/
-
 DEVLOG.md
 CLIMBPIT.md
 QUESTIONS.md
