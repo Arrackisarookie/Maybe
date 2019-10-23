@@ -1,7 +1,9 @@
 from flask_admin import Admin
 
 from blog.extensions import db
-from blog.models import About, Article, Category, Tag, User
+from blog.models.article import Article, Category, Tag
+from blog.models.others import About, Talk, Top
+from blog.models.user import User
 from blog.admin.modelviews import (
     IndexView, AboutView, ArticleView, CategoryView, TagView, UserView
 )

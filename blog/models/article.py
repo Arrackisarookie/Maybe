@@ -1,8 +1,8 @@
 from datetime import date
 import re
 
-from .extensions import db
-from .utils import Translator
+from blog.extensions import db
+from blog.utils import Translator
 
 
 article_tag = db.Table(

@@ -1,7 +1,7 @@
 from flask import g, jsonify
 from flask_httpauth import HTTPBasicAuth
 
-from blog.models import User
+from blog.models.user import User
 from blog.api import api
 from blog.api.errors import unauthorized
 

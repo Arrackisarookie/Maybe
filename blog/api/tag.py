@@ -2,7 +2,7 @@ from flask import jsonify, request, url_for
 
 from . import api
 from ..extensions import db
-from ..models import Tag
+from ..models.article import Tag
 
 
 @api.route('/tag', methods=['GET'])

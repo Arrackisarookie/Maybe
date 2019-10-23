@@ -3,12 +3,13 @@ import os
 
 from blog import create_app
 from blog.extensions import db
-from blog.models import About, Article, Category, User, Tag, Talk, Top
+from blog.models.article import Article, Category, Tag
+from blog.models.others import About, Talk, Top
+from blog.models.user import User
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
-
 app = create_app(os.environ.get('FLASK_CONFIG') or 'default')
 
 

@@ -2,7 +2,7 @@ from flask import jsonify, request, url_for
 
 from . import api
 from ..extensions import db
-from ..models import User
+from ..models.user import User
 
 
 @api.route('/users', methods=['GET'])

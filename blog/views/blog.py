@@ -2,7 +2,8 @@ from os.path import join
 
 from flask import Blueprint, render_template, flash, redirect, url_for
 
-from blog.models import About, Article, Category, Tag, Talk, Top
+from blog.models.article import Article, Category, Tag
+from blog.models.others import About, Talk, Top
 from blog.utils import markdown_to_html
 from blog.forms import TalkForm
 from blog.extensions import db

@@ -6,7 +6,7 @@ from flask import current_app
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from .extensions import db, loginmanager
+from blog.extensions import db, loginmanager
 
 
 class Permission(object):
@@ -31,7 +31,7 @@ class Role(db.Model):
             self.permissions = 0
 
     @staticmethod
-    def insert_roles():
+    def init_roles():
         roles = {
             'User': [
                 Permission.LIKE,
@@ -69,7 +69,7 @@ class Role(db.Model):
         if self.has_permission(perm):
             self.permissions -= perm
 
-    def reset_permission(self):
+    def reset_permissions(self):
         self.permissions = 0
 
     def has_permission(self, perm):
