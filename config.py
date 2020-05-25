@@ -6,8 +6,6 @@ class Config(object):
 
     ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL') or 'nicearrack@163.com'
 
-    FLASK_ADMIN_SWATCH = 'flatly'
-
     SITE_TITLE = 'Maybe'
     SITE_SUBTITLE = 'Everything is not too late.'
 

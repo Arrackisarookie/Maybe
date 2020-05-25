@@ -7,7 +7,3 @@ instance/
 # Environments
 .env
 venv/
-
-DEVLOG.md
-CLIMBPIT.md
-QUESTIONS.md

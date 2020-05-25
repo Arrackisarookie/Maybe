@@ -1,10 +1,8 @@
 import click
 from flask import Flask, current_app, jsonify, render_template, request
 
-from app.admin import admin
-from app.models.user import Role, User
-from app.extensions import (
-    db, loginmanager, moment)
+from app.models import Role, User
+from app.extensions import db, loginmanager
 
 from config import config
 
@@ -19,15 +17,12 @@ def create_app(config_name):
     register_errors(app)
     register_command(app)
 
-    admin.init_app(app)
-
     return app
 
 
 def register_extensions(app):
     db.init_app(app)
     loginmanager.init_app(app)
-    moment.init_app(app)
 
 
 def register_blueprint(app):
@@ -35,8 +30,6 @@ def register_blueprint(app):
     app.register_blueprint(blog.bp)
     from .views import auth
     app.register_blueprint(auth.bp, url_prefix='/auth')
-    from .api import api as api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
 
 
 def register_errors(app):
@@ -54,14 +47,12 @@ def register_command(app):
     @click.option('--drop', is_flag=True, help='Create after drop.')
     def initdb(drop):
         if drop:
-            click.confirm(
-                'This operation will delete the database, '
-                'do you want to continue?')
-            db.drop_all()
-            click.echo('All tables have been dropped.')
+            if click.confirm('This operation will delete the database, do you want to continue?'):
+                db.drop_all()
+                click.echo('All tables have been dropped.')
         db.create_all()
         click.echo('Initialized database.')
-        Role.init_roles()
+        Role.initRoles()
         click.echo('Initialized Roles.')
 
     @app.cli.command()

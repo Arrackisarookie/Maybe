@@ -1,11 +1,10 @@
-from flask_wtf import FlaskForm
 from wtforms import (
-    BooleanField, StringField, SubmitField, PasswordField, TextAreaField
+    Form, BooleanField, StringField, SubmitField, PasswordField, TextAreaField
 )
 from wtforms.validators import DataRequired, Length
 
 
-class LoginForm(FlaskForm):
+class LoginForm(Form):
     username = StringField(
         label='Username',
         validators=[DataRequired(), Length(1, 64)])
@@ -16,7 +15,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
-class TalkForm(FlaskForm):
+class TalkForm(Form):
     content = TextAreaField(validators=[DataRequired()])
     private = BooleanField()
     submit = SubmitField()
