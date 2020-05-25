@@ -1,11 +1,11 @@
 from dotenv import load_dotenv
 import os
 
-from blog import create_app
-from blog.extensions import db
-from blog.models.article import Article, Category, Tag
-from blog.models.others import About, Talk, Top
-from blog.models.user import User
+from app import create_app
+from app.extensions import db
+from app.models.article import Article, Category, Tag
+from app.models.others import About, Talk, Top
+from app.models.user import User
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):

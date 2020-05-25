@@ -1,10 +1,10 @@
 import click
 from flask import Flask, current_app, jsonify, render_template, request
 
-from blog.admin import admin
-from blog.models.user import Role, User
-from blog.extensions import (
-    db, loginmanager, migrate, moment)
+from app.admin import admin
+from app.models.user import Role, User
+from app.extensions import (
+    db, loginmanager, moment)
 
 from config import config
 
@@ -27,7 +27,6 @@ def create_app(config_name):
 def register_extensions(app):
     db.init_app(app)
     loginmanager.init_app(app)
-    migrate.init_app(app, db)
     moment.init_app(app)
 
 

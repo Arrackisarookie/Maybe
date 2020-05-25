@@ -2,11 +2,11 @@ from os.path import join
 
 from flask import Blueprint, render_template, flash, redirect, url_for
 
-from blog.models.article import Article, Category, Tag
-from blog.models.others import About, Talk, Top
-from blog.utils import markdown_to_html
-from blog.forms import TalkForm
-from blog.extensions import db
+from app.models.article import Article, Category, Tag
+from app.models.others import About, Talk, Top
+from app.utils import markdown_to_html
+from app.forms import TalkForm
+from app.extensions import db
 
 
 bp = Blueprint('blog', __name__)

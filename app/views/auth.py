@@ -1,8 +1,8 @@
 from flask import Blueprint, flash, render_template, redirect, request, url_for
 from flask_login import login_user, login_required, logout_user
 
-from blog.forms import LoginForm
-from blog.models.user import User
+from app.forms import LoginForm
+from app.models.user import User
 
 
 bp = Blueprint('auth', __name__)
@@ -18,7 +18,7 @@ def login():
             login_user(user, form.remember_me.data)
             next = request.args.get('next')
             if next is None or not next.startswith('/'):
-                next = url_for('blog.index')
+                next = url_for('app.index')
             flash('Welcome, %s!' % user.username)
             return redirect(next)
         flash('Invalid username or password.')
@@ -31,4 +31,4 @@ def login():
 def logout():
     logout_user()
     flash('You have been logged out.')
-    return redirect(url_for('blog.index'))
+    return redirect(url_for('app.index'))

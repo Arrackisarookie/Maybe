@@ -1,4 +1,4 @@
-from blog.extensions import db
+from app.extensions import db
 
 
 class About(db.Model):

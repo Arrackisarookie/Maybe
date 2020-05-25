@@ -22,8 +22,8 @@ class Translator(object):
 
     trans_type = 'v3'
 
-    _trans_key = os.environ['TRANSLATOR_KEY']
-    _trans_secret = os.environ['TRANSLATOR_SECRET']
+    _trans_key = os.environ['TRANSLATOR_KEY']  # 应用 ID
+    _trans_secret = os.environ['TRANSLATOR_SECRET']  # 密钥
 
     def __init__(self, src='zh-CHS', dest='en'):
         self.data = {}
