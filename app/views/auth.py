@@ -1,5 +1,21 @@
-from flask import Blueprint, flash, render_template, redirect, request, url_for
-from flask_login import login_user, login_required, logout_user
+#
+# -*- coding: utf-8 -*-
+#
+# @Author: Arrack
+# @Date:   2020-05-25 18:22:09
+# @Last modified by:   Arrack
+# @Last Modified time: 2020-05-25 18:25:27
+#
+
+from flask import Blueprint
+from flask import flash
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import url_for
+from flask_login import login_required
+from flask_login import login_user
+from flask_login import logout_user
 
 from app.forms import LoginForm
 from app.models.user import User

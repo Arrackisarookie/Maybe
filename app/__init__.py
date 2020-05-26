@@ -1,8 +1,21 @@
-import click
-from flask import Flask, current_app, jsonify, render_template, request
+#
+# -*- coding: utf-8 -*-
+#
+# @Author: Arrack
+# @Date:   2020-05-25 18:21:49
+# @Last modified by:   Arrack
+# @Last Modified time: 2020-05-26 14:15:24
+#
 
-from app.models import Role, User
-from app.extensions import db, loginmanager
+import click
+
+from flask import Flask
+from flask import current_app
+
+from app.extensions import db
+from app.extensions import loginmanager
+from app.models import Role
+from app.models import User
 
 from config import config
 
@@ -14,7 +27,6 @@ def create_app(config_name):
 
     register_blueprint(app)
     register_extensions(app)
-    register_errors(app)
     register_command(app)
 
     return app
@@ -26,20 +38,10 @@ def register_extensions(app):
 
 
 def register_blueprint(app):
-    from .views import blog
-    app.register_blueprint(blog.bp)
-    from .views import auth
+    from app.views import main
+    app.register_blueprint(main.bp)
+    from app.views import auth
     app.register_blueprint(auth.bp, url_prefix='/auth')
-
-
-def register_errors(app):
-    @app.errorhandler(404)
-    def page_not_found(e):
-        if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
-            response = jsonify({'error': 'not found'})
-            response.status_code = 404
-            return response
-        return render_template('errors/404.html'), 404
 
 
 def register_command(app):

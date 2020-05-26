@@ -1,11 +1,23 @@
-from dotenv import load_dotenv
+#
+# -*- coding: utf-8 -*-
+#
+# @Author: Arrack
+# @Date:   2020-05-26 11:37:21
+# @Last modified by:   Arrack
+# @Last Modified time: 2020-05-26 17:03:33
+#
+
 import os
+
+from dotenv import load_dotenv
 
 from app import create_app
 from app.extensions import db
-from app.models.article import Article, Category, Tag
-from app.models.others import About, Talk, Top
-from app.models.user import User
+from app.models import Article
+from app.models import Category
+from app.models import Tag
+from app.models import User
+
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
@@ -15,7 +27,7 @@ app = create_app(os.environ.get('FLASK_CONFIG') or 'default')
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, About=About, Article=Article, Category=Category, User=User, Tag=Tag, Talk=Talk, Top=Top)
+    return dict(db=db, Article=Article, Category=Category, User=User, Tag=Tag)
 
 
 @app.context_processor

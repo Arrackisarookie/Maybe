@@ -1,8 +1,22 @@
-from sqlalchemy import Column, Integer, String, Table, Text, ForeignKey
+#
+# -*- coding: utf-8 -*-
+#
+# @Author: Arrack
+# @Date:   2020-05-25 17:28:37
+# @Last modified by:   Arrack
+# @Last Modified time: 2020-05-25 18:22:38
+#
+
+from sqlalchemy import Column
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import Table
+from sqlalchemy import Text
 from sqlalchemy.orm import relationship
 
-from app.models import Base
 from app.extensions import db
+from app.models import Base
 
 
 article_tag = db.Table(

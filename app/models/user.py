@@ -1,15 +1,30 @@
-from itsdangerous import (
-    TimedJSONWebSignatureSerializer as Sericalizer,
-    BadSignature, SignatureExpired
-)
+#
+# -*- coding: utf-8 -*-
+#
+# @Author: Arrack
+# @Date:   2020-05-25 18:11:08
+# @Last modified by:   Arrack
+# @Last Modified time: 2020-05-25 18:23:41
+#
+
+from itsdangerous import BadSignature
+from itsdangerous import SignatureExpired
+from itsdangerous import TimedJSONWebSignatureSerializer as Sericalizer
+
 from flask import current_app
 from flask_login import UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy import Column, Integer, String, SmallInteger, ForeignKey
+from sqlalchemy import Column
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import SmallInteger
+from sqlalchemy import String
 from sqlalchemy.orm import relationship
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
 
+from app.extensions import db
+from app.extensions import loginmanager
 from app.models import Base
-from app.extensions import db, loginmanager
 
 
 class Role(Base):

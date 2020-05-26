@@ -1,7 +1,21 @@
-from wtforms import (
-    Form, BooleanField, StringField, SubmitField, PasswordField, TextAreaField
-)
-from wtforms.validators import DataRequired, Length
+#
+# -*- coding: utf-8 -*-
+#
+# @Author: Arrack
+# @Date:   2020-05-25 17:25:12
+# @Last modified by:   Arrack
+# @Last Modified time: 2020-05-25 18:24:24
+#
+
+from wtforms import BooleanField
+from wtforms import Form
+from wtforms import PasswordField
+from wtforms import StringField
+from wtforms import SubmitField
+from wtforms import TextAreaField
+
+from wtforms.validators import DataRequired
+from wtforms.validators import Length
 
 
 class LoginForm(Form):

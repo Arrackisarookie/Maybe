@@ -1,9 +1,10 @@
-from markdown import Markdown
 import hashlib
 import os
 import requests
 import time
 import uuid
+
+from markdown import Markdown
 
 
 def markdown_to_html(body):

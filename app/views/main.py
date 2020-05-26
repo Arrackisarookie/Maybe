@@ -1,21 +1,56 @@
+#
+# -*- coding: utf-8 -*-
+#
+# @Author: Arrack
+# @Date:   2020-05-25 18:22:18
+# @Last modified by:   Arrack
+# @Last Modified time: 2020-05-26 16:29:08
+#
+
 from os.path import join
 
-from flask import Blueprint, render_template, flash, redirect, url_for
+from flask import Blueprint
+from flask import flash
+from flask import redirect
+from flask import render_template
+from flask import url_for
 
-from app.models.article import Article, Category, Tag
-from app.models.others import About, Talk, Top
-from app.utils import markdown_to_html
-from app.forms import TalkForm
 from app.extensions import db
+from app.forms import TalkForm
+from app.models.article import Article
+from app.models.article import Category
+from app.models.article import Tag
+from app.utils import markdown_to_html
 
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('main', __name__)
 
 
 @bp.route('/')
 def index():
     articles = Article.query.order_by(Article.id.desc()).all()
-    return render_template('blog/index.html', articles=articles)
+    return render_template('main/index.html', articles=articles)
+
+
+@bp.route('/article')
+def article():
+    return render_template('main/article.html')
+
+
+@bp.route('/category')
+def category():
+    return render_template('main/category.html')
+
+
+@bp.route('/about')
+def about():
+    return render_template('main/about.html')
+
+
+@bp.route('/shuoshuo')
+def shuoshuo():
+    return render_template('main/shuoshuo.html')
+
 
 
 # @bp.route('/article/<year>/<month>/<title>')
@@ -39,13 +74,6 @@ def index():
 #     articles = Tag.query.filter_by(name=tag).first().articles.order_by(Article.id.desc())
 #     return render_template(
 #         'blog/tag.html', tag=tag, articles=articles)
-
-
-# @bp.route('/about')
-# def about():
-#     about = About.query.first()
-#     about_body = markdown_to_html(about.body)
-#     return render_template('blog/about.html', about=about, about_body=about_body)
 
 
 # @bp.route('/talktalk', methods=['GET', 'POST'])
