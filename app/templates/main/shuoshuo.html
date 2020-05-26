@@ -1,0 +1,459 @@
+{% extends "main/base.html" %}
+
+{%- block styles %}
+  {{ super() }}
+  <style>
+    .side-nav {display: none;}
+    .post-item .post-meta {margin: 5px 0 15px 0;}
+    .post-item h1.post-title {
+      font-weight: 600;
+      font-size: 18px;
+    }
+  </style>
+{%- endblock styles %}
+
+{% block main -%}
+<div class="main">            
+  <div class="shuo-content site-box">
+    <article>
+        <h3>2020</h3>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">04/12</span>
+            <aside>
+                <p class="things"><p>突然想到我还有个博客</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">04/12</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">01/28</span>
+            <aside>
+                <p class="things"><p>武汉加油</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">01/28</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">01/10</span>
+            <aside>
+                <p class="things"><p>听我说武功，无法高过寺院的钟</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">01/10</span>
+                </p>
+            </aside>
+        </section>
+    </article>
+      
+    <article>
+        <h3>2019</h3>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">03/12</span>
+            <aside>
+                <p class="things"><p>幽默是挫折中优雅的礼貌</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">03/12</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">01/03</span>
+            <aside>
+                <p class="things"><p>人生百年，吾道不孤</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">01/03</span>
+                </p>
+            </aside>
+        </section>
+    </article>
+    
+    <article>
+        <h3>2018</h3>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">11/20</span>
+            <aside>
+                <p class="things"><p>不要拖泥又带水，不要懒惰又浪费</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">11/20</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">11/11</span>
+            <aside>
+                <p class="things"><p>下面的阿里云学生专项服务器，24岁以下认证自动获得学生身份，简直太爽了~</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">11/11</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">11/02</span>
+            <aside>
+                <p class="things"><p>还好图片地址没有写死QAQ~</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">11/02</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">11/01</span>
+            <aside>
+                <p class="things"><p>七牛域名回收，图片全挂了，嘤嘤嘤</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">11/01</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">09/17</span>
+            <aside>
+                <p class="things"><p>爱是什么，我不知道，我不懂永远，我不懂自己</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">09/17</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">08/14</span>
+            <aside>
+                <p class="things"><p>弱小与无知不是生存的障碍，傲慢才是</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">08/14</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">08/09</span>
+            <aside>
+                <p class="things"><p>工作中最难听也最恶心的三个字：看不懂</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">08/09</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">05/02</span>
+            <aside>
+                <p class="things"><p>折磨我们的往往是想象，而不是真实</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">05/02</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">04/27</span>
+            <aside>
+                <p class="things"><p>位面的工程师，赶紧给我<code>new</code>一个对象</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">04/27</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">04/24</span>
+            <aside>
+                <p class="things"><p>公司下午茶时间广播放杰伦的音乐，很幸福QAQ~</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">04/24</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">03/05</span>
+            <aside>
+                <p class="things"><p>飞得越高摔得越重，还是摔得越重飞得越高</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">03/05</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">03/02</span>
+            <aside>
+                <p class="things">
+                  <p>梦里不知流转了多少年，忘却青丝尘念。</p>
+                  <p>回眸一片往事又浮现。</p>
+                  <p>醉眼笑看人世间，何处是桃源。</p>
+                  <p>青风几度谁与我留恋。</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">03/02</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">02/27</span>
+            <aside>
+                <p class="things"><p>我说自尊啊，看起来或许可笑。</p>
+                  <p>但它至少撑着我，试着不让我跌倒。</p>
+                  <p>活着，如果只是不甘寂静的喧嚣。</p>
+                  <p>那就咆哮吧，让每个人都能听的到。</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">02/27</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">02/25</span>
+            <aside>
+                <p class="things"><p>网站弃用<code>editormd</code>编辑器，部分文章<code>markdown</code>显示有问题，正在改进中...</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">02/25</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">02/19</span>
+            <aside>
+                <p class="things"><p>醉眼笑看人世间，何处是桃源。</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">02/19</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">02/06</span>
+            <aside>
+                <p class="things"><p>不要拿本站的评论去做无意义的测试，不会通过的</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">02/06</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">01/24</span>
+            <aside>
+                <p class="things"><p>天下熙熙皆为利来，天下攘攘皆为利往</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">01/24</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">01/13</span>
+            <aside>
+                <p class="things"><p>博客稍微调整了下样式，显示异常的，清除缓存刷新页面哦！！！</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">01/13</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">01/01</span>
+            <aside>
+                <p class="things"><p>新年快乐！！！</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">01/01</span>
+                </p>
+            </aside>
+        </section> 
+    </article>
+    
+    <article>
+        <h3>2017</h3>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">12/31</span>
+            <aside>
+                <p class="things"><p>还有1个小时就要到 2018 了。提前祝大家新年快乐。</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">12/31</span>
+                </p>
+            </aside>
+        </section>
+        
+        <section>
+            <span class="point-time point-orange"></span>
+            <span class="date-time">12/31</span>
+            <aside>
+                <p class="things"><p>最近博客做了很大的改动，加入自己写的评论系统，加入了说说页面。</p></p>
+                <p class="brief">
+                <span class="mobile-date-time">12/31</span>
+                </p>
+            </aside>
+        </section> 
+    </article>
+  </div>
+</div>
+{%- endblock main %}
+
+{% block sidebar -%}
+  <div class="sidebar">
+    <div id="mobile-user" class="side-content">
+      <div class="side-nav">
+          <span class="current">文章目录</span>
+          <span>站点概览</span>
+      </div>
+      <div class="profile site-box">
+          <div class="master-image">
+              <img class="profile-avatar" src="/static/images/yinshi.jpg" alt="author">
+              <div class="master-info">
+                  <p class="profile-master">俞坤</p>
+                  <p class="master-description">
+                      克制力，执行力
+                  </p>
+              </div>
+          </div>
+
+          <div class="new-shuo">
+              <a href="/shuoshuo">
+                  <p>突然想到我还有个博客</p>
+              </a>
+          </div>
+
+          <div class="blog-info">
+              <ul>
+                  <li><a href="/archives/">
+                      <strong>40</strong>
+                      <span>文章</span>
+                  </a></li>
+                  <li><a href="/friends">
+                      <strong>2</strong>
+                      <span>朋友</span>
+                  </a></li>
+                  <li class="last-li"><a href="/page/guestbook/">
+                      <strong>31</strong>
+                      <span>留言</span>
+                  </a></li>
+              </ul>
+          </div>
+
+          <div class="social-links">
+              <ul>
+                  
+                  <li>
+                      <a class="add-link" href="https://www.yukunweb.com/column" target="_blank">专题</a>
+                  </li>
+                  
+                  <li>
+                      <a class="add-link" href="https://github.com/Blackyukun" target="_blank">Github</a>
+                  </li>
+                  
+              </ul>
+              <div class="clear"></div>
+          </div>
+
+          <div id="rss">
+              <a href="/atom.xml"><i class="icon-rss"></i> RSS</a>
+          </div>
+
+          <div class="love-me">
+              <div class="love-title">你喜欢我吗</div>
+              <div class="love-me-con">
+                  <span class="love-me-icon">
+                      <i class="icon-heart-empty"></i>
+                      <span class="love-me-count">3363</span>
+                  </span>
+              </div>
+              <div class="clear"></div>
+          </div>
+      </div>
+      <div class="post-toc site-box">
+          <div class="toc-list">
+              <ol id="toc"></ol>
+          </div>
+      </div>
+
+      <div class="blog-tags site-box">
+        <div class="side-title"><i class="demo-icon icon-tags"></i> 标签</div>
+          <ul> 
+            <li><a href="/tag/Docker/">Docker</a></li>
+            
+            <li><a href="/tag/Flask/">Flask</a></li>
+            
+            <li><a href="/tag/JS/">JS</a></li>
+            
+            <li><a href="/tag/MongoD/">MongoD</a></li>
+            
+            <li><a href="/tag/nginx/">nginx</a></li>
+            
+            <li><a href="/tag/Python/">Python</a></li>
+            
+            <li><a href="/tag/ubuntu/">ubuntu</a></li>
+            
+            <li><a href="/tag/VueJS/">VueJS</a></li>
+            
+            <li><a href="/tag/web%E5%BC%80%E5%8F%91/">web开发</a></li>
+            
+            <li><a href="/tag/%E6%8A%80%E6%9C%AF/">技术</a></li>
+            
+            <li><a href="/tag/%E6%BA%90%E7%A0%81/">源码</a></li>
+            
+            <li><a href="/tag/%E7%88%AC%E8%99%AB/">爬虫</a></li>
+            
+            <li><a href="/tag/%E7%94%9F%E6%B4%BB/">生活</a></li>
+            
+            <li><a href="/tag/%E7%94%B5%E5%BD%B1/">电影</a></li>
+            
+            <li><a href="/tag/%E7%AC%94%E8%AE%B0/">笔记</a></li>
+            
+            <li><a href="/tag/%E7%AE%97%E6%B3%95/">算法</a></li>
+            
+            <li><a href="/tag/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+            
+            <li><a href="/tag/%E9%9F%B3%E4%B9%90/">音乐</a></li>
+          </ul>
+        <div class="clear"></div>
+      </div>  
+    </div>
+
+    <div class="ads_plugin">
+      <div class="my-plugin">
+        <div class="plugin-body">
+          <a href="https://s.click.taobao.com/odhkXPw" target="_blank"><img src="https://www.yukunweb.com/static/upload/aliyun3.jpg" style="width:230px"></a>
+        </div>
+      <div class="clear"></div>
+      </div>    
+    </div>
+  </div>
+{%- endblock sidebar %}

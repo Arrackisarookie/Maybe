@@ -1,0 +1,174 @@
+{% extends "main/base.html" %}
+
+{%- block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="/static/lib/markdown.css"/>
+  <style>
+    .side-nav {display: none;}
+    .post-body {padding: 0;}
+    h1.post-title {text-align: left;}
+    #content {
+        padding: 30px 0;
+        border-top: 1px dashed #ccc;
+        border-bottom: 1px dashed #ccc;
+        margin-top: 20px;
+    }
+  </style>
+{%- endblock styles %}
+
+{% block main -%}
+  <div class="main">          
+    <div class="post-item site-box">
+      <h1 class="post-title">关于</h1>
+
+      <div id="content" class="post-body"> 
+        <p><img alt="dog" src="https://www.yukunweb.com/qiniu/page_about.jpg" /></p>
+        <p>每个看起来与正常人无异的程序员，其实都是在学习的途中熬过，压抑过，而且创伤过的反社会人士。我是俞坤。这是我的博客网站，记录我的学习路程，技术分享和一些生活感悟。大学时光总是过得很快，转眼就要大四，开始准备进入社会后的摸爬滚打。前几天室友开始讨论起实习的事情，我茫茫然抬起头，才惊觉时光的流逝。为了记录这匆匆的时光，就建了这个博客网站。</p>
+        <p>我是一个宁愿一个人宅在宿舍背英语单词，也不想结伴出去看一场电影的人。不是因为我天生孤僻，而是我很懒，懒癌发作时，吃饭都不想出去。不喜欢自找麻烦，但是折腾起来常常想废寝忘食。我喜欢王家卫的电影，喜欢周杰伦的音乐，不爱运动，爱美女。希望今后不会被生活击垮，让自己的内心住着一条巨龙，既是一种苦刑，也是一种乐趣。</p>
+        <p>至今单身，那么，请美丽的单身姑娘们联系我吧...</p>
+        <p><strong>2018/06/22更新：</strong>已经毕业，也实习几个月了。</p>
+        <h2>联系我</h2>
+        <p>邮箱：<code>MTUxNTIzNDcyNzdAMTYzLmNvbQ</code></p>
+        <h2>网站经历</h2>
+        <p>2017-05-24建站，基于 Wordpress，部署在阿里云虚拟主机；</p>
+        <p>2017-10-09改用 hexo 强力驱动。</p>
+        <p>2017-12-08使用 Flask + Nginx 部署于阿里云 Ubuntu 服务器，博客源码可到 Github 查看。</p>
+        <h2>座右铭</h2>
+        <blockquote>
+          <p>博观约取，厚积薄发</p>
+        </blockquote> 
+      </div>
+    </div>
+  </div>
+{%- endblock main %}
+
+{% block sidebar -%}
+  <div class="sidebar">
+    <div id="mobile-user" class="side-content">
+      <div class="side-nav">
+          <span class="current">文章目录</span>
+          <span>站点概览</span>
+      </div>
+      <div class="profile site-box">
+          <div class="master-image">
+              <img class="profile-avatar" src="/static/images/yinshi.jpg" alt="author">
+              <div class="master-info">
+                  <p class="profile-master">俞坤</p>
+                  <p class="master-description">
+                      克制力，执行力
+                  </p>
+              </div>
+          </div>
+
+          <div class="new-shuo">
+              <a href="/shuoshuo">
+                  <p>突然想到我还有个博客</p>
+              </a>
+          </div>
+
+          <div class="blog-info">
+              <ul>
+                  <li><a href="/archives/">
+                      <strong>40</strong>
+                      <span>文章</span>
+                  </a></li>
+                  <li><a href="/friends">
+                      <strong>2</strong>
+                      <span>朋友</span>
+                  </a></li>
+                  <li class="last-li"><a href="/page/guestbook/">
+                      <strong>31</strong>
+                      <span>留言</span>
+                  </a></li>
+              </ul>
+          </div>
+
+          <div class="social-links">
+              <ul>
+                  
+                  <li>
+                      <a class="add-link" href="https://www.yukunweb.com/column" target="_blank">专题</a>
+                  </li>
+                  
+                  <li>
+                      <a class="add-link" href="https://github.com/Blackyukun" target="_blank">Github</a>
+                  </li>
+                  
+              </ul>
+              <div class="clear"></div>
+          </div>
+
+          <div id="rss">
+              <a href="/atom.xml"><i class="icon-rss"></i> RSS</a>
+          </div>
+
+          <div class="love-me">
+              <div class="love-title">你喜欢我吗</div>
+              <div class="love-me-con">
+                  <span class="love-me-icon">
+                      <i class="icon-heart-empty"></i>
+                      <span class="love-me-count">3363</span>
+                  </span>
+              </div>
+              <div class="clear"></div>
+          </div>
+      </div>
+      <div class="post-toc site-box">
+          <div class="toc-list">
+              <ol id="toc"></ol>
+          </div>
+      </div>
+
+      <div class="blog-tags site-box">
+        <div class="side-title"><i class="demo-icon icon-tags"></i> 标签</div>
+          <ul> 
+            <li><a href="/tag/Docker/">Docker</a></li>
+            
+            <li><a href="/tag/Flask/">Flask</a></li>
+            
+            <li><a href="/tag/JS/">JS</a></li>
+            
+            <li><a href="/tag/MongoD/">MongoD</a></li>
+            
+            <li><a href="/tag/nginx/">nginx</a></li>
+            
+            <li><a href="/tag/Python/">Python</a></li>
+            
+            <li><a href="/tag/ubuntu/">ubuntu</a></li>
+            
+            <li><a href="/tag/VueJS/">VueJS</a></li>
+            
+            <li><a href="/tag/web%E5%BC%80%E5%8F%91/">web开发</a></li>
+            
+            <li><a href="/tag/%E6%8A%80%E6%9C%AF/">技术</a></li>
+            
+            <li><a href="/tag/%E6%BA%90%E7%A0%81/">源码</a></li>
+            
+            <li><a href="/tag/%E7%88%AC%E8%99%AB/">爬虫</a></li>
+            
+            <li><a href="/tag/%E7%94%9F%E6%B4%BB/">生活</a></li>
+            
+            <li><a href="/tag/%E7%94%B5%E5%BD%B1/">电影</a></li>
+            
+            <li><a href="/tag/%E7%AC%94%E8%AE%B0/">笔记</a></li>
+            
+            <li><a href="/tag/%E7%AE%97%E6%B3%95/">算法</a></li>
+            
+            <li><a href="/tag/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+            
+            <li><a href="/tag/%E9%9F%B3%E4%B9%90/">音乐</a></li>
+          </ul>
+        <div class="clear"></div>
+      </div>  
+    </div>
+
+    <div class="ads_plugin">
+      <div class="my-plugin">
+        <div class="plugin-body">
+          <a href="https://s.click.taobao.com/odhkXPw" target="_blank"><img src="https://www.yukunweb.com/static/upload/aliyun3.jpg" style="width:230px"></a>
+        </div>
+      <div class="clear"></div>
+      </div>    
+    </div>
+  </div>
+{%- endblock sidebar %}

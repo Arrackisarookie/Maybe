@@ -1,0 +1,415 @@
+{% extends "main/base.html" %}
+
+{%- block styles %}
+  {{ super() }}
+  <style>
+    .side-nav {display: none;}
+    .post-item .post-meta {margin: 5px 0 15px 0;}
+    .post-item h1.post-title {
+      font-weight: 600;
+      font-size: 18px;
+    }
+  </style>
+{%- endblock styles %}
+
+{% block main -%}
+  <div class="main">
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2019/1/docker-core-component/">
+                Docker入门：核心组件
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2019-01-23</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E7%AC%94%E8%AE%B0/">笔记</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 6
+            </span>
+        </div>
+        <div class="post-body">
+            什么是Docker Docker是一个能够把开发的应用程序自动部署到容器的开源引擎，他设计的目的就是要加强程序员写代码的开发环境和应用部署的生产环境的一致性，降低开发环境的代码在生产环境无法正常执行的风险。推荐阅读HERE 安装Docker Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，Ubuntu 系统可以使用这套脚本安装： $ curl -fsSL get.docker.com -o get-docker.sh $ sudo sh get-docker.sh...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2018/8/read-three-body/">
+                读三体
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-08-28</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E9%98%85%E8%AF%BB/">阅读</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 3
+            </span>
+        </div>
+        <div class="post-body">
+            最近我用了两个星期读完了刘慈欣的三体三部曲，《地球往事》、《黑暗森林》、《死神永生》。因为是科幻小说，作者从上帝视角，以宏大的时间跨度，去叙述两个文明在宇宙中为了生存，付诸的努力。本文尽量不叙述小说的剧情。 故事开始于黑暗的文革时期。对现实世界心灰意冷的叶文洁，按下发射键。发出了地球文明向宇宙的第一声啼哭，内容是&#34;Hello...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2018/8/Talking-with-from-the-ontextlib-source/">
+                从contextlib源码谈with语句
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-08-13</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E6%8A%80%E6%9C%AF/">技术</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 0
+            </span>
+        </div>
+        <div class="post-body">
+            上一篇文章中，解决RuntimeError: Working outside of application context.错误，使用手动将应用上下文推入栈中： ctx = app.app_context() ctx.push() print(current_app.name) ctx.pop() 而 flask 文档中给我们的解决代码是： with app.app_context(): print(current_app.name)...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2018/7/Flask-classic-error/">
+                Flask的经典错误
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-07-29</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E6%8A%80%E6%9C%AF/">技术</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 0
+            </span>
+        </div>
+        <div class="post-body">
+            在编写 Flask 应用的单元测试，离线应用时候经常会遇到，RuntimeError: Working outside of application context.的报错。这个报错是在没有激活程序上下文情况下，进行了一些程序上下文或请求上下文的操作。先看下面的两段代码： from flask import Flask, current_app app = Flask(__name__) print(current_app.name) from flask import Flask,...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2018/6/Nginx-scene-practice/">
+                Nginx场景实践
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-06-30</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E6%8A%80%E6%9C%AF/">技术</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 0
+            </span>
+        </div>
+        <div class="post-body">
+            Nginx(读作：恩静 X)是一个高性能的HTTP和反向代理服务器，一个邮件代理以及通用的TCP/ UDP代理服务器。本篇文章是我最近使用Nginx的记录。你发现本站已经是全站https了，而本站的图片是放在七牛云的。之所以可以使用https://www.yukun.com/qiniu/xxx访问到存放在七牛的图片，是因为使用了nginx的反向代理。 安装 我们使用Docker启动一个ubuntu容器来演示安装过程： $ sudo docker run -t -i -p 80：80...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2018/5/write-judgment-sentences-gracefully/">
+                优雅的写判断语句
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-05-20</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E7%AC%94%E8%AE%B0/">笔记</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 4
+            </span>
+        </div>
+        <div class="post-body">
+            一个程序之所以能自动做很多任务，是因为我们给他做好了条件判断。项目中，我们难免会使用if/else判断逻辑语句。对简单的情况而言，使用逻辑语句会很清晰简洁，而项目情况一旦复杂，或者判断层次变多，盲目的使用if/else语句就不免会显得难看，而且难以维护和扩展。 比如一个返回今天是什么日子的函数： def get_today(today): if today == &#39;Monday&#39;: return &#39;星期一&#39; elif today == &#39;Tuesday&#39;: return &#39;星期二&#39;...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2018/5/jiandan-encryption-processing/">
+                Python爬虫(15):煎蛋网加密处理方式
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-05-08</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E6%8A%80%E6%9C%AF/">技术</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 8
+            </span>
+        </div>
+        <div class="post-body">
+            最近一直有朋友问我改版的煎蛋网妹子图怎么爬，因为他们花费精力结果抓了一整个文件夹的防盗图。我之前在很久以前的一篇博客说过，对于这种js处理的网页，要想抓取到网页上看到的数据，大致有三种方法： Selenium结合浏览器驱动，直接获取加载js后的页面，解析数据。这种方法最为简单粗暴，不过速度会慢一点，处理煎蛋这样的网页有点大材小用；...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2018/4/split-life/">
+                分裂
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-04-29</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E7%94%9F%E6%B4%BB/">生活</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 2
+            </span>
+        </div>
+        <div class="post-body">
+            4月1号那天，网易云下架了周杰伦的音乐，也是那天我在地铁上卸载了这个我使用4年的软件。这个月很多歌火了，前几天室友刷抖音，视频的bgm是一首叫《离人凑》的歌。他觉得好听，就搜出来听。我刚听就觉得熟悉，回味了一会，我靠，这不是 烟花易冷 的旋律吗。我就和室友说他抄袭啊，这歌怎么火的，抄袭杰伦很多年前玩的旋律，还能火起来。他一听到杰伦的名字，脸上就露出不屑之色，我立马打住，默默带上耳机。...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2018/4/build-free-asynchronous-proxy-pool/">
+                Python爬虫(14):搭建免费异步IP代理池
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-04-07</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E6%8A%80%E6%9C%AF/">技术</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 7
+            </span>
+        </div>
+        <div class="post-body">
+            之前写爬虫的时候，经常遇到被封IP的情况。解决办法是控制爬虫请求的时间，这样效率低很多，而且一般网站都会有ip访问阈值监控，超过访问阈值仍然可能会被封。最直接的办法是更换ip，如果可以建议选择付费的代理服务，省事又便捷。当然网上也有很多免费代理，只不过这些代理能不能使用就需要我们自己去检测。...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-item site-box">
+        <h1 class="post-title">
+            <a href="/2018/3/encapsulation-of-mongodb/">
+                对MongoDB的封装
+            </a>
+        </h1>
+        <div class="post-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-03-17</span>
+            <span class="post-category">
+                <i class="demo-icon icon-folder-empty"></i> 分类：
+                <a href="/category/%E7%AC%94%E8%AE%B0/">笔记</a>
+            </span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： 2
+            </span>
+        </div>
+        <div class="post-body">
+            写爬虫的时候，习惯性会把爬取到的数据存入mongodb。为了方便，也为了每次抓取完数据，不在后面接插入数据的生涩代码。最好的选择是简单的封装mongodb的增删改查功能，如果后面使用mongodb的时候可以直接调用它，一劳永逸。 pymongo 其实pymongo这个库已经为我们很好的封装了对数据库的操作，但是我总是很容易忘记或者搞混他的 api。我想实现如果创建数据库，只需要配置好数据库的name，host，port，增加数据：put(data)，删除数据：delete(data)。...
+
+
+
+        </div>
+    </div>
+
+    <div class="post-page site-box">
+      <ul class="pages">
+        <li style="display:none;">
+          <a href="#">
+              &laquo;
+          </a>
+        </li>
+        <li>
+          <a  class="active" href="#">1</a>
+        </li>
+        <li>
+          <a href="/index?page=2">2</a>
+        </li>
+        <li>
+          <a href="/index?page=3">3</a>
+        </li>
+        <li>
+          <a href="/index?page=4">4</a>
+        </li>
+        <li >
+          <a href="/index?page=2">
+              &raquo;
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+{%- endblock main %}
+
+{% block sidebar -%}
+  <div class="sidebar">
+    <div id="mobile-user" class="side-content">
+      <div class="side-nav">
+          <span class="current">文章目录</span>
+          <span>站点概览</span>
+      </div>
+      <div class="profile site-box">
+          <div class="master-image">
+              <img class="profile-avatar" src="/static/images/yinshi.jpg" alt="author">
+              <div class="master-info">
+                  <p class="profile-master">俞坤</p>
+                  <p class="master-description">
+                      克制力，执行力
+                  </p>
+              </div>
+          </div>
+
+          <div class="new-shuo">
+              <a href="/shuoshuo">
+                  <p>突然想到我还有个博客</p>
+              </a>
+          </div>
+
+          <div class="blog-info">
+              <ul>
+                  <li><a href="/archives/">
+                      <strong>40</strong>
+                      <span>文章</span>
+                  </a></li>
+                  <li><a href="/friends">
+                      <strong>2</strong>
+                      <span>朋友</span>
+                  </a></li>
+                  <li class="last-li"><a href="/page/guestbook/">
+                      <strong>31</strong>
+                      <span>留言</span>
+                  </a></li>
+              </ul>
+          </div>
+
+          <div class="social-links">
+              <ul>
+                  
+                  <li>
+                      <a class="add-link" href="https://www.yukunweb.com/column" target="_blank">专题</a>
+                  </li>
+                  
+                  <li>
+                      <a class="add-link" href="https://github.com/Blackyukun" target="_blank">Github</a>
+                  </li>
+                  
+              </ul>
+              <div class="clear"></div>
+          </div>
+
+          <div id="rss">
+              <a href="/atom.xml"><i class="icon-rss"></i> RSS</a>
+          </div>
+
+          <div class="love-me">
+              <div class="love-title">你喜欢我吗</div>
+              <div class="love-me-con">
+                  <span class="love-me-icon">
+                      <i class="icon-heart-empty"></i>
+                      <span class="love-me-count">3363</span>
+                  </span>
+              </div>
+              <div class="clear"></div>
+          </div>
+      </div>
+      <div class="post-toc site-box">
+          <div class="toc-list">
+              <ol id="toc"></ol>
+          </div>
+      </div>
+
+      <div class="blog-tags site-box">
+        <div class="side-title"><i class="demo-icon icon-tags"></i> 标签</div>
+          <ul> 
+            <li><a href="/tag/Docker/">Docker</a></li>
+            
+            <li><a href="/tag/Flask/">Flask</a></li>
+            
+            <li><a href="/tag/JS/">JS</a></li>
+            
+            <li><a href="/tag/MongoD/">MongoD</a></li>
+            
+            <li><a href="/tag/nginx/">nginx</a></li>
+            
+            <li><a href="/tag/Python/">Python</a></li>
+            
+            <li><a href="/tag/ubuntu/">ubuntu</a></li>
+            
+            <li><a href="/tag/VueJS/">VueJS</a></li>
+            
+            <li><a href="/tag/web%E5%BC%80%E5%8F%91/">web开发</a></li>
+            
+            <li><a href="/tag/%E6%8A%80%E6%9C%AF/">技术</a></li>
+            
+            <li><a href="/tag/%E6%BA%90%E7%A0%81/">源码</a></li>
+            
+            <li><a href="/tag/%E7%88%AC%E8%99%AB/">爬虫</a></li>
+            
+            <li><a href="/tag/%E7%94%9F%E6%B4%BB/">生活</a></li>
+            
+            <li><a href="/tag/%E7%94%B5%E5%BD%B1/">电影</a></li>
+            
+            <li><a href="/tag/%E7%AC%94%E8%AE%B0/">笔记</a></li>
+            
+            <li><a href="/tag/%E7%AE%97%E6%B3%95/">算法</a></li>
+            
+            <li><a href="/tag/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+            
+            <li><a href="/tag/%E9%9F%B3%E4%B9%90/">音乐</a></li>
+          </ul>
+        <div class="clear"></div>
+      </div>  
+    </div>
+
+    <div class="ads_plugin">
+      <div class="my-plugin">
+        <div class="plugin-body">
+          <a href="https://s.click.taobao.com/odhkXPw" target="_blank"><img src="https://www.yukunweb.com/static/upload/aliyun3.jpg" style="width:230px"></a>
+        </div>
+      <div class="clear"></div>
+      </div>    
+    </div>
+  </div>
+{%- endblock sidebar %}

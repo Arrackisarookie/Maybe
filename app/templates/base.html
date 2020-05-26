@@ -1,52 +1,67 @@
 {% block doc -%}
 <!DOCTYPE html>
-<html>
-{%- block html %}
-  <head>
-    {%- block head %}
-      <title>{% block title %}{% endblock title %}{{ title|default }}</title>
-      {%- block metas %}
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      {%- endblock metas %}
+{% block html -%}
+  <html>
+    {% block head -%}
+      <head>
+        {% block title %}<title></title>{% endblock title %}
 
-      <link rel="shortcut icon" href="{{ url_for('static', filename='images/jinx256.png') }}">
+        {% block metas -%}
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+          <meta name="author" content="">
+        {%- endblock metas %}
 
-      {%- block styles %}
-      <!-- Bootstrap -->
-        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/icon.min.css') }}" rel="stylesheet">
-      {%- endblock styles %}
+        {% block icon -%}
+          <link rel="shortcut icon" href="{{ url_for('static', filename='images/jinx256.png') }}">
+        {%- endblock icon %}
+
+        {% block styles -%}
+        {%- endblock styles %}
+      </head>
     {%- endblock head %}
-  </head>
-  <body>
     {% block body -%}
-      {% block navbar %}
-      {%- endblock navbar %}
+      <body>
+        <div class="container">
+          {% block flash -%}
+            <!-- {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %} -->
+          {% endblock %}
 
-      {% block header -%}
-      {%- endblock header %}
+          {% block header -%}
+          {%- endblock header %}
 
-      {% block content -%}
-      {%- endblock content %}
+          {% block content -%}
+          {%- endblock content %}
 
-      {% block scripts %}
-      {%- endblock scripts %}
+          {% block footer -%}
+            <div class="footer-box">
+              <div class="footer">
+                <div class="copyright">
+                    © 2017  <i class="demo-icon icon-heart"></i>
+                    <span> 俞坤</span>
+                </div>
+                <span class="powered-by"><a href="http://www.miitbeian.gov.cn/" target="_blank">苏ICP备17028833号</a></span>
 
-{% block flash %}
-  <!-- {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul class=flashes>
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %} -->
-{% endblock %}
+                <span>Powered by <a href="https://github.com/Blackyukun/YuBlog" target="_blank">YuBlog</a></span>
+                <span class="cnzz-span"><script src="https://s22.cnzz.com/z_stat.php?id=1263956682&web_id=1263956682" language="JavaScript"></script></span>
+              </div>
+            </div>
+          {%- endblock footer %}
+        </div>
 
+        {% block scripts -%}
+        {%- endblock scripts %}
+      </body>
     {%- endblock body %}
-  </body>
+  </html>
 {%- endblock html %}
-</html>
-{% endblock doc -%}
+{%- endblock doc %}
