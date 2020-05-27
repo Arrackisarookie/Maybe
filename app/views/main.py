@@ -4,23 +4,26 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:22:18
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-26 16:29:08
+# @Last Modified time: 2020-05-27 17:52:56
 #
 
 from os.path import join
 
 from flask import Blueprint
+from flask import current_app
 from flask import flash
 from flask import redirect
+from flask import request
 from flask import render_template
 from flask import url_for
 
 from app.extensions import db
 from app.forms import TalkForm
-from app.models.article import Article
-from app.models.article import Category
-from app.models.article import Tag
-from app.utils import markdown_to_html
+from app.models import Article
+from app.models import Category
+from app.models import Tag
+from app.models import Talk
+from app.viewmodels import TalkViewModel, TalksViewModel
 
 
 bp = Blueprint('main', __name__)
@@ -30,6 +33,16 @@ bp = Blueprint('main', __name__)
 def index():
     articles = Article.query.order_by(Article.id.desc()).all()
     return render_template('main/index.html', articles=articles)
+
+
+@bp.route('/talktalk')
+def talks():
+    page = request.args.get('page', 1, type=int)
+    pagination = Talk.query.order_by(Talk.createTime.desc()).paginate(
+        page, per_page=current_app.config['TALKS_PER_PAGE'])
+    talks = [TalkViewModel(t) for t in pagination.items]
+    talks = TalksViewModel(talks)
+    return render_template('main/talks.html', talks=talks, pagination=pagination)
 
 
 @bp.route('/article')
@@ -45,12 +58,6 @@ def category():
 @bp.route('/about')
 def about():
     return render_template('main/about.html')
-
-
-@bp.route('/shuoshuo')
-def shuoshuo():
-    return render_template('main/shuoshuo.html')
-
 
 
 # @bp.route('/article/<year>/<month>/<title>')

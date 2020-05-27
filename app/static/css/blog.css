@@ -734,6 +734,7 @@ ul.pages a {
 ul.pages a.active,ul.pages a.active:hover {
     background: #ccc;
     color: #fff;
+    pointer-events: none;
 }
 
 ul.pages a:hover {

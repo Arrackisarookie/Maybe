@@ -12,6 +12,10 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_POOL_RECYCLE = 280
 
+    ARTICLES_PER_PAGE = 10
+    TALKS_PER_PAGE = 15
+    COMMENTS_PER_PAGE = 5
+
     JSON_AS_ASCII = False
 
     @staticmethod
