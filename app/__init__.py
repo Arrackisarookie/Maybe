@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:21:49
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-26 14:15:24
+# @Last Modified time: 2020-05-27 16:29:35
 #
 
 import click
@@ -15,7 +15,7 @@ from flask import current_app
 from app.extensions import db
 from app.extensions import loginmanager
 from app.models import Role
-from app.models import User
+from test.fake import fakeTalks
 
 from config import config
 
@@ -48,24 +48,17 @@ def register_command(app):
     @app.cli.command()
     @click.option('--drop', is_flag=True, help='Create after drop.')
     def initdb(drop):
-        if drop:
-            if click.confirm('This operation will delete the database, do you want to continue?'):
-                db.drop_all()
-                click.echo('All tables have been dropped.')
+        if drop and click.confirm('This operation will delete the database, do you want to continue?'):
+            db.drop_all()
+            click.echo('All tables have been dropped.')
         db.create_all()
         click.echo('Initialized database.')
         Role.initRoles()
         click.echo('Initialized Roles.')
 
     @app.cli.command()
-    @click.argument('username')
-    @click.argument('password')
-    def initadmin(username, password):
-        email = current_app.config['ADMIN_EMAIL']
-        if User.query.first():
-            click.echo('Administrator already exsits.')
-            return None
-        user = User(email=email, username=username, password=password)
-        db.session.add(user)
-        db.session.commit()
-        click.echo('Initialized Administrator %s' % username)
+    @click.option('--talks', is_flag=True, help='Fake talks.')
+    def fake(talks):
+        if talks:
+            count = fakeTalks()
+            click.echo('Initialized %d fake talks.' % count)
