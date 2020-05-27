@@ -361,6 +361,7 @@ ul#drop a:hover {
     float: left;
     width: 90px;
     padding: 5px 0px;
+    line-height: 15px;
 }
 
 .profile .social-links a{
