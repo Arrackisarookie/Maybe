@@ -1344,6 +1344,10 @@ ul.comment-children .comment-time {
     background-color: #df846c;
 }
 
+.shuo-edit {
+    padding: 10px;
+}
+
 .shuo-content {
     padding: 20px;
 }
