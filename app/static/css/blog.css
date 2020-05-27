@@ -1067,7 +1067,6 @@ ul.pages a:hover {
 
 .textarea-container input {
     width: 180px;
-    height: 14px;
     float: left;
     margin: 0;
     padding: 7px 0 7px 54px;
@@ -1090,7 +1089,7 @@ ul.pages a:hover {
     outline: none;
     border: 1px dashed #df846c;
     padding: 10px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
@@ -1114,7 +1113,12 @@ ul.pages a:hover {
     border: 1px solid #f06909;
 }
 
-.textarea-container button.comment-submit {
+.textarea-container button.comment-submit,
+.textarea-container input.comment-submit {
+    margin: 10px 0;
+    width: 100px;
+    display: inline-block;
+    line-height: 25px;
     border: 1px solid #df846c;
     background: #df846c;
     color: #fff;
@@ -1124,7 +1128,8 @@ ul.pages a:hover {
     float: right;
 }
 
-.textarea-container button.comment-submit:hover {
+.textarea-container button.comment-submit:hover,
+.textarea-container input.comment-submit:hover {
     background: #f06909;
 }
 
@@ -1346,7 +1351,11 @@ ul.comment-children .comment-time {
 }
 
 .shuo-edit {
-    padding: 10px;
+    padding: 20px 10px 5px 10px;
+}
+
+.shuo-send {
+    margin: 10px 0;
 }
 
 .shuo-content {

@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:22:18
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-27 17:52:56
+# @Last Modified time: 2020-05-27 21:04:57
 #
 
 from os.path import join
@@ -35,14 +35,28 @@ def index():
     return render_template('main/index.html', articles=articles)
 
 
-@bp.route('/talktalk')
+@bp.route('/talktalk', methods=['GET', 'POST'])
 def talks():
+    form = TalkForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        content = form.content.data
+        try:
+            t = Talk(content=content)
+            db.session.add(t)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            flash(e.message, category='error')
+        else:
+            flash('话唠，闲的慌是不？')
+        return redirect(url_for('main.talks'))
     page = request.args.get('page', 1, type=int)
     pagination = Talk.query.order_by(Talk.createTime.desc()).paginate(
         page, per_page=current_app.config['TALKS_PER_PAGE'])
     talks = [TalkViewModel(t) for t in pagination.items]
     talks = TalksViewModel(talks)
-    return render_template('main/talks.html', talks=talks, pagination=pagination)
+    return render_template('main/talks.html', form=form, talks=talks, pagination=pagination)
 
 
 @bp.route('/article')

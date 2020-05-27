@@ -16,26 +16,18 @@
 {% block main -%}
   <div class="main">
     <div class="shuo-edit site-box">
-      <div class="comment-send">
-        <div class="textarea-container">
-          <div class="author-info">
-            <div class="input-div">
-              <label>名字：</label>
-              <input type="text" name="author" placeholder="必填">
-            </div>
+      <div class="shuo-send">
+        <form method="post">
+          <div class="textarea-container">
+            {{ form.content(class='ipt-txt', cols='80', rows='6', placeholder='四六八句整起来~') }}
+            {{ form.submit(class='comment-submit', value='走你') }}
           </div>
-          <i class="logined">已登录，<a class="delete-user">注销</a></i>
-          <textarea cols="80" name="comment" rows="6" placeholder="评论支持 Markdown 语法。" class="ipt-txt"></textarea>
-          <span class="cancel">取消</span>
-          <button type="submit" class="comment-submit"
-                  posturl="docker-core-component"
-                  replyid="" replyto="">发表评论</button>
-        </div>
-        <div class="clear"></div>
-        <!-- <div class="comment-emoji">
-            <i class="face"></i>
-            <span class="text">表情</span>
-        </div> -->
+          <div class="clear"></div>
+          <!-- <div class="comment-emoji">
+              <i class="face"></i>
+              <span class="text">表情</span>
+          </div> -->
+        </form>
       </div>
     </div>
     <div class="shuo-content site-box">
