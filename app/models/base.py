@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 15:19:12
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-25 18:10:25
+# @Last Modified time: 2020-05-27 16:41:25
 #
 from datetime import datetime
 
@@ -23,11 +23,18 @@ class Base(db.Model):
     availiblity = Column(SmallInteger, default=1)
 
     def __init__(self, **kwargs):
+        if '_createTime' in kwargs.keys() and isinstance(kwargs['_createTime'], datetime):
+            self.createTime = int(kwargs.pop('_createTime').timestamp())
+        else:
+            self.createTime = int(datetime.now().timestamp())
         super().__init__(**kwargs)
-        self.createTime = int(datetime.now().timestamp())
 
     # todo:
     # update time fuction
+
+    @property
+    def createDatetime(self):
+        return datetime.utcfromtimestamp(self.createTime).strftime('%Y-%m-%d %H:%M:%S')
 
     def delete(self):
         self.availiblity = 0
