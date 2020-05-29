@@ -10,20 +10,6 @@
         }
     };
 
-    // ä¸‹æ‹‰èœå•äº‹ä»¶
-    var dropNav = document.getElementById('drop');
-    var navCate = document.getElementsByClassName('category-nav')[0];
-
-    // é¼ æ ‡è¿›å…¥
-    navCate.onmouseenter = function() {
-        dropNav.style.display = 'block';
-    };
-
-    // é¼ æ ‡ç¦»å¼€
-    navCate.onmouseleave = function() {
-        dropNav.style.display = 'none';
-    };
-
     // æœç´¢æ¡†äº‹ä»¶
     var searchNav = document.getElementsByClassName('search-btn')[0];
     var searchDiv = document.getElementsByClassName('search')[0];

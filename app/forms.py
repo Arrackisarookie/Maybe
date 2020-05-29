@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 17:25:12
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-25 18:24:24
+# @Last Modified time: 2020-05-27 21:25:39
 #
 
 from wtforms import BooleanField
@@ -19,14 +19,14 @@ from wtforms.validators import Length
 
 
 class LoginForm(Form):
-    username = StringField(
-        label='Username',
+    email = StringField(
+        label='Email',
         validators=[DataRequired(), Length(1, 64)])
     password = PasswordField(
         label='Password',
         validators=[DataRequired(), Length(1, 128)])
     remember_me = BooleanField('Remember me.')
-    submit = SubmitField('Login')
+    submit = SubmitField()
 
 
 class TalkForm(Form):

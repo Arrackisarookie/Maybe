@@ -161,6 +161,11 @@ h2:after {
     float: right;
     width: 700px;
     padding: 15px 0;
+    line-height: 25px;
+}
+
+.category-nav:hover .drop {
+    display: block;
 }
 
 #menu {
@@ -173,6 +178,8 @@ h2:after {
     float: right;
     margin-left: 15px;
     width: 40px;
+    height: 25px;
+    line-height: 25px;
     text-align: center;
 }
 
@@ -187,10 +194,9 @@ li.menu-item a:hover,.search-btn:hover {
     font-weight: 600;
 }
 
-ul#drop {
+ul.drop {
     display: none;
     list-style: none;
-    margin-top: 5px;
     margin-left: -20px;
     border: 1px solid #eee;
     border-radius: 3px;
@@ -200,7 +206,7 @@ ul#drop {
     box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }
 
-ul#drop a {
+ul.drop a {
     font-size: 14px;
     padding: 5px 10px;
     width: 60px;
@@ -212,7 +218,7 @@ a.drop-item-last {
     border-bottom: none;
 }
 
-ul#drop a:hover {
+ul.drop a:hover {
     background: rgba(102, 102, 102, 0.7);
     color: #fff;
     font-weight: 400;

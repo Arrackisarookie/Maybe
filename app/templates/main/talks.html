@@ -15,6 +15,7 @@
 
 {% block main -%}
   <div class="main">
+    {% if current_user.is_authenticated %}
     <div class="shuo-edit site-box">
       <div class="shuo-send">
         <form method="post">
@@ -30,6 +31,7 @@
         </form>
       </div>
     </div>
+    {% endif %}
     <div class="shuo-content site-box">
       {% for year, vals in talks.res.items() %}
       <article>

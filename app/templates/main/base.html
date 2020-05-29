@@ -24,6 +24,17 @@
       </div>
       <div class="site-nav">
         <ul id="menu" class="menu">
+          {% if current_user.is_authenticated %}
+            <li class="menu-item category-nav"><a href="#">{{ current_user.nickName }}</a>
+              <ul class="drop">
+                <li>
+                  <a href="{{ url_for('auth.logout') }}" class="drop-item">
+                    注销
+                  </a>
+                </li>
+              </ul>
+            </li>
+          {% endif %}
             <li class="menu-item search-nav"><span class="search-btn">搜索</span>
               <div class="search" style="display: none;">
                 <form action="/search/" method="post">
@@ -38,9 +49,9 @@
               <a href="/page/about/">关于</a>
             </li>
             
-            <li class="menu-item"><a href="/shuoshuo">说说</a></li>
+            <li class="menu-item"><a href="{{ url_for('main.talks') }}">说说</a></li>
             <li class="menu-item category-nav"><a href="#">分类</a>
-              <ul id="drop">
+              <ul class="drop">
                 <li>
                   <a href="/category/%E6%8A%80%E6%9C%AF/" class="drop-item">
                     技术
