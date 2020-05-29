@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:11:08
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-25 18:23:41
+# @Last Modified time: 2020-05-29 14:36:13
 #
 
 from itsdangerous import BadSignature
@@ -124,19 +124,5 @@ class User(Base, UserMixin):
     #         return None  # invalid token
     #     return User.query.get(data['id'])
 
-    # def can(self, perm):
-    #     return self.role is not None and self.role.has_permission(perm)
-
-    # def isAdmin(self):
-        # return self.can(Permission.ADMIN)
-
     def __repr__(self):
         return '<User %d-%r-%r>' % (self.id, self.nickName, self.role.name)
-
-
-loginmanager.login_view = 'auth.login'
-
-
-@loginmanager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
