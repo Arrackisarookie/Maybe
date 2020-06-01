@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:22:18
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-27 21:04:57
+# @Last Modified time: 2020-06-01 19:08:41
 #
 
 from os.path import join
@@ -31,8 +31,23 @@ bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def index():
-    articles = Article.query.order_by(Article.id.desc()).all()
-    return render_template('main/index.html', articles=articles)
+    page = request.args.get('page', 1, type=int)
+    pagination = Article.query.order_by(Article.createTime.desc()).paginate(
+        page, per_page=current_app.config['ARTICLES_PER_PAGE'])
+    return render_template('main/index.html', pagination=pagination)
+
+
+@bp.route('/article/<int:aid>')
+def article(aid):
+    post = Article.query.get(aid)
+
+    return render_template('main/article.html', article=post)
+
+
+@bp.route('/category/<name>')
+def category(name):
+    cate = Category.query.filter_by(name=name).first()
+    return render_template('main/category.html', category=cate)
 
 
 @bp.route('/talktalk', methods=['GET', 'POST'])
@@ -51,22 +66,13 @@ def talks():
         else:
             flash('话唠，闲的慌是不？')
         return redirect(url_for('main.talks'))
+
     page = request.args.get('page', 1, type=int)
     pagination = Talk.query.order_by(Talk.createTime.desc()).paginate(
         page, per_page=current_app.config['TALKS_PER_PAGE'])
     talks = [TalkViewModel(t) for t in pagination.items]
     talks = TalksViewModel(talks)
     return render_template('main/talks.html', form=form, talks=talks, pagination=pagination)
-
-
-@bp.route('/article')
-def article():
-    return render_template('main/article.html')
-
-
-@bp.route('/category')
-def category():
-    return render_template('main/category.html')
 
 
 @bp.route('/about')

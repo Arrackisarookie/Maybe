@@ -2,57 +2,17 @@
 
 {% block main -%}
   <div class="main">             
-  <div class="category site-box">分类：<strong>生活</strong></div>
+  <div class="category site-box"><strong>{{ category.name }}</strong></div>
   <div class="category-post site-box">
     <ul>
+    {% for article in category.articles %}
       <li>
-          2018-04-29
-          <a href="/2018/4/split-life/">
-              分裂
-          </a>
+        {{ article.createDatetime }}
+        <a href="{{ url_for('main.article', aid=article.id) }}">
+          {{ article.title }}
+        </a>
       </li>
-      
-      <li>
-          2018-01-01
-          <a href="/2018/1/what-age-what-words/">
-              什么年龄说什么话
-          </a>
-      </li>
-      
-      <li>
-          2017-09-23
-          <a href="/2017/9/rained-all-night/">
-              雨下一整晚
-          </a>
-      </li>
-      
-      <li>
-          2017-08-27
-          <a href="/2017/8/August-things/">
-              八月
-          </a>
-      </li>
-      
-      <li>
-          2017-06-20
-          <a href="/2017/6/busy-life/">
-              忙忙碌碌
-          </a>
-      </li>
-      
-      <li>
-          2017-06-02
-          <a href="/2017/6/walking-world-is-monster/">
-              行走世间都是妖怪
-          </a>
-      </li>
-      
-      <li>
-          2017-05-25
-          <a href="/2017/5/May-things/">
-              五月的事
-          </a>
-      </li>
+    {% endfor %}
     </ul>
   </div>
   </div>

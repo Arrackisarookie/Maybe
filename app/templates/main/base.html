@@ -38,56 +38,33 @@
               </ul>
             </li>
           {% endif %}
-            <li class="menu-item search-nav"><span class="search-btn">搜索</span>
-              <div class="search" style="display: none;">
-                <form action="/search/" method="post">
-                    <i class="demo-icon icon-search"></i>
-                    <input id="csrf_token" name="csrf_token" type="hidden" value="IjkwMDIwZDkwM2QzMGZiNmNiZGYyZDQ1ZDBmMGZlZTRlYTZhZmE2Yzci.XsyMDg.SI--Xk1lP_tj64pWe5644K584F4">
-                    <input class="search-ipt" id="search" name="search" placeholder="Search..." type="text" value="">
-                </form>
-              </div>
-            </li>
-            
-            <li class="menu-item">
-              <a href="/page/about/">关于</a>
-            </li>
-            
-            <li class="menu-item"><a href="{{ url_for('main.talks') }}">说说</a></li>
-            <li class="menu-item category-nav"><a href="#">分类</a>
-              <ul class="drop">
-                <li>
-                  <a href="/category/%E6%8A%80%E6%9C%AF/" class="drop-item">
-                    技术
-                  </a>
-                </li>
-                <li>
-                  <a href="/category/%E7%94%9F%E6%B4%BB/" class="drop-item">
-                    生活
-                  </a>
-                </li>
-                <li>
-                  <a href="/category/%E7%94%B5%E5%BD%B1/" class="drop-item">
-                    电影
-                  </a>
-                </li>
-                <li>
-                  <a href="/category/%E7%AC%94%E8%AE%B0/" class="drop-item">
-                    笔记
-                  </a>
-                </li>
-                <li>
-                  <a href="/category/%E9%98%85%E8%AF%BB/" class="drop-item">
-                    阅读
-                  </a>
-                </li>
-                <li>
-                  <a href="/category/%E9%9F%B3%E4%B9%90/" class="drop-item">
-                    音乐
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item"><a href="/index">首页</a></li>
+          <li class="menu-item search-nav"><span class="search-btn">搜索</span>
+            <div class="search" style="display: none;">
+              <form action="/search/" method="post">
+                  <i class="demo-icon icon-search"></i>
+                  <input id="csrf_token" name="csrf_token" type="hidden" value="IjkwMDIwZDkwM2QzMGZiNmNiZGYyZDQ1ZDBmMGZlZTRlYTZhZmE2Yzci.XsyMDg.SI--Xk1lP_tj64pWe5644K584F4">
+                  <input class="search-ipt" id="search" name="search" placeholder="Search..." type="text" value="">
+              </form>
+            </div>
+          </li>
+          
+          <li class="menu-item">
+            <a href="{{ url_for('main.about') }}">关于</a>
+          </li>
+          
+          <li class="menu-item"><a href="{{ url_for('main.talks') }}">说说</a></li>
+          <li class="menu-item category-nav"><a href="#">分类</a>
+            <ul class="drop">
+              {% for cate in Category.query.all() %}
+              <li>
+                <a href="{{ url_for('main.category', name=cate.name) }}" class="drop-item">
+                  {{ cate.name }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li class="menu-item"><a href="{{ url_for('main.index') }}">首页</a></li>
         </ul>
         <div class="clear"></div>
       </div>

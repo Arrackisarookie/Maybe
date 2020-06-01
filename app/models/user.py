@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:11:08
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-29 14:36:13
+# @Last Modified time: 2020-06-01 15:05:32
 #
 
 from itsdangerous import BadSignature
@@ -66,7 +66,7 @@ class User(Base, UserMixin):
     roleID = Column(Integer, ForeignKey('roles.id'))
 
     articles = relationship('Article', backref='author', lazy='dynamic')
-    comments = relationship('Comment', backref='author', lazy='dynamic')
+    # comments = relationship('Comment', backref='author', lazy='dynamic')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
