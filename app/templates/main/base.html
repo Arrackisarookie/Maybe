@@ -21,9 +21,9 @@
     <div class="site-wrap">
       <div class="site-logo">
         <a href="/" class="logo">
-            意外
+          醉了醉了~
         </a>
-        <span>俞坤的博客</span>
+        <span>Arrack的博客</span>
       </div>
       <div class="site-nav">
         <ul id="menu" class="menu">
@@ -81,14 +81,14 @@
     </div>
     <div class="mobile-site-logo">
       <a href="/">
-        意外
+        醉了醉了~
       </a>
-      <span>俞坤的博客</span>
+      <span>Arrack的博客</span>
     </div>
     <div class="mobile-site-nav" style="display: none;">
       <ul>
           <li>
-            <a class="mobile-nav-item" href="/index">
+            <a class="mobile-nav-item" href="{{ url_for('main.index') }}">
               <i class="demo-icon icon-home"></i> 首页
             </a>
           </li>
@@ -97,36 +97,13 @@
               <i class="demo-icon icon-book"></i> 分类
             </a>
             <ul class="mobile-drop-category" style="display: none;">
+              {% for cate in Category.query.all() %}
               <li>
-                <a href="/category/%E6%8A%80%E6%9C%AF/" class="mobile-drop-item">
-                    技术
+                <a href="{{ url_for('main.category', name=cate.name)}}" class="mobile-drop-item">
+                  {{ cate.name }}
                 </a>
               </li>
-              <li>
-                <a href="/category/%E7%94%9F%E6%B4%BB/" class="mobile-drop-item">
-                    生活
-                </a>
-              </li>
-              <li>
-                <a href="/category/%E7%94%B5%E5%BD%B1/" class="mobile-drop-item">
-                    电影
-                </a>
-              </li>
-              <li>
-                <a href="/category/%E7%AC%94%E8%AE%B0/" class="mobile-drop-item">
-                    笔记
-                </a>
-              </li>
-              <li>
-                <a href="/category/%E9%98%85%E8%AF%BB/" class="mobile-drop-item">
-                    阅读
-                </a>
-              </li>
-              <li>
-                <a href="/category/%E9%9F%B3%E4%B9%90/" class="mobile-drop-item">
-                    音乐
-                </a>
-              </li>
+              {% endfor %}
             </ul>
           </li>
           <li>
@@ -140,7 +117,7 @@
             </a>
           </li>
           <li>
-            <a href="/page/about/" class="mobile-nav-item mobile-add-page"> 关于</a>
+            <a href="{{ url_for('main.about') }}" class="mobile-nav-item mobile-add-page"> 关于</a>
           </li>
           
           <li>
@@ -171,18 +148,18 @@
           </div>
           <div class="profile site-box">
             <div class="master-image">
-                <img class="profile-avatar" src="/static/images/yinshi.jpg" alt="author">
+                <img class="profile-avatar" src="{{ url_for('static', filename='images/tree.jpeg')}}" alt="author">
                 <div class="master-info">
-                    <p class="profile-master">俞坤</p>
+                    <p class="profile-master">Arrack</p>
                     <p class="master-description">
-                        克制力，执行力
+                      别怂，别懒
                     </p>
                 </div>
             </div>
 
             <div class="new-shuo">
-              <a href="/shuoshuo">
-                <p>突然想到我还有个博客</p>
+              <a href="{{ url_for('main.talks') }}">
+                <p>{{ Talk.query.first().content }}</p>
               </a>
             </div>
 
@@ -212,7 +189,7 @@
                 </li>
                 
                 <li>
-                  <a class="add-link" href="https://github.com/Blackyukun" target="_blank">
+                  <a class="add-link" href="https://github.com/Arrackisarookie" target="_blank">
                     Github
                   </a>
                 </li>
@@ -256,10 +233,10 @@
 {%- endblock content %}
 
 {% block scripts %}
-  <script src="/static/js/myStorage.js"></script>
-  <script src="/static/js/main.js"></script>
-  <script src="/static/js/sticky.js"></script>
-  <script src="/static/lib/headroom.min.js"></script>
+  <script src="{{ url_for('static', filename='js/myStorage.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/sticky.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/headroom.min.js') }}"></script>
   <script>
     // headroom
     var header = new Headroom(document.getElementById("header"), {

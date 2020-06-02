@@ -1,8 +1,10 @@
 {% extends "main/base.html" %}
 
+{% block title -%}关于我 - 醉了醉了~{%- endblock %}
+
 {%- block styles %}
   {{ super() }}
-  <link rel="stylesheet" href="/static/lib/markdown.css"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='lib/markdown.css') }}"/>
   <style>
     .post-body {padding: 0;}
     h1.post-title {text-align: left;}
@@ -18,7 +20,7 @@
 {% block main -%}
   <div class="main">          
     <div class="post-item site-box">
-      <h1 class="post-title">关于</h1>
+      <h1 class="post-title">关于我</h1>
 
       <div id="content" class="post-body"> 
         <p><img alt="dog" src="https://www.yukunweb.com/qiniu/page_about.jpg" /></p>

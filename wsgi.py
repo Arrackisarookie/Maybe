@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-26 11:37:21
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-26 17:03:33
+# @Last Modified time: 2020-06-02 18:34:11
 #
 
 import os
@@ -16,6 +16,7 @@ from app.extensions import db
 from app.models import Article
 from app.models import Category
 from app.models import Tag
+from app.models import Talk
 from app.models import User
 
 
@@ -32,7 +33,7 @@ def make_shell_context():
 
 @app.context_processor
 def inject_models():
-    return dict(Article=Article, Category=Category, User=User, Tag=Tag)
+    return dict(Article=Article, Category=Category, User=User, Tag=Tag, Talk=Talk)
 
 
 @app.context_processor

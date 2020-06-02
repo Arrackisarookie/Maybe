@@ -1,7 +1,9 @@
 {% extends "main/base.html" %}
 {% import "/main/_macros.html" as macros %}
 
-{%- block styles %}
+{% block title -%}醉了醉了~{%- endblock %}
+
+{% block styles -%}
   {{ super() }}
   <style>
     .post-item .post-meta {margin: 5px 0 15px 0;}
@@ -14,50 +16,26 @@
 
 {% block main -%}
   <div class="main">
-    <div class="post-item site-box">
-        <h1 class="post-title">
-            <a href="/2018/8/read-three-body/">
-                读三体
-            </a>
-        </h1>
-        <div class="post-meta">
-            <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于2018-08-28</span>
-            <span class="post-category">
-                <i class="demo-icon icon-folder-empty"></i> 分类：
-                <a href="/category/%E9%98%85%E8%AF%BB/">阅读</a>
-            </span>
-            <span class="post-comments-count">
-                <i class="demo-icon icon-comment-empty"></i> 评论： 3
-            </span>
-        </div>
-        <div class="post-body">
-            最近我用了两个星期读完了刘慈欣的三体三部曲，《地球往事》、《黑暗森林》、《死神永生》。因为是科幻小说，作者从上帝视角，以宏大的时间跨度，去叙述两个文明在宇宙中为了生存，付诸的努力。本文尽量不叙述小说的剧情。 故事开始于黑暗的文革时期。对现实世界心灰意冷的叶文洁，按下发射键。发出了地球文明向宇宙的第一声啼哭，内容是&#34;Hello...
-
-
-
-        </div>
-    </div>
-
     {% for article in pagination.items %}
     <div class="post-item site-box">
-        <h1 class="post-title">
-          <a href="{{ url_for('main.article', aid=article.id) }}">
-            {{ article.title }}
-          </a>
-        </h1>
-        <div class="post-meta">
-          <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于 {{ article.createDatetime }}</span>
-          <span class="post-category">
-            <i class="demo-icon icon-folder-empty"></i> 分类于
-            <a href="/category/%E7%AC%94%E8%AE%B0/">{{ article.category.name }}</a>
-          </span>
-          <span class="post-comments-count">
-            <i class="demo-icon icon-comment-empty"></i> 热度 6
-          </span>
-        </div>
-        <div class="post-body">
-          {{ article.description }}
-        </div>
+      <h1 class="post-title">
+        <a href="{{ url_for('main.article', aid=article.id) }}">
+          {{ article.title }}
+        </a>
+      </h1>
+      <div class="post-meta">
+        <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于 {{ article.createDatetime }}</span>
+        <span class="post-category">
+          <i class="demo-icon icon-folder-empty"></i> 分类于
+          <a href="/category/%E7%AC%94%E8%AE%B0/">{{ article.category.name }}</a>
+        </span>
+        <span class="post-comments-count">
+          <i class="demo-icon icon-comment-empty"></i> 热度 6
+        </span>
+      </div>
+      <div class="post-body">
+        {{ article.description }}
+      </div>
     </div>
     {% endfor %}
 

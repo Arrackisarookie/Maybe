@@ -1,8 +1,10 @@
 {% extends "main/base.html" %}
 
-{%- block styles %}
+{% block title -%}{{ article.title }} - 醉了醉了~{%- endblock %}
+
+{% block styles -%}
   {{ super() }}
-  <link rel="stylesheet" href="/static/lib/markdown.css"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='lib/markdown.css') }}"/>
   <style>
     .post-title {
       text-align: center;
