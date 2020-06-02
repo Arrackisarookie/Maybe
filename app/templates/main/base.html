@@ -241,42 +241,10 @@
 
           <div class="blog-tags site-box">
             <div class="side-title"><i class="demo-icon icon-tags"></i> 标签</div>
-              <ul> 
-                <li><a href="/tag/Docker/">Docker</a></li>
-                
-                <li><a href="/tag/Flask/">Flask</a></li>
-                
-                <li><a href="/tag/JS/">JS</a></li>
-                
-                <li><a href="/tag/MongoD/">MongoD</a></li>
-                
-                <li><a href="/tag/nginx/">nginx</a></li>
-                
-                <li><a href="/tag/Python/">Python</a></li>
-                
-                <li><a href="/tag/ubuntu/">ubuntu</a></li>
-                
-                <li><a href="/tag/VueJS/">VueJS</a></li>
-                
-                <li><a href="/tag/web%E5%BC%80%E5%8F%91/">web开发</a></li>
-                
-                <li><a href="/tag/%E6%8A%80%E6%9C%AF/">技术</a></li>
-                
-                <li><a href="/tag/%E6%BA%90%E7%A0%81/">源码</a></li>
-                
-                <li><a href="/tag/%E7%88%AC%E8%99%AB/">爬虫</a></li>
-                
-                <li><a href="/tag/%E7%94%9F%E6%B4%BB/">生活</a></li>
-                
-                <li><a href="/tag/%E7%94%B5%E5%BD%B1/">电影</a></li>
-                
-                <li><a href="/tag/%E7%AC%94%E8%AE%B0/">笔记</a></li>
-                
-                <li><a href="/tag/%E7%AE%97%E6%B3%95/">算法</a></li>
-                
-                <li><a href="/tag/%E9%9A%8F%E7%AC%94/">随笔</a></li>
-                
-                <li><a href="/tag/%E9%9F%B3%E4%B9%90/">音乐</a></li>
+              <ul>
+                {% for t in Tag.query.all() %}
+                <li><a href="{{ url_for('main.tag', name=t.name)}}">{{ t.name }}</a></li>
+                {% endfor %}
               </ul>
             <div class="clear"></div>
           </div>  

@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 17:28:37
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-01 15:05:08
+# @Last Modified time: 2020-06-02 11:57:25
 #
 
 from sqlalchemy import Column
@@ -19,10 +19,11 @@ from app.extensions import db
 from app.models import Base
 
 
-# article_tag = db.Table(
-#     'article_tag',
-#     Column('article_id', Integer, ForeignKey('articles.id')),
-#     Column('tag_id', Integer, ForeignKey('tags.id')))
+class ArticleTag(Base):
+    __tablename__ = 'article_tag'
+
+    articleID = Column(Integer, ForeignKey('articles.id'), primary_key=True)
+    tagID = Column(Integer, ForeignKey('tags.id'), primary_key=True)
 
 
 class Tag(Base):
@@ -32,7 +33,12 @@ class Tag(Base):
     name = Column(String(32), unique=True, nullable=False)
     slogan = Column(String(128), default='Everything is not too late.')
 
-    # articles = relationship('Article', secondary=article_tag, backref='tags', lazy='dynamic')
+    articles = relationship(
+        'ArticleTag',
+        foreign_keys=[ArticleTag.tagID],
+        backref=db.backref('tag', lazy='joined'),
+        lazy='dynamic',
+        cascade='all, delete-orphan')
 
     def __repr__(self):
         return '<Tag %d-%r>' % (self.id, self.name)
@@ -63,6 +69,13 @@ class Article(Base):
 
     authorID = Column(Integer, ForeignKey('users.id'))
     cateID = Column(Integer, ForeignKey('categories.id'))
+
+    tags = relationship(
+        'ArticleTag',
+        foreign_keys=[ArticleTag.articleID],
+        backref=db.backref('article', lazy='joined'),
+        lazy='dynamic',
+        cascade='all, delete-orphan')
 
     # replies = relationship('Comment', backref='article', lazy='dynamic')
 

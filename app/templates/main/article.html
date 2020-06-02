@@ -25,15 +25,16 @@
         <span class="post-time"><i class="demo-icon icon-calendar"></i> 发表于 {{ article.createDatetime }}</span>
         <span class="post-category">
           <i class="demo-icon icon-folder-empty"></i> 分类于
-          <a href="/category/%E7%AC%94%E8%AE%B0/">{{ article.category.name }}</a>
+          <a href="{{ url_for('main.category', name=article.category.name)}}">{{ article.category.name }}</a>
         </span>
       </div>
       <div id="content" class="post-body">
         {{ article.content }}
       </div>
       <div class="post-tags">
-        <a href="/tag/Docker/"><i class="demo-icon icon-tags"></i> Docker</a>
-        <a href="/tag/%E7%AC%94%E8%AE%B0/"><i class="demo-icon icon-tags"></i> 笔记</a>
+        {% for tag in tags %}
+          <a href="{{ url_for('main.tag', name=tag.name)}}"><i class="demo-icon icon-tags"></i>{{ tag.name }}</a>
+        {% endfor %}
       </div>
     </div>
   </div>

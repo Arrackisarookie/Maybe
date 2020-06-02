@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+
+{% block main -%}
+  <div class="main">             
+  <div class="category site-box"><strong>{{ tag.name }}</strong></div>
+  <div class="category-post site-box">
+    <ul>
+    {% for a in articles %}
+      <li>
+        {{ a.createDatetime }}
+        <a href="{{ url_for('main.article', aid=a.id) }}">
+          {{ a.title }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+  </div>
+{%- endblock main %}

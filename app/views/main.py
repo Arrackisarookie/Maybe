@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:22:18
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-01 19:08:41
+# @Last Modified time: 2020-06-02 14:16:15
 #
 
 from os.path import join
@@ -40,14 +40,21 @@ def index():
 @bp.route('/article/<int:aid>')
 def article(aid):
     post = Article.query.get(aid)
-
-    return render_template('main/article.html', article=post)
+    tags = [item.tag for item in post.tags]
+    return render_template('main/article.html', article=post, tags=tags)
 
 
 @bp.route('/category/<name>')
 def category(name):
     cate = Category.query.filter_by(name=name).first()
     return render_template('main/category.html', category=cate)
+
+
+@bp.route('/tag/<name>')
+def tag(name):
+    tag = Tag.query.filter_by(name=name).first()
+    articles = [item.article for item in tag.articles]
+    return render_template('main/tag.html', tag=tag, articles=articles)
 
 
 @bp.route('/talktalk', methods=['GET', 'POST'])

@@ -4,13 +4,13 @@
 # @Author: Arrack
 # @Date:   2020-05-27 16:02:25
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-01 15:02:56
+# @Last Modified time: 2020-06-02 12:02:49
 #
 
 from faker import Faker
 
 from app.extensions import db
-from app.models import Article, Category, Tag, Talk, User
+from app.models import Article, Category, Tag, Talk, User, ArticleTag
 
 
 class Fake(object):
@@ -68,5 +68,9 @@ class Fake(object):
                     author=User.query.get(1),
                     _createTime=self.fake.date_time())
                 db.session.add(a)
+                for j in range(3):
+                    tag = Tag.query.get(j+1)
+                    at = ArticleTag(article=a, tag=tag)
+                    db.session.add(at)
                 i += 1
         return count
