@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:21:49
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-01 14:38:45
+# @Last Modified time: 2020-06-02 20:27:46
 #
 
 import click
@@ -13,7 +13,7 @@ from flask import Flask
 from flask import current_app
 
 from app.extensions import db
-from app.extensions import loginmanager
+from app.extensions import lm
 from app.models import Role
 from test.fake import Fake
 
@@ -34,14 +34,14 @@ def create_app(config_name):
 
 def register_extensions(app):
     db.init_app(app)
-    loginmanager.init_app(app)
+    lm.init_app(app)
 
 
 def register_blueprint(app):
     from app.views import main
     app.register_blueprint(main.bp)
-    from app.views import auth
-    app.register_blueprint(auth.bp, url_prefix='/auth')
+    from app.views import admin
+    app.register_blueprint(admin.bp, url_prefix='/admin')
 
 
 def register_command(app):

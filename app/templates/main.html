@@ -31,7 +31,7 @@
             <li class="menu-item category-nav"><a href="#">{{ current_user.nickName }}</a>
               <ul class="drop">
                 <li>
-                  <a href="{{ url_for('auth.logout') }}" class="drop-item">
+                  <a href="{{ url_for('admin.logout') }}" class="drop-item">
                     注销
                   </a>
                 </li>
@@ -231,6 +231,21 @@
     <div class="clear"></div>
   </div>
 {%- endblock content %}
+
+{% block footer -%}
+  <div class="footer-box">
+    <div class="footer">
+      <div class="copyright">
+          © 2020  <i class="demo-icon icon-heart"></i>
+          <span> Arrack</span>
+      </div>
+      <span class="powered-by"><a href="#" target="_blank">京ICP备1×××××833号</a></span>
+
+      <span>Powered by <a href="https://github.com/Arrackisarookie/maybe" target="_blank">Maybe</a></span>
+      <span class="cnzz-span"><script src="https://s22.cnzz.com/z_stat.php?id=1263956682&web_id=1263956682" language="JavaScript"></script></span>
+    </div>
+  </div>
+{%- endblock footer %}
 
 {% block scripts %}
   <script src="{{ url_for('static', filename='js/myStorage.js') }}"></script>

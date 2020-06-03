@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:11:08
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-01 15:05:32
+# @Last Modified time: 2020-06-02 20:28:25
 #
 
 from itsdangerous import BadSignature
@@ -23,7 +23,6 @@ from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
 from app.extensions import db
-from app.extensions import loginmanager
 from app.models import Base
 
 

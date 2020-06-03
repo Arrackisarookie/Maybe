@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 17:17:05
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-27 21:34:00
+# @Last Modified time: 2020-06-02 20:27:33
 #
 
 from contextlib import contextmanager
@@ -25,12 +25,12 @@ class SQLAlchemy(_SQLAlchemy):
 
 
 db = SQLAlchemy()
-loginmanager = LoginManager()
+lm = LoginManager()
 
-loginmanager.login_view = 'auth.login'
+lm.login_view = 'admin.login'
 
 
-@loginmanager.user_loader
+@lm.user_loader
 def load_user(user_id):
     from app.models import User
     return User.query.get(int(user_id))
