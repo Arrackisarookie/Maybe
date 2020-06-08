@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:22:18
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-02 14:16:15
+# @Last Modified time: 2020-06-08 15:12:03
 #
 
 from os.path import join
@@ -40,7 +40,7 @@ def index():
 @bp.route('/article/<int:aid>')
 def article(aid):
     post = Article.query.get(aid)
-    tags = [item.tag for item in post.tags]
+    tags = [item.tag.name for item in post.tags]
     return render_template('main/article.html', article=post, tags=tags)
 
 

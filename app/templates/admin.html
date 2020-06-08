@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Pricing example · Bootstrap</title>
+    <title>{% block title -%}Pricing example · Bootstrap{%- endblock title %}</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/pricing/">
 
@@ -14,22 +14,26 @@
     <link href="{{ url_for('static', filename='lib/css/bootstrap.css')}}" rel="stylesheet">
 
     <style>
-      
+      h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
 
     </style>
     <!-- Custom styles for this template -->
-    <link href="{{ url_for('static', filename='css/admin.css')}}" rel="stylesheet">
+    {% block styles -%}
+      <link href="{{ url_for('static', filename='css/admin.css')}}" rel="stylesheet">
+    {%- endblock %}
   </head>
   <body>
     <div class="d-flex sticky-top flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
+      <h5 class="my-0 mr-md-auto font-weight-normal"><a href="{{ url_for('admin.index') }}">醉了醉了~</a></h5>
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#">Features</a>
-        <a class="p-2 text-dark" href="#">Enterprise</a>
+        <a class="p-2 text-dark" href="{{ url_for('main.index') }}">前台主页</a>
+        <a class="p-2 text-dark" href="{{ url_for('admin.articleWrite', articleID=None) }}">写文章</a>
         <a class="p-2 text-dark" href="#">Support</a>
         <a class="p-2 text-dark" href="#">Pricing</a>
       </nav>
-      <a class="btn btn-outline-primary" href="#">Sign up</a>
+      <a class="btn btn-outline-danger" href="#">Logout</a>
     </div>
 
     <div class="container-fluid">
@@ -43,8 +47,8 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Orders
+                <a class="nav-link" href="{{ url_for('admin.articles') }}">
+                  文章管理
                 </a>
               </li>
               <li class="nav-item">
@@ -99,19 +103,16 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Library</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Data</li>
-            </ol>
-          </nav>
+          {% block breadcrumb -%}
+          {%- endblock %}
 
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
-          </div>
+          {% block content -%}
+          {%- endblock %}
         </main>
       </div>
     </div>
+
+    {% block scripts -%}
+    {%- endblock scripts%}
   </body>
 </html>
