@@ -4,7 +4,7 @@
 # @adminor: Arrack
 # @Date:   2020-05-25 18:22:09
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-02 21:11:51
+# @Last Modified time: 2020-06-08 17:00:25
 #
 
 from flask import Blueprint
@@ -13,12 +13,17 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
+from flask_login import login_required
 from flask_login import login_user
 from flask_login import logout_user
-from flask_login import login_required
 
+from app.extensions import db
+from app.forms import ArticleForm
 from app.forms import LoginForm
-from app.forms import PostWriteForm
+from app.models import Article
+from app.models import ArticleTag
+from app.models import Category
+from app.models import Tag
 from app.models import User
 
 
@@ -57,131 +62,57 @@ def logout():
     return redirect(url_for('main.index'))
 
 
-@bp.route('/post/write')
-@login_required
-def postWrite():
-    form = PostWriteForm(request.form)
-    
-    # if request.method == 'POST' and form.validate():
-
-    return render_template('admin/postWrite.html', form=form)
+@bp.route('/articles')
+def articles():
+    atcs = Article.query.all()
+    return render_template('admin/articles.html', articles=atcs)
 
 
-@bp.route('/post/edit')
-@login_required
-def postEdit(time, name):
-    return render_template('admin/postEdit.html')
+@bp.route('/article/write')
+def articleWrite():
+    # atcs = Article.query.all()
+    return render_template('admin/articleWrite.html')
 
 
-@bp.route('/setting')
-@login_required
-def setting():
-    return render_template('admin/index.html')
+@bp.route('/article/<int:aid>/edit', methods=['GET', 'POST'])
+def articleEdit(aid):
+    article = Article.query.get(aid)
+    form = ArticleForm(request.form)
+    tags = [item.tag.name for item in article.tags]
 
+    if request.method == 'POST' and form.validate():
+        article.title = form.title.data
+        article.content = form.content.data
+        article.category = Category.query.filter_by(name=form.category.data).first()
+        updateTags = form.tags.data.split(',')
 
-@bp.route('/change-password')
-@login_required
-def changePassword():
-    return render_template('admin/index.html')
+        # 将新标签写入数据库，并为文章添加新标签
+        newTags = form.newTags.data.split(',')
+        for t in newTags:
+            tag = Tag.query.filter_by(name=t.strip()).first()
+            if tag is None:
+                tag = Tag(name=t.strip())
+                db.session.add(tag)
+                at = ArticleTag(article=article, tag=tag)
+                db.session.add(at)
 
+        # 对文章已有标签检测是否有更改
+        tagsNeedDel = list(set(tags).difference(set(updateTags))) # 需要移除的 tag
+        tagsNeedAdd = list(set(updateTags).difference(set(tags))) # 需要添加的 tag
 
-@bp.route('/set_site')
-@login_required
-def set_site():
-    return render_template('admin/index.html')
+        # todo: 整合到 Model 中
+        # 添加
+        for t in tagsNeedAdd:
+            tag = Tag.query.filter_by(name=t.strip()).first()
+            at = ArticleTag(article=article, tag=tag)
+            db.session.add(at)
 
-
-@bp.route('/links')
-@login_required
-def addLink():
-    return render_template('admin/index.html')
-
-
-@bp.route('/admin-links')
-@login_required
-def adminLinks():
-    return render_template('admin/index.html')
-
-
-@bp.route('/admin_posts')
-@login_required
-def admin_posts():
-    return render_template('admin/index.html')
-
-
-@bp.route('/admin_drafts')
-@login_required
-def admin_drafts():
-    return render_template('admin/index.html')
-
-
-@bp.route('/add_page')
-@login_required
-def add_page():
-    return render_template('admin/index.html')
-
-
-@bp.route('/admin_pages')
-@login_required
-def admin_pages():
-    return render_template('admin/index.html')
-
-
-@bp.route('/write_column')
-@login_required
-def write_column():
-    return render_template('admin/index.html')
-
-
-@bp.route('/admin_columns')
-@login_required
-def admin_columns():
-    return render_template('admin/index.html')
-
-
-@bp.route('/admin_comments')
-@login_required
-def admin_comments():
-    return render_template('admin/index.html')
-
-
-@bp.route('/upload_file')
-@login_required
-def upload_file():
-    return render_template('admin/index.html')
-
-
-@bp.route('/write_shuoshuo')
-@login_required
-def write_shuoshuo():
-    return render_template('admin/index.html')
-
-
-@bp.route('/add_shuos')
-@login_required
-def add_shuos():
-    return render_template('admin/index.html')
-
-
-@bp.route('/admin_shuos')
-@login_required
-def admin_shuos():
-    return render_template('admin/index.html')
-
-
-@bp.route('/add_side_box')
-@login_required
-def add_side_box():
-    return render_template('admin/index.html')
-
-
-@bp.route('/admin_side_box')
-@login_required
-def admin_side_box():
-    return render_template('admin/index.html')
-
-
-@bp.route('/qiniu_picbed')
-@login_required
-def qiniu_picbed():
-    return render_template('admin/index.html')
+        # 删除
+        for t in tagsNeedDel:
+            tag = Tag.query.filter_by(name=t.strip()).first()
+            at = article.tags.filter_by(tagID=tag.id).first()
+            if at:
+                db.session.delete(at)
+        db.session.commit()
+        return redirect(url_for('admin.articles'))
+    return render_template('admin/articleWrite.html', form=form, article=article, tags=tags)

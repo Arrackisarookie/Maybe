@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Markdown Editor</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/marked@0.3.6"></script>
+    <script src="https://unpkg.com/lodash@4.16.0"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/write.css') }}" />
+  </head>
+  <body>
+    <div id="editor">
+      <form method="post">
+        <header class="header editor-header">
+          <div class="left-box">
+            <div class="logo"></div>
+          </div>
+          {{ form.title(class_="title-input title-input", maxlength="80", value=article.title)}}
+          <div class="right-box">
+            <div title="最近保存于 6/7/2020, 2:54:22 PM" class="status-text with-padding">已保存至<a href="/editor/drafts">草稿</a></div>
+            <div class="publish-popup with-padding">
+              <div class="toggle-btn" onclick="dropdown()">
+                <span class="title">发布</span>
+              </div>
+              <div class="panel" id="panel">
+                <div class="title">发布文章</div>
+                <div class="category-box">
+                  <div class="sub-title">分类</div>
+                  <div class="category-list">
+                    {% for cate in Category.query.all() %}
+                      {% if cate.name == article.category.name %}
+                        <div class="item active">{{ cate.name }}</div>
+                      {% else %}
+                        <div class="item">{{ cate.name }}</div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  {{ form.category(id="category") }}
+                </div>
+                <div class="tag-box">
+                  <div class="sub-title">标签</div>
+                  <div id="tag-list" class="tag-list">
+                    {% for tag in Tag.query.all() %}
+                      {% if not tags %}
+                        {% set tags = [] %}
+                      {% endif %}
+                      {% if tag.name in tags %}
+                        <div class="item active">{{ tag.name }}</div>
+                      {% else %}
+                        <div class="item">{{ tag.name }}</div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <div class="tag-input tag-input">
+                    {{ form.newTags(class_="input", placeholder="添加新标签 使用 , 隔开")}}
+                  </div>
+                  {{ form.tags(id="tags") }}
+                </div>
+                {{ form.submit(class_="publish-btn", value="确定并发布") }}
+              </div>
+            </div>
+          </div>
+        </header>
+        <div id="main">
+          {{ form.content(**{":value": "content", "@input": "update"})}}
+          <div v-html="compiledMarkdown"></div>
+        </div>
+      </form>
+    </div>
+    <script>
+      var content = {{ article.content | tojson }};
+      new Vue({
+        el: "#editor",
+        data: {
+          content: content
+        },
+        computed: {
+          compiledMarkdown: function() {
+            return marked(this.content, { sanitize: true });
+          }
+        },
+        methods: {
+          update: _.debounce(function(e) {
+            this.content = e.target.value;
+          }, 300)
+        }
+      });
+    </script>
+
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      /* 点击 发布 按钮，下拉菜单在 显示/隐藏 之间切换 */
+      function dropdown() {
+        document.getElementById("panel").classList.toggle("show");
+      }
+
+      $(function(){
+        /* 点击选择类型 */
+        $(".category-list div").click(function() {
+          $(this).siblings('div').removeClass('active');  // 删除其兄弟元素的样式
+          $(this).addClass('active');                    // 为点击元素添加类名
+          $("#category").attr("value", $(this).text());  // 为 form.category 赋值
+        });
+
+        var activeTags = $("#tag-list").children(".active");
+        var tags = [];
+        for (var i = 0; i < activeTags.length; i++) {
+          tags.push($(activeTags.get(i)).text());
+        }
+        $("#tags").attr("value", tags.join(','));
+
+        /* 点击选择标签 */
+        $(".tag-list div").click(function() {
+          if ($(this).hasClass('active')) {
+            $(this).removeClass('active');  // 删除其兄弟元素的样式
+          } else {
+            $(this).addClass('active');     // 为点击元素添加样式
+          }
+
+          var activeTags = $("#tag-list").children(".active");
+          var tags = [];
+          for (var i = 0; i < activeTags.length; i++) {
+            tags.push($(activeTags.get(i)).text());
+          }
+          $("#tags").attr("value", tags.join(','));
+        });
+      });
+
+    </script>
+  </body>
+</html>

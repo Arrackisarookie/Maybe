@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 17:25:12
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-27 21:25:39
+# @Last Modified time: 2020-06-08 15:27:48
 #
 
 from wtforms import BooleanField
@@ -13,6 +13,7 @@ from wtforms import PasswordField
 from wtforms import StringField
 from wtforms import SubmitField
 from wtforms import TextAreaField
+from wtforms import HiddenField
 
 from wtforms.validators import DataRequired
 from wtforms.validators import Length
@@ -32,4 +33,18 @@ class LoginForm(Form):
 class TalkForm(Form):
     content = TextAreaField(validators=[DataRequired()])
     private = BooleanField()
+    submit = SubmitField()
+
+
+class ArticleForm(Form):
+    title = StringField(validators=[DataRequired()])
+    content = TextAreaField(validators=[DataRequired()])
+    # time = StringField('datetime', validators=[DataRequired()])
+    tags = StringField()
+    newTags = StringField()
+    category = HiddenField()
+    tags = HiddenField()
+    # url_name = StringField('urlName', validators=[DataRequired()])
+
+    # save_draft = SubmitField('save')
     submit = SubmitField()

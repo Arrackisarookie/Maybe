@@ -1,0 +1,51 @@
+{% extends "admin.html" %}
+
+{% block title -%}文章 - 醉了后台~{%- endblock title %}
+
+{% block styles -%}
+  {{ super() }}
+  <style type="text/css">
+    p {
+      font-size: 20px;
+      color: #999;
+    }
+  </style>
+{%- endblock %}
+
+{% block breadcrumb -%}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
+  </nav>
+{%- endblock %}
+
+{% block content -%}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="container">
+      {% for article in articles %}
+      <div class="col-md-10">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <h2 class="mb-2">{{ article.title }}</h2>
+            <div class="mb-1 text-muted">{{ article.createDatetime }}</div>
+            <p class="card-text mb-auto">{{ article.description }}</p>
+            <div class="row justify-content-end mt-4">
+              <a href="{{ url_for('admin.articleEdit', aid=article.id) }}" type="button" class="btn btn-light">编辑</a>
+              <a type="button" class="btn btn-outline-secondary">删除</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{%- endblock content %}
+
+{% block scripts -%}
+  {{ super() }}
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/js/bootstrap.bundle.min.js') }}"></script>
+{%- endblock scripts%}
