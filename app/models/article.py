@@ -4,14 +4,13 @@
 # @Author: Arrack
 # @Date:   2020-05-25 17:28:37
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-02 11:57:25
+# @Last Modified time: 2020-06-09 14:38:08
 #
 
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 from sqlalchemy import String
-from sqlalchemy import Table
 from sqlalchemy import Text
 from sqlalchemy.orm import relationship
 
@@ -39,6 +38,10 @@ class Tag(Base):
         backref=db.backref('tag', lazy='joined'),
         lazy='dynamic',
         cascade='all, delete-orphan')
+
+    @staticmethod
+    def exist(self, tagName):
+        return Tag.query.filter_by(name=tagName).first() is not None
 
     def __repr__(self):
         return '<Tag %d-%r>' % (self.id, self.name)
@@ -78,6 +81,21 @@ class Article(Base):
         cascade='all, delete-orphan')
 
     # replies = relationship('Comment', backref='article', lazy='dynamic')
+
+    def hasTag(self, tag):
+        if tag.id is None:
+            return False
+        return self.tags.filter_by(tagID=tag.id).first() is not None
+
+    def addTag(self, tag):
+        if not self.hasTag(tag):
+            at = ArticleTag(article=self, tag=tag)
+            db.session.add(at)
+
+    def delTag(self, tag):
+        at = self.tags.filter_by(tagID=tag.id).first()
+        if at:
+            db.session.delete(at)
 
     def __repr__(self):
         return '<Article %d-%r>' % (self.id, self.title)
