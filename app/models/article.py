@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 17:28:37
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-09 14:38:08
+# @Last Modified time: 2020-06-10 15:06:54
 #
 
 from sqlalchemy import Column
@@ -40,7 +40,7 @@ class Tag(Base):
         cascade='all, delete-orphan')
 
     @staticmethod
-    def exist(self, tagName):
+    def exist(tagName):
         return Tag.query.filter_by(name=tagName).first() is not None
 
     def __repr__(self):

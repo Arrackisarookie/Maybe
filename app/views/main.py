@@ -4,10 +4,8 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:22:18
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-08 15:12:03
+# @Last Modified time: 2020-06-10 15:47:49
 #
-
-from os.path import join
 
 from flask import Blueprint
 from flask import current_app
