@@ -28,7 +28,7 @@
       <div class="site-nav">
         <ul id="menu" class="menu">
           {% if current_user.is_authenticated %}
-            <li class="menu-item category-nav"><a href="#">{{ current_user.nickName }}</a>
+            <li class="menu-item category-nav"><a href="#">{{ current_user.username }}</a>
               <ul class="drop">
                 <li>
                   <a href="{{ url_for('admin.logout') }}" class="drop-item">

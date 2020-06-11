@@ -4,17 +4,17 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:21:49
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-02 20:27:46
+# @Last Modified time: 2020-06-11 11:25:26
 #
 
 import click
 
 from flask import Flask
-from flask import current_app
 
 from app.extensions import db
 from app.extensions import lm
 from app.models import Role
+from app.models import User
 from test.fake import Fake
 
 from config import config
@@ -55,6 +55,8 @@ def register_command(app):
         click.echo('Initialized database.')
         Role.initRoles()
         click.echo('Initialized Roles.')
+        User.initAdmin()
+        click.echo('Initialized an Admin.')
 
     @app.cli.command()
     @click.option('--cates', is_flag=True, help='Fake talks.')
@@ -73,5 +75,14 @@ def register_command(app):
             count = fake.articles()
             click.echo('Initialized %d fake articles.' % count)
         if talks:
+            count = fake.talks()
+            click.echo('Initialized %d fake talks.' % count)
+        if not any([cates, tags, talks, articles]):
+            count = fake.cates()
+            click.echo('Initialized %d fake cates.' % count)
+            count = fake.tags()
+            click.echo('Initialized %d fake tags.' % count)
+            count = fake.articles()
+            click.echo('Initialized %d fake articles.' % count)
             count = fake.talks()
             click.echo('Initialized %d fake talks.' % count)

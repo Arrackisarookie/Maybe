@@ -5,6 +5,7 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev'
 
     ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL') or 'nicearrack@163.com'
+    ADMIN_NAME = os.environ.get('ADMIN_NAME') or 'Arrack'
 
     SITE_TITLE = 'Maybe'
     SITE_SUBTITLE = 'Everything is not too late.'

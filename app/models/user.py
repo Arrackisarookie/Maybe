@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-25 18:11:08
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-02 20:28:25
+# @Last Modified time: 2020-06-11 11:25:18
 #
 
 from itsdangerous import BadSignature
@@ -59,7 +59,7 @@ class User(Base, UserMixin):
 
     id = Column(Integer, primary_key=True)
     email = Column(String(64), unique=True, index=True, nullable=False)
-    nickName = Column(String(64), unique=True, nullable=False)
+    username = Column(String(64), unique=True, nullable=False)
     passwordHash = Column(String(128))
 
     roleID = Column(Integer, ForeignKey('roles.id'))
@@ -123,5 +123,16 @@ class User(Base, UserMixin):
     #         return None  # invalid token
     #     return User.query.get(data['id'])
 
+    @staticmethod
+    def initAdmin(password=None):
+        if not password:
+            password = input('Initializing Admin, Please set your password:')
+        email = current_app.config['ADMIN_EMAIL']
+        username = current_app.config['ADMIN_NAME']
+
+        with db.autoCommit():
+            admin = User(email=email, username=username, password=password)
+            db.session.add(admin)
+
     def __repr__(self):
-        return '<User %d-%r-%r>' % (self.id, self.nickName, self.role.name)
+        return '<User %d-%r-%r>' % (self.id, self.username, self.role.name)

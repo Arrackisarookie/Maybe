@@ -4,7 +4,7 @@
 # @adminor: Arrack
 # @Date:   2020-05-25 18:22:09
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-09 14:38:00
+# @Last Modified time: 2020-06-11 11:29:09
 #
 
 from flask import Blueprint
@@ -46,8 +46,8 @@ def login():
             next = request.args.get('next')
             if next is None or not next.startswith('/'):
                 next = url_for('main.index')
-            flash('Welcome, %s!' % user.nickName)
-            print('Welcome, %s!' % user.nickName)
+            flash('Welcome, %s!' % user.username)
+            print('Welcome, %s!' % user.username)
             return redirect(next)
         flash('Invalid email or password.', category='error')
     flash(form.errors, category='error')
@@ -87,12 +87,13 @@ def articleEdit(aid):
         updateTags = form.tags.data.split(',')
 
         # 将新标签写入数据库，并为文章添加新标签
-        newTags = form.newTags.data.split(',')
-        for t in newTags:
-            if not Tag.exist(t):
-                tag = Tag(name=t.strip())
-                db.session.add(tag)
-                article.addTag(tag)
+        newTags = form.newTags.data
+        if newTags:
+            for t in newTags.split(','):
+                if not Tag.exist(t):
+                    tag = Tag(name=t.strip())
+                    db.session.add(tag)
+                    article.addTag(tag)
 
         # 对文章已有标签检测是否有更改
         tagsNeedDel = list(set(tags).difference(set(updateTags)))  # 需要移除的 tag
