@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-27 16:02:25
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-06-02 12:02:49
+# @Last Modified time: 2020-06-10 14:53:29
 #
 
 from faker import Faker
@@ -46,7 +46,8 @@ class Fake(object):
             while i < count:
                 t = Talk(
                     content=self.fake.paragraph(nb_sentences=1),
-                    _createTime=self.fake.date_time())
+                    createTime=self.fake.date_time(),
+                    updateTime=self.fake.date_time())
                 db.session.add(t)
                 i += 1
         return count
@@ -66,7 +67,8 @@ class Fake(object):
                     category=Category.query.get(self.fake.random_int(min=1, max=cateCount)),
                     # tag=Tag.query.get(self.fake.random_int(min=1, max=tagCount)),
                     author=User.query.get(1),
-                    _createTime=self.fake.date_time())
+                    createTime=self.fake.date_time(),
+                    updateTime=self.fake.date_time())
                 db.session.add(a)
                 for j in range(3):
                     tag = Tag.query.get(j+1)

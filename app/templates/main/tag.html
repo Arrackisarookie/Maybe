@@ -9,7 +9,7 @@
     <ul>
     {% for a in articles %}
       <li>
-        {{ a.createDatetime }}
+        {{ a.createTime }}
         <a href="{{ url_for('main.article', aid=a.id) }}">
           {{ a.title }}
         </a>

@@ -30,7 +30,7 @@
         <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col p-4 d-flex flex-column position-static">
             <h2 class="mb-2">{{ article.title }}</h2>
-            <div class="mb-1 text-muted">{{ article.createDatetime }}</div>
+            <div class="mb-1 text-muted">{{ article.createTime }}</div>
             <p class="card-text mb-auto">{{ article.description }}</p>
             <div class="row justify-content-end mt-4">
               <a href="{{ url_for('admin.articleEdit', aid=article.id) }}" type="button" class="btn btn-light">编辑</a>

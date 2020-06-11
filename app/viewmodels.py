@@ -4,7 +4,7 @@
 # @Author: Arrack
 # @Date:   2020-05-27 16:43:13
 # @Last modified by:   Arrack
-# @Last Modified time: 2020-05-27 17:21:49
+# @Last Modified time: 2020-06-10 14:58:43
 #
 from collections import OrderedDict
 
@@ -15,8 +15,9 @@ class TalkViewModel(object):
         :type talk: Talk
         :rtype: None
         """
-        createTime = talk.createDatetime
-        date = createTime.split()[0].split('-', 1)
+
+        # todo: moment.js
+        date = talk.createTime.strftime('%Y-%m-%d %H:%M:%S').split()[0].split('-', 1)
         self.year = date[0]
         self.date = date[1].replace('-', '/')
         self.content = talk.content

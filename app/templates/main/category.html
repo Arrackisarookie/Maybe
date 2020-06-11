@@ -9,7 +9,7 @@
     <ul>
     {% for article in category.articles %}
       <li>
-        {{ article.createDatetime }}
+        {{ article.createTime }}
         <a href="{{ url_for('main.article', aid=article.id) }}">
           {{ article.title }}
         </a>
